@@ -1,0 +1,356 @@
+-
+[19-Sep-2022 09:14:18 UTC] PHP Warning:  file_put_contents(data/setting/tokpeds.json): failed to open stream: No such file or directory in /home/gale4949/public_html/helpers/hlp_data.php on line 5
+[19-Sep-2022 09:55:34 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:55:37 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:55:41 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:55:49 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:55:49 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:56:05 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:56:38 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:57:39 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:57:46 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:58:39 UTC] PHP Fatal error:  Uncaught Error: Unsupported operand types in /home/gale4949/public_html/bot.php:22
+Stack trace:
+#0 /home/gale4949/public_html/index.php(5): include()
+#1 {main}
+  thrown in /home/gale4949/public_html/bot.php on line 22
+[19-Sep-2022 09:59:43 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 09:59:45 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 09:59:49 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 09:59:58 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 10:00:14 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 10:00:46 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 10:01:09 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 10:01:14 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 10:01:22 UTC] PHP Parse error:  syntax error, unexpected 'print_r' (T_STRING), expecting ']' in /home/gale4949/public_html/games/mamin_mainplay.php on line 359
+[19-Sep-2022 10:08:49 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:08:49 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying('2')
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:09:14 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:09:14 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:09:37 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:09:37 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:09:50 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 10:09:50 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 13:53:27 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 13:53:27 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 13:53:58 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[19-Sep-2022 13:53:58 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 05:23:09 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 05:23:09 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_commands.php(168): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main_commands.php(176): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/main_message.php(70): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/bot.php(66): include('/home/gale4949/...')
+#4 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#5 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:29 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:29 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:37 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:37 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:42 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:42 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:49 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:49 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:55 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:57:55 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:01 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:01 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:08 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:08 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:15 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:15 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:20 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:20 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:25 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:25 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:33 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:33 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:39 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:39 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:45 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:45 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:52 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:58:52 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:00 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:00 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:05 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:05 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:11 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:11 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:17 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:17 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:24 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:24 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:29 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:29 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:34 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:34 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:41 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:41 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:46 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:46 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:53 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:53 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:59 UTC] PHP Warning:  Illegal string offset 'mamin' in /home/gale4949/public_html/helpers/hlp_game.php on line 106
+[20-Sep-2022 07:59:59 UTC] PHP Fatal error:  Uncaught Error: Cannot use string offset as an array in /home/gale4949/public_html/helpers/hlp_game.php:106
+Stack trace:
+#0 /home/gale4949/public_html/games/mamin_mainplay.php(353): unsetUserPlaying(227024160)
+#1 /home/gale4949/public_html/main.php(71): include('/home/gale4949/...')
+#2 /home/gale4949/public_html/bot.php(24): include('/home/gale4949/...')
+#3 /home/gale4949/public_html/index.php(5): include('/home/gale4949/...')
+#4 {main}
+  thrown in /home/gale4949/public_html/helpers/hlp_game.php on line 106
