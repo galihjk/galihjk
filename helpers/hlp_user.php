@@ -1,50 +1,53 @@
 <?php
 
 function getUser($user_id){
-	return loadData("user/$user_id");
+	global $data;
+	if(empty($data['active_users'][$user_id])){
+		$user = loadData("user/$user_id");
+		$data['active_users'][$user_id] = $user;
+	}
+	else{
+		$user = $data['active_users'][$user_id];
+	}
+	return $user;
 }
 
-function setUser($user_id, $data, $update_last_active = true){
+function setUser($user_id, $data_set_user, $update_last_active = true){
+	global $data;
 	if($update_last_active){
-		$data['last_active'] = time();
+		$data_set_user['last_active'] = time();
 	}
 	$data_user = getUser($user_id);
-	foreach($data as $k=>$v){
+	foreach($data_set_user as $k=>$v){
 		$data_user[$k]=$v;
 	}
 	saveData("user/$user_id",$data_user);
+	$data['active_users'][$user_id] = $data_user;
 	return $data_user;
 }
 
 function mentionUser($from_id){
-	global $data;
-	if(!isset($data['playing_users'][$from_id])){
-	    $data_user = getUser($from_id);
-	    if(!empty($data_user)){
-	        $data['playing_users'][$from_id] = $data_user;
-	    }
-	}
-	if(!isset($data['playing_users'][$from_id])){
+	$data_user = getUser($from_id);
+	if(empty($data_user)){
 		return "[-?-]";
 	}
 	else{
-		if(empty($data['playing_users'][$from_id]['username'])){
-			return "<a href='tg://user?id=$from_id'>".$data['playing_users'][$from_id]['first_name']."</a>";
+		if(empty($data_user['username'])){
+			return "<a href='tg://user?id=$from_id'>".$data_user['first_name']."</a>";
 		}
 		else{
-			return "@".$data['playing_users'][$from_id]['username'];
+			return "@".$data_user['username'];
 		}
 	}
 }
 
 function namaLengkap($user_id){
-	global $data;
-	if(!isset($data['playing_users'][$user_id])){
+	if(empty(getUser($user_id))){
 		return "[-??-]";
 	}
 	else{
-		$return = $data['playing_users'][$user_id]['first_name'];
-		if(!empty($data['playing_users'][$user_id]['last_name'])) $return .= " " .$data['playing_users'][$user_id]['last_name'];
+		$return = getUser($user_id)['first_name'];
+		if(!empty(getUser($user_id)['last_name'])) $return .= " " .getUser($user_id)['last_name'];
 		return $return;
 	}
 }

@@ -17,10 +17,9 @@ function getGameType($type, $prop = "all"){
 }
 
 function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
-	global $data;
 	global $emoji_thinking;
-	if(!empty($data['playing_users'][$user_id]['playing'])){
-		if($data['playing_users'][$user_id]['playing']['chat_id'] == $chat_id){
+	if(!empty(getUser($user_id)['playing'])){
+		if(getUser($user_id)['playing']['chat_id'] == $chat_id){
 			KirimPerintah('sendMessage',[
 				'chat_id' => $chat_id,
 				'text'=> "GAGAL!\nKayaknya kamu sudah join deh..$emoji_thinking",
@@ -53,21 +52,22 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 
 function setUserPlaying($user_id, $chat_id, $game){
 	global $config;
-	global $data;
 
-	$data['playing_users'][$user_id]['playing'] = [
+	setUser($user_id, ['playing'=>[
 		'bot'=> $config['bot_username'],
 		'chat_id'=>$chat_id,
 		'game'=>$game,
 		'time'=>0
-	];
+	]]);
+
 }
 
 function addUserPlayingTime($user_id, $seconds, $active){
-	global $data;
-	if(!empty($data['playing_users'][$user_id]['playing'])){
-		$data['playing_users'][$user_id]['playing']['playtime'] += $seconds;
-		if($active) $data['playing_users'][$user_id]['playing']['activetime'] += $seconds;
+	if(!empty(getUser($user_id)['playing'])){
+		$playing = getUser($user_id)['playing'];
+		$playing['playtime'] += $seconds;
+		if($active) $playing['activetime'] += $seconds;
+		setUser($user_id,['playing'=>$playing]);
 	}
 }
 
@@ -80,48 +80,47 @@ function calculatePlayingPoint($activetime, $playtime, $win_ratio){
 }
 
 function setUserWinRate($user_id, $rank, $playercount){
-	global $data;
 	if(empty($playercount)){
 		$win_ratio = 0;
 	}
 	else{
 		$win_ratio = ($playercount - ($rank-1))/$playercount;
 	}
-	$data['playing_users'][$user_id]['playing']['win_ratio'] = $win_ratio;
+	$playing = getUser($user_id)['playing'];
+	$playing['win_ratio'] = $win_ratio;
+	setUser($user_id,['playing'=>$playing]);
 	return $win_ratio;
 }
 
 function unsetUserPlaying($user_id, $calculate = true){
-	global $data;
+	$calculate_result = false;
+	$set_user = [
+		'playing'=>'',
+		'test'=>'wkwk',
+	];
 	if($calculate){
-		if(empty($data['playing_users'][$user_id]['unclaimeds'])){
-			$data['playing_users'][$user_id]['unclaimeds'] = [];
+		$unclaimeds = [];
+		if(!empty(getUser($user_id)['unclaimeds'])){
+			$unclaimeds = getUser($user_id)['unclaimeds'];
 		}
-		$calculate_result = calculatePlayingPoint(
-			$data['playing_users'][$user_id]['playing']['activetime'],
-			$data['playing_users'][$user_id]['playing']['playtime'],
-			$data['playing_users'][$user_id]['playing']['win_ratio']
-		);
-// 		$data['playing_users'][$user_id]['unclaimeds']
-// 		[$data['playing_users'][$user_id]['playing']['game']]
-// 		[$data['playing_users'][$user_id]['playing']['chat_id']]
-// 		[md5(date('YmdHis').rand(0,999))] = [
-// 			$calculate_result,
-// 			time()+24*60*60,
-// 		];
+		if(!empty(getUser($user_id)['playing'])){
+			$playing = getUser($user_id)['playing'];
+			$calculate_result = calculatePlayingPoint(
+				$playing['activetime'],
+				$playing['playtime'],
+				$playing['win_ratio']
+			);
+			$unclaimeds[$playing['game']][$playing['chat_id']][md5(date('YmdHis').rand(0,999))] = [
+				$calculate_result,
+				time()+24*60*60, //kadaluarsa dalam 24 jam
+			];
+		}
+		$set_user['unclaimeds']=$unclaimeds;
 	}
 	$return = [
 		'calculate_result'=>$calculate_result,
-		'user'=>$data['playing_users'][$user_id],
+		'set_user'=>$set_user,
 	];
-	unset($data['playing_users'][$user_id]);
-	setUser(
-		$user_id,
-		[
-			'playing'=>'',
-			'test'=>'wkwk',
-			'unclaimeds'=>json_encode($data['playing_users'][$user_id]['unclaimeds']),
-		]
-	);
+	setUser($user_id, $set_user);
 	return $return;
 }

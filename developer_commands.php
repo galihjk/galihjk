@@ -25,14 +25,14 @@ elseif(isDiawali($command,"user") and $chat_id == $id_developer){
     if(isDiawali($command,"user_")){
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
-            'text'=> "result: ".print_r($data['playing_users'][str_replace("user_","",$command)],1),
+            'text'=> "result: \n(per ".date("Y-m-d H:i",$data['last_active_user_time']).")\n ".print_r($data['active_users'][str_replace("user_","",$command)],1),
             'parse_mode'=>'HTML',
             'reply_to_message_id' => $message_id
         ]);
     }
     else{
-        $output = "users:\n";
-        foreach($data['playing_users'] as $key=>$val){
+        $output = "users:\n(per ".date("Y-m-d H:i",$data['last_active_user_time']).")\n ";
+        foreach($data['active_users'] as $key=>$val){
             $output .= "/user_$key " . $val['first_name'] . "\n";
         }
         KirimPerintah('sendMessage',[

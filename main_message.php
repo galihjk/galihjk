@@ -56,11 +56,12 @@ $from_id != $id_developer){
 //=======================================
 //check user
 if(!empty($from_id)){
-    if(empty($data['playing_users'][$from_id])){
-        saveData("user/$from_id", $message_data["from"]);
-        $data['playing_users'][$from_id] = $message_data["from"];
+    if(empty(getUser($from_id))){
+        setUser($from_id, $message_data["from"]);
+        // saveData("user/$from_id", $message_data["from"]);
+        // $data['active_users'][$from_id] = $message_data["from"];
     }
-    $data['playing_users'][$from_id]['last_active'] = time();
+    setUser($from_id, ['last_active'=>time()]);
 }
 
 //developer commands 
