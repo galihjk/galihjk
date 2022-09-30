@@ -12,6 +12,11 @@ elseif(!empty($_GET['runserver']) and $_GET['runserver'] == "f9c19a9ebb552c48c83
 	exit();
 }
 
-
+elseif(!empty($_GET['web_run_action']) and file_exists("galihjk/web_run_action/".$_GET['web_run_action'].".php")){
+	//web_run_action
+    $include_action = "galihjk/web_run_action/".$_GET['web_run_action'].".php";
+	include("galihjk/web_run_action/index.php");
+	exit();
+}
 
 echo "Hello World!";

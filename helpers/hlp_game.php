@@ -110,10 +110,18 @@ function unsetUserPlaying($user_id, $calculate = true){
 				$playing['playtime'],
 				$playing['win_ratio']
 			);
-			$unclaimeds[$playing['game']][$playing['chat_id']][md5(date('YmdHis').rand(0,999))] = [
-				$calculate_result,
-				time()+24*60*60, //kadaluarsa dalam 24 jam
-			];
+			$playing_game = $playing['game'];
+			$playing_chat_id = $playing['chat_id'];
+			$random = md5(date('YmdHis').rand(0,999));
+			KirimPerintah('sendMessage',[
+				'chat_id' => '227024160',
+				'text'=> "NIH: " . print_r([$playing_game,$playing_chat_id, $random], true),
+				'reply_to_message_id'=> $message_id,
+			]);
+			// $unclaimeds[$playing_game][$playing_chat_id][$random] = [
+			// 	$calculate_result,
+			// 	time()+24*60*60, //kadaluarsa dalam 24 jam
+			// ];
 		}
 		$set_user['unclaimeds']=$unclaimeds;
 	}
