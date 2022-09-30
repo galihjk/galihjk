@@ -3,10 +3,10 @@
 $config = include("config.php");
 
 //helpers autoload
-$scandir = scandir('helpers/');
+$scandir = scandir('./helpers/');
 foreach($scandir as $file){
 	if(substr($file,-4) == '.php'){
-		include("helpers/$file");
+		include("./helpers/$file");
 	}
 }
 
