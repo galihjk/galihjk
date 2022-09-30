@@ -356,19 +356,16 @@ elseif($playdata['step'] == 'game_end'){
     }
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> "points=".print_r($points,true),
-        'parse_mode'=>'HTML',
-    ]);
-    KirimPerintah('sendMessage',[
-        'chat_id' => $chat_id,
         'text'=> $text,
         'parse_mode'=>'HTML',
     ]);
     $text = "Poin yang dapat diklaim:\n";
     foreach ($points as $k=>$v){
-        $text .= mentionUser($k) . " : ".$v['calculate_result']."\n";
+        if(!empty($v['calculate_result'])){
+            $text .= mentionUser($k) . " : ".$v['calculate_result']."\n";
+        }
     }
-    $text .= "\nKlik untuk ambil --> [<a href='t.me/galihjkbot?start=cmd_claim'>CLAIM</a>]\n<i>*kadaluarsa dalam 24 jam</i>";
+    $text .= "\nKlik untuk ambil --> <a href='t.me/".$config['bot_username']."?start=cmd_claim'>[CLAIM]</a>\n<i>*kadaluarsa dalam 24 jam</i>";
     $text .= "\n\n/mamin_play - main lagi";
     $text .= "\n/play - main yang lain";
     $data['delayedPerintah'][] = ['sendMessage',

@@ -135,6 +135,47 @@ elseif($command == "menu"){
     ]);
 }
 
+elseif($command == "claim"){
+    $user_data = getUser($from_id);
+    if(empty($user_data)){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Gagal",
+            'reply_to_message_id' => $message_id,
+        ]);
+        goto skip_to_end;
+    }
+    $calimdata = empty($user_data['unclaimeds']) ? [] : $user_data['unclaimeds'];
+    $text = "Poin yg dapat diklaim: \n\n";
+    $ada = false;
+    foreach($calimdata as $gametype=>$claimchat){
+        foreach($claimchat as $claim_chat_id=>$claimvals){
+            foreach($claimvals as $claimcode=>$claimval){
+                $ada = true;
+                $expired_in = $claimval[1] - time();
+                $expired_text = ($expired_in < 60*60 ? round($expired_in/60) . " menit" : round($expired_in/(60*60)) . " jam"); 
+                $text .= "- ".$claimval[0]." ($gametype) [<a href='https://galihjk.my.id/?web_run_action=claim&code=$from_id|$claim_chat_id|$claimcode'>AMBIL</a>]\n";
+                $text .= "<i>Kadaluarsa dalam $expired_text</i>\n\n";
+            }
+        }
+    }
+    if($ada){
+        $text .= "Kalau muncul produk yang kamu mau, masukin keranjang yaa.. :D";
+    }
+    else{
+        $text .= "TIDAK ADA\n\nAyo mainkan dulu game nya /play";
+    }
+    
+    $result = KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> $text,
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id,
+        'disable_web_page_preview' => true,
+    ]);
+}
+//=============================================================
+
 //don't play other game!
 if(!empty($data['playing_chatters'][$chat_id]['playing']) and substr($command,-5) == "_play"){
     if(substr($chat_id,0,1) == "-"){
@@ -193,3 +234,6 @@ else{
         }
     */
 }
+
+skip_to_end:
+;
