@@ -101,7 +101,9 @@ function unsetUserPlaying($user_id, $calculate = true){
 		if(!empty(getUser($user_id)['unclaimeds'])){
 			$unclaimeds = getUser($user_id)['unclaimeds'];
 		}
-		if(empty($unclaimeds)) $unclaimeds = [];
+		if(!is_array($unclaimeds)){
+			$unclaimeds = array();
+		}
 		if(!empty(getUser($user_id)['playing'])){
 			$playing = getUser($user_id)['playing'];
 			$calculate_result = calculatePlayingPoint(
