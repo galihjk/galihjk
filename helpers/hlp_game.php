@@ -27,14 +27,14 @@ function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 			}
 			KirimPerintah('sendMessage',[
 				'chat_id' => $chat_id,
-				'text'=> "GAGAL!\nKayaknya kamu sudah join deh..$emoji_thinking",
+				'text'=> "GAGAL!\nMaaf ".getUser($user_id)['first_name'].", Kayaknya kamu sudah join deh..$emoji_thinking",
 				'reply_to_message_id'=> $message_id,
 			]);
 		}
 		else{
 			KirimPerintah('sendMessage',[
 				'chat_id' => $chat_id,
-				'text'=> "GAGAL!\nKamu saat ini sedang memainkan game lain (tidak bisa main lebih dari 1 game sekaligus).\n\n*<i>Mungkin kamu bisa coba command</i> <pre>/flee</pre> <i>dulu</i>..",
+				'text'=> "GAGAL!\nMaaf ".getUser($user_id)['first_name'].", Kamu saat ini sedang memainkan game lain (tidak bisa main lebih dari 1 game sekaligus).\n\n*<i>Mungkin kamu bisa coba command</i> <pre>/flee</pre> <i>dulu</i>..",
 				'reply_to_message_id'=> $message_id,
 			]);
 		}
