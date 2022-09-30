@@ -13,7 +13,7 @@ if(!empty(getUser($from_id)['playing']['chat_id'])){
         $game = $data['playing_chatters'][$chat_id]['playing'];
         if(!empty($data['playing_chatters'][$chat_id][$game]['step'])
         and $data['playing_chatters'][$chat_id][$game]['step'] == 'receive_inline'){
-            include ("games/$game".'_chosen_inline_result.php');
+            include ("galihjk/games/$game".'_chosen_inline_result.php');
         }
     }
 }

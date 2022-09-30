@@ -18,8 +18,13 @@ function getGameType($type, $prop = "all"){
 
 function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 	global $emoji_thinking;
+	global $data;
+	
 	if(!empty(getUser($user_id)['playing'])){
 		if(getUser($user_id)['playing']['chat_id'] == $chat_id){
+			if(empty($data['playing_chatters'][$chat_id][getUser($user_id)['playing']['game']]['players'][$user_id])){
+				return true;
+			}
 			KirimPerintah('sendMessage',[
 				'chat_id' => $chat_id,
 				'text'=> "GAGAL!\nKayaknya kamu sudah join deh..$emoji_thinking",
@@ -29,7 +34,7 @@ function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 		else{
 			KirimPerintah('sendMessage',[
 				'chat_id' => $chat_id,
-				'text'=> "GAGAL!\nKamu saat ini sedang memainkan game lain (tidak bisa main lebih dari 1 game sekaligus).",
+				'text'=> "GAGAL!\nKamu saat ini sedang memainkan game lain (tidak bisa main lebih dari 1 game sekaligus).\n\n*<i>Mungkin kamu bisa coba command</i> <pre>/flee</pre> <i>dulu</i>..",
 				'reply_to_message_id'=> $message_id,
 			]);
 		}
