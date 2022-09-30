@@ -169,27 +169,27 @@ else{
         $command = $data['playing_chatters'][$chat_id]['playing'] . "_$command";
     }
     
-    $gamefiles = scandir('games/');
+    $gamefiles = scandir('galihjk/games/');
     foreach($gamefiles as $file){
         if(isDiakhiri($file,'_commands.php')){
             $game = str_replace('_commands.php','',$file);
-            if(isDiawali($command,$game)) include("games/$game".'_commands.php');
+            if(isDiawali($command,$game)) include("galihjk/games/$game".'_commands.php');
         }
     }
     /*
         // MAMIN COMMANDS ===
         if(substr($command,0,strlen("mamin")) == "mamin"){
-            include('games/mamin_commands.php');
+            include('galihjk/games/mamin_commands.php');
         }
 
         // RPG COMMANDS ===
         elseif(substr($command,0,strlen("rpg")) == "rpg"){
-            include('games/rpg_commands.php');
+            include('galihjk/games/rpg_commands.php');
         }
 
         //TTSS COMMANDS ===
         elseif(substr($command,0,strlen("ttss")) == "ttss"){
-            include('games/ttss_commands.php');
+            include('galihjk/games/ttss_commands.php');
         }
     */
 }

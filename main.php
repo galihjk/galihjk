@@ -68,7 +68,7 @@ if(!empty($data['playing_chatters'])){
 			$game = $val_chatter['playing'];
 			$playdata = $val_chatter[$game];
 			
-			include('games/'.$game.'_mainplay.php');
+			include('galihjk/games/'.$game.'_mainplay.php');
 		}
 	}
 }

@@ -6,5 +6,5 @@ $jawabans = $message_data["options"];
 $soal = $message_data["question"];
 
 if ($config['bot_username'] == "galihjkbot"){
-    include("special_galihjkbot_poll.php");
+    include("galihjk/special_galihjkbot_poll.php");
 }

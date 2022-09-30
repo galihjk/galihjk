@@ -1,12 +1,12 @@
 <?php 
 
-$config = include("config.php");
+$config = include("galihjk/config.php");
 
 //helpers autoload
-$scandir = scandir('./helpers/');
+$scandir = scandir('galihjk/helpers/');
 foreach($scandir as $file){
 	if(substr($file,-4) == '.php'){
-		include("./helpers/$file");
+		include("galihjk/helpers/$file");
 	}
 }
 
@@ -15,13 +15,13 @@ $apiURL = "https://api.telegram.org/bot$token";
 $data = loadData("data");
 $id_developer = $config['id_developer'];
 
-include('initiate.php');
+include('galihjk/initiate.php');
 
 $last_serve_time = intval(loadData("last_serve_time") ?? 0);
 if($last_serve_time !== time()){
     $jeda = time() - intval($last_serve_time);
     saveData("last_serve_time",time());
-    include('main.php');
+    include('galihjk/main.php');
 }
 
 $update = json_decode(file_get_contents("php://input"), TRUE);
@@ -29,22 +29,22 @@ if(!empty($update)) {
 	//================================================================
 	//poll:==========================
 	if(isset($update["poll"])){
-		include("main_poll.php");
+		include("galihjk/main_poll.php");
 	}
 
 	//callback query:==========================
 	elseif(isset($update["callback_query"])){
-		include("main_callback_query.php");
+		include("galihjk/main_callback_query.php");
 	}
 
 	//inline_query:==========================
 	elseif(isset($update['inline_query'])){
-		include("main_inline_query.php");
+		include("galihjk/main_inline_query.php");
 	}
 
 	//chosen_inline_result:==========================
 	elseif(isset($update['chosen_inline_result'])){
-		include("main_chosen_inline_result.php");
+		include("galihjk/main_chosen_inline_result.php");
 	}
 
 	//channel_post:==========================
@@ -58,12 +58,12 @@ if(!empty($update)) {
 
 	//my_chat_member (start / stop bot):==========================
 	elseif(isset($update['my_chat_member'])){
-		include("main_my_chat_member.php");
+		include("galihjk/main_my_chat_member.php");
 	}
 
 	//message (basic chat message):==========================
 	elseif(isset($update['message'])){
-		include("main_message.php");
+		include("galihjk/main_message.php");
 	}
 
 	//unhandled report:==========================

@@ -27,12 +27,12 @@ elseif(isset($update["callback_query"]) and $update["callback_query"]['data'] ==
 
 //games
 else{
-    $gamefiles = scandir('games/');
+    $gamefiles = scandir('galihjk/games/');
     foreach($gamefiles as $file){
         if(isDiakhiri($file,'_callback_query.php')){
             $game = str_replace('_callback_query.php','',$file);
             if(isDiawali($update["callback_query"]['data'],$game."_"))
-                include("games/$game".'_callback_query.php')
+                include("galihjk/games/$game".'_callback_query.php')
             ;
         }
     }
@@ -44,7 +44,7 @@ else{
     //TTSS CALLBACK QUERY ==
     elseif(isset($update["callback_query"]) and 
     substr($update["callback_query"]['data'],0,strlen("tts_")) == "tts_"){
-        include('ttss_callback_query.php');
+        include('galihjk/ttss_callback_query.php');
     }
 */
 

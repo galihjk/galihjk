@@ -47,7 +47,7 @@ elseif(isDiawali($command,"user") and $chat_id == $id_developer){
 elseif($command == "tesdir" and $chat_id == $id_developer){
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> "games: ".print_r(scandir("games/"),1),
+        'text'=> "games: ".print_r(scandir("galihjk/games/"),1),
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);

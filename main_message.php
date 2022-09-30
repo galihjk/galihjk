@@ -64,15 +64,15 @@ if(!empty($from_id)){
 }
 
 //developer commands 
-include("developer_commands.php");
+include("galihjk/developer_commands.php");
 
 //main commands
-include("main_commands.php");
+include("galihjk/main_commands.php");
 
 //message updates for active games====
 //TTSS MESSAGE UPDATE
 // if(!empty($data['playing_chatters'][$chat_id]['playing']) and $data['playing_chatters'][$chat_id]['playing'] == "ttss"
 // ){
-//     include('ttss_msg_update.php');
+//     include('galihjk/ttss_msg_update.php');
 // }
 //====================================

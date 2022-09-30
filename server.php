@@ -3,13 +3,13 @@ if(empty($_GET['runserver']) or $_GET['runserver'] !== "f9c19a9ebb552c48c83fd796
     die("wrong access");
 }
 
-$config = include("config.php");
+$config = include("galihjk/config.php");
 
 //helpers autoload
-$scandir = scandir('helpers/');
+$scandir = scandir('galihjk/helpers/');
 foreach($scandir as $file){
 	if(substr($file,-4) == '.php'){
-		include("helpers/$file");
+		include("galihjk/helpers/$file");
 	}
 }
 

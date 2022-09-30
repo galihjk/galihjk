@@ -12,9 +12,9 @@ if(!isset($data['playing_chatters'])) $data['playing_chatters'] = [];
 if(!isset($data['last_serve_time'])) $data['last_serve_time'] = 0;
 
 //initiate for games
-$gamefiles = scandir('games/');
+$gamefiles = scandir('galihjk/games/');
 foreach($gamefiles as $file){
 	if(isDiakhiri($file,'_init.php')){
-		include("games/$file");
+		include("galihjk/games/$file");
 	}
 }
