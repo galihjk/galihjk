@@ -4,9 +4,21 @@ function server_stop(){
     saveData("srvstatus",$srvstatus);
 }
 
-function server_start(){
+function server_start($check_already_running=false){
     global $token;
     global $id_developer;
+
+    if($check_already_running){
+        $srvstatus = loadData("srvstatus");
+        if(!empty($srvstatus['run_code'])){
+            if(!empty($srvstatus['time'])){
+                if(abs(time() - $srvstatus['time']) <= 7){
+                    //jika sudah aktif dalam 7 detik yang lalu, tidak perlu start ulang
+                    return false;
+                }
+            }
+        }
+    }
     
     $run_code = md5(date("YmdHis").rand(0,99));
     $srvstatus['run_code'] = $run_code;

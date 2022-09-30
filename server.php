@@ -21,10 +21,10 @@ $srvstatus = loadData("srvstatus");
 if(!empty($srvstatus['run_code'])){
 	$run_code = $srvstatus['run_code'];
 	if($_GET['code'] == $run_code){
-		bot_execute($token,'sendMessage',[
-			'chat_id' => '227024160',
-			'text' => 'Server is running: '.$run_code,
-		]);
+		// bot_execute($token,'sendMessage',[
+		// 	'chat_id' => '227024160',
+		// 	'text' => 'Server is running: '.$run_code,
+		// ]);
 		$srvstatus = loadData("srvstatus");
 		$srvstatus['time'] = time();
 		saveData("srvstatus",$srvstatus);
