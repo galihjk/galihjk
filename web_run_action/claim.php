@@ -23,15 +23,28 @@ if(empty($userdata['unclaimeds'][$gametype][$claim_chat_id][$claimcode])){
 
 $unclaimeds = $userdata['unclaimeds'];
 $claimdata = $unclaimeds[$gametype][$claim_chat_id][$claimcode];
-$poin = $claimdata[0];
+$point_add = $claimdata[0];
+
+$point = $userdata['point'] ?? 0;
+$w_point = $userdata['w_point'] ?? [];
+
+$point += $point_add;
+if(empty($w_point[$gametype][$claim_chat_id])) $w_point[$gametype][$claim_chat_id] = 0;
+$w_point[$gametype][$claim_chat_id] += $point_add;
 
 unset($unclaimeds[$gametype][$claim_chat_id][$claimcode]);
+if(empty($unclaimeds[$gametype][$claim_chat_id])) unset($unclaimeds[$gametype][$claim_chat_id]);
+if(empty($unclaimeds[$gametype])) unset($unclaimeds[$gametype]);
 
-setUser($user_id,['unclaimeds'=>$unclaimeds]);
+setUser($user_id,[
+    'unclaimeds'=>$unclaimeds,
+    'point'=>$point,
+    'w_point'=>$w_point,
+]);
 
 KirimPerintah('sendMessage',[
     'chat_id' => $user_id,
-    'text'=> "Selamat. Anda telah mendapatkan $poin poin.",
+    'text'=> "Selamat! Anda telah mendapatkan $point_add /point ..",
     'parse_mode'=>'HTML',
 ]);
 

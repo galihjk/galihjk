@@ -190,6 +190,10 @@ elseif($command == "point"){
         }
         $text = "POINT ".$user_data['first_name'].": $point";
     }
+    $text .= "\n\nPerolehan poin minggu ini:\n";
+    if(!empty($user_data['w_point'])){
+        $text .= print_r($user_data['w_point'],true);
+    }
     $result = KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
