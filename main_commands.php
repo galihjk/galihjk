@@ -137,7 +137,7 @@ elseif($command == "menu"){
 
 elseif($command == "claim"){
     checkExpiredUnclaimeds($from_id);
-    $user_data = getUser($from_id);
+    $user_data = getUser($from_id, true);
     if(empty($user_data)){
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,

@@ -15,7 +15,7 @@ $userdata = getUser($user_id);
 if(empty($userdata['unclaimeds'][$gametype][$claim_chat_id][$claimcode])){
     KirimPerintah('sendMessage',[
         'chat_id' => $user_id,
-        'text'=> "GAGAL: Kayaknya yang mau kamu claim itu sudah kadaluarsa atau sudah diclaim sebelumnya.. coba cek /claim lagi..",
+        'text'=> "GAGAL: Kayaknya yang mau kamu klaim itu sudah kadaluarsa atau sudah diklaim sebelumnya.. coba cek /claim lagi..",
         'parse_mode'=>'HTML',
     ]);
     goto skip_to_end;

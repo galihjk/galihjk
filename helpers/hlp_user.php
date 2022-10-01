@@ -1,8 +1,8 @@
 <?php
 
-function getUser($user_id){
+function getUser($user_id, $loadData = false){
 	global $data;
-	if(empty($data['active_users'][$user_id])){
+	if(empty($data['active_users'][$user_id]) or $loadData){
 		$user = loadData("user/$user_id");
 		if (!empty($user)) $data['active_users'][$user_id] = $user;
 	}
