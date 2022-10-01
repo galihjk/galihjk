@@ -1,4 +1,7 @@
 <?php 
+$data = loadData("data");
+$data_old = $data;
+
 htmlBegin();
 if(empty($_GET['code'])) goto skip_to_end;
 $explode = explode("|",$_GET['code']);
@@ -88,4 +91,7 @@ skip_to_end:
     </script>
 <?php
 
+if($data_old != $data){
+    saveData("data", $data);
+}
 htmlEnd();

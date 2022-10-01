@@ -137,7 +137,7 @@ elseif($command == "menu"){
 
 elseif($command == "claim"){
     checkExpiredUnclaimeds($from_id);
-    $user_data = getUser($from_id, true);
+    $user_data = getUser($from_id);
     if(empty($user_data)){
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
@@ -188,11 +188,19 @@ elseif($command == "point"){
         if(!empty($user_data['point'])){
             $point = $user_data['point'];
         }
-        $text = "POINT ".$user_data['first_name'].": $point";
+        $text = "POINT ".$user_data['first_name'].": \n<b>$point</b>";
     }
-    $text .= "\n\nPerolehan poin minggu ini:\n";
     if(!empty($user_data['w_point'])){
-        $text .= print_r($user_data['w_point'],true);
+        $text .= "\n\nPerolehan poin minggu ini:\n";
+        $total_w_point = 0;
+        foreach($user_data['w_point'] as $gametype=>$vals){
+            $text .= "- $gametype:\n";
+            foreach($vals as $val_chatid=>$val){
+                $text .= " -- ".getChatData($val_chatid,'title','').": $val\n";
+                $total_w_point += $val;
+            }
+        }
+        $text .= "TOTAL: $total_w_point";
     }
     $result = KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,

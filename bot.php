@@ -18,7 +18,7 @@ $id_developer = $config['id_developer'];
 include('galihjk/initiate.php');
 
 $last_serve_time = intval(loadData("last_serve_time") ?? 0);
-if($last_serve_time !== time()){
+if(abs($last_serve_time-time()) > 1){
     $jeda = time() - intval($last_serve_time);
     saveData("last_serve_time",time());
     include('galihjk/main.php');

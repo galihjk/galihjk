@@ -16,7 +16,7 @@ foreach($scandir as $file){
 $token = $config['bot_token'];
 $id_developer = $config['id_developer'];
 
-sleep(rand(4,6));
+sleep(rand(3,5));
 $srvstatus = loadData("srvstatus");
 if(!empty($srvstatus['run_code'])){
 	$run_code = $srvstatus['run_code'];
