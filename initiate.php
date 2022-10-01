@@ -15,6 +15,10 @@ if(!isset($data['last_active_user_time'])) $data['last_active_user_time'] = time
 if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
     //reset active users every 10 minutes
     $data['last_active_user_time'] = time();
+    foreach(array_keys($data['active_users']) as $key_user){
+        checkExpiredUnclaimeds($key_user);
+    }
+    checkExpiredUnclaimeds($from_id);
     $data['active_users'] = [];
 }
 

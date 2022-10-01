@@ -4,7 +4,7 @@ function getUser($user_id){
 	global $data;
 	if(empty($data['active_users'][$user_id])){
 		$user = loadData("user/$user_id");
-		$data['active_users'][$user_id] = $user;
+		if (!empty($user)) $data['active_users'][$user_id] = $user;
 	}
 	else{
 		$user = $data['active_users'][$user_id];
@@ -57,5 +57,28 @@ function checkImpersonate(&$userdata){
 	global $id_developer;
 	if(!empty($data['impersonate']) and $userdata['id'] == $id_developer){
 		$userdata = $data['impersonate'];
+	}
+}
+
+function checkExpiredUnclaimeds($user_id){
+	$user = getUser($user_id);
+	if(empty($user)) return false;
+	$unclaimeds = [];
+	if(!empty($user['unclaimeds'])){
+		$unclaimeds = $user['unclaimeds'];
+	}
+	$unclaimeds_new = $unclaimeds;
+	foreach($unclaimeds_new as $gametype=>$claimchat){
+        foreach($claimchat as $claim_chat_id=>$claimvals){
+            foreach($claimvals as $claimcode=>$claimval){
+                $expired_in = $claimval[1] - time();
+				if($expired_in <= 0){
+					unset($unclaimeds_new[$gametype][$claim_chat_id][$claimcode]);
+				}
+            }
+        }
+    }
+	if($unclaimeds_new != $unclaimeds){
+		setUser($user_id, ['unclaimeds'=>$unclaimeds_new]);
 	}
 }

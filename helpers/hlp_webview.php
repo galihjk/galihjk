@@ -1,11 +1,8 @@
 <?php 
 //html helpers...
 //=============== page layout
-function htmlBegin(){
-	$r = getAllRequest();
-	if(empty($r->app))$r->app = "";
-	if(empty($r->act))$r->act = "";
-	$menu_name = getMenuName($r->app,$r->act);
+function htmlBegin($options = []){
+	$title = $options['title'] ?? '';
 	?>
 	<!doctype html>
 	<html lang="en">
@@ -17,10 +14,11 @@ function htmlBegin(){
 			<link rel="stylesheet" href="/assets/dx.light.css">
 			
 			<link rel="icon" href="https://realfavicongenerator.net/homepage_icons/platforms/google.png">
-			<title>[GJK] <?= (empty($menu_name) ? '' : " - $menu_name")?> </title>
+			<title>[GJK] <?= (empty($title) ? '' : " - $title")?> </title>
 
 			<script type="text/javascript" src="/assets/jquery-3.6.0.min.js"></script>
-			<script type="text/javascript" src="/assets/dx.all.js"></script>
+			<!-- <script type="text/javascript" src="/assets/dx.all.js"></script> -->
+			<script src="https://cdn3.devexpress.com/jslib/22.1.5/js/dx.all.js"></script>
 
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3643933755900950"
      		crossorigin="anonymous"></script>
@@ -30,7 +28,7 @@ function htmlBegin(){
 	<?php
 	return "";
 }
-function htmlEnd(){
+function htmlEnd($options = []){
 	?>
 		<script src="/assets/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		</body>

@@ -98,6 +98,7 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
     return $debug;  
 }
 
+/*
 function bot_execute($bot_token, $method, $param = []){
 	$options = array(
 		'http' => array(
@@ -113,6 +114,7 @@ function bot_execute($bot_token, $method, $param = []){
 	// dump(json_decode($result,true));
 	return json_decode($result,true);
 }
+*/
 
 
 function getBotSrv($botcode = "all", $prop = "all"){

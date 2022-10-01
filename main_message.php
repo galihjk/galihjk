@@ -58,10 +58,7 @@ $from_id != $id_developer){
 if(!empty($from_id)){
     if(empty(getUser($from_id))){
         setUser($from_id, $message_data["from"]);
-        // saveData("user/$from_id", $message_data["from"]);
-        // $data['active_users'][$from_id] = $message_data["from"];
     }
-    setUser($from_id, ['last_active'=>time()]);
 }
 
 //developer commands 

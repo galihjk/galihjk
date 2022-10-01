@@ -136,6 +136,7 @@ elseif($command == "menu"){
 }
 
 elseif($command == "claim"){
+    checkExpiredUnclaimeds($from_id);
     $user_data = getUser($from_id);
     if(empty($user_data)){
         KirimPerintah('sendMessage',[
@@ -154,7 +155,9 @@ elseif($command == "claim"){
                 $ada = true;
                 $expired_in = $claimval[1] - time();
                 $expired_text = ($expired_in < 60*60 ? round($expired_in/60) . " menit" : round($expired_in/(60*60)) . " jam"); 
-                $text .= "- ".$claimval[0]." ($gametype) [<a href='https://galihjk.my.id/?web_run_action=claim&code=$from_id|$claim_chat_id|$claimcode'>AMBIL</a>]\n";
+                $text .= "- ".$claimval[0]." ($gametype / " ;
+                $text .= getChatData($claim_chat_id,'title','') ;
+                $text .= ") \n	&gt;&gt; <a href='https://galihjk.my.id/?web_run_action=claim&code=$from_id|$gametype|$claim_chat_id|$claimcode'>[AMBIL]</a> &lt;&lt;\n";
                 $text .= "<i>Kadaluarsa dalam $expired_text</i>\n\n";
             }
         }
@@ -172,6 +175,26 @@ elseif($command == "claim"){
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id,
         'disable_web_page_preview' => true,
+    ]);
+}
+
+elseif($command == "point"){
+    $user_data = getUser($from_id);
+    if(empty($user_data)){
+        $text = "Mohon maaf, tidak dapat diproses.";
+    }
+    else{
+        $point = 0;
+        if(!empty($user_data['point'])){
+            $point = $user_data['point'];
+        }
+        $text = "POINT ".$user_data['first_name'].": $point";
+    }
+    $result = KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> $text,
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
     ]);
 }
 //=============================================================
