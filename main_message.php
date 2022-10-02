@@ -22,7 +22,8 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         ]);
     }
     $chat_last_play = $chat_data['last_play'] ?? 0;
-    $chat_idle_timeleft = $chat_data['idle_timeleft'] ?? 0;
+    $chat_idle_leavetime = $chat_data['idle_leavetime'] ?? time();
+    $chat_idle_timeleft = time() - $chat_idle_leavetime;
     $chat_idle_notif = getChatData($chat_id,'idle_notif',false);
     $since_last_play = time() - $chat_last_play;
     $bonus_time = max(0,(5*60)-$since_last_play); //bonus time up to 5 minutes after last play
@@ -31,7 +32,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         $leave_timeleft = $chat_idle_timeleft + $bonus_time + $add_idle_time_left;
         setChatData($chat_id,[
             'idle_notif'=>true,
-            'idle_timeleft'=>$chat_idle_timeleft + $add_idle_time_left,
+            'idle_leavetime'=>time() + $chat_idle_timeleft + $add_idle_time_left,
         ]);
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
