@@ -57,7 +57,6 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
 
 // update chat data every 10 minutes
 $setChatData = $message_data["chat"];
-$setChatData['active'] = true;
 setChatData($chat_id,$setChatData,true,10*60);
 
 $message_id = $message_data["message_id"];

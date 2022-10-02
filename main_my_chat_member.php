@@ -1,5 +1,13 @@
 <?php
 
+if(!empty($update['my_chat_member']['new_chat_member']['status'])
+and $update['my_chat_member']['new_chat_member']['status'] == 'kicked'){
+    setChatData($chat_id,['active'=>false],false);
+}
+else{
+    setChatData($chat_id,['active'=>true]);
+}
+
 // 		Array
 // (
 //     [update_id] => 588710485
