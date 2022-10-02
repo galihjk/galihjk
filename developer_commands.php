@@ -81,9 +81,30 @@ elseif($command == "p" and $chat_id == $id_developer){
 }
 
 elseif($command == "data" and $chat_id == $id_developer){
+    $text = "DATA\n";
+    foreach($data as $k=>$v){
+        $text .= "- $k: ";
+        if(is_array($v)){
+            $text .= "/data__$k";
+        }
+        else{
+            $text .= $v;
+        }
+        $text .= "\n";
+    }
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text' => 'data: '.print_r(loadData("data"),1),
+        'text' => $text,
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+
+elseif(isDiawali($command,"data__") and $chat_id == $id_developer){
+    $explode = explode("__",$command);
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text' => 'data: '.print_r($data[$explode[1]],1),
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);
