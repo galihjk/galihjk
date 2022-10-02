@@ -78,11 +78,18 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
         echo "ERROR: ";
         print_r($data);
     }
+	
 
     if (!empty($hasil) and ($perintah == "sendMessage" or $perintah == "editMessageText")) usleep(30000);
     
     //debug
     $debug = json_decode($hasil,true);
+
+	//kalau gagal kirim ke suatu chat id, non aktifkan
+	if(empty($debug['ok']) and !empty($data['chat_id'])){
+		setChatData($data['chat_id'],['active'=>false],false);
+	}
+	
     if(empty($debug['result']) and $perintah == "sendMessage"){
         echo "text = " . $data['text'] . "\n";
         print_r($debug);

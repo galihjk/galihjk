@@ -376,5 +376,5 @@ elseif($playdata['step'] == 'game_end'){
             'disable_web_page_preview' => true,
         ], time()+2
     ];
-    $data['playing_chatters'][$chat_id]['playing'] = false;
+    stopPlayingGame($chat_id);
 }

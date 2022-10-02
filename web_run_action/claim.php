@@ -33,7 +33,9 @@ $w_point = $userdata['w_point'] ?? [];
 
 $point += $point_add;
 if(empty($w_point[$gametype][$claim_chat_id])) $w_point[$gametype][$claim_chat_id] = 0;
-$w_point[$gametype][$claim_chat_id] += $point_add;
+
+//ini nanti dipake:
+//$w_point[$gametype][$claim_chat_id] += $point_add;
 
 unset($unclaimeds[$gametype][$claim_chat_id][$claimcode]);
 if(empty($unclaimeds[$gametype][$claim_chat_id])) unset($unclaimeds[$gametype][$claim_chat_id]);

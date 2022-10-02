@@ -56,3 +56,7 @@ function escapeHtmlOpenTag($str){
 function strToDB($str){
 	return str_replace("'","''",$str);
 }
+
+function timeToSimpleText($time){
+	return ($time < 60*60 ? round($time/60) . " menit" : round($time/(60*60)) . " jam");
+}

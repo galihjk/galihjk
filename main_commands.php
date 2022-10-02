@@ -154,7 +154,7 @@ elseif($command == "claim"){
             foreach($claimvals as $claimcode=>$claimval){
                 $ada = true;
                 $expired_in = $claimval[1] - time();
-                $expired_text = ($expired_in < 60*60 ? round($expired_in/60) . " menit" : round($expired_in/(60*60)) . " jam"); 
+                $expired_text = timeToSimpleText($expired_in); 
                 $text .= "- ".$claimval[0]." ($gametype / " ;
                 $text .= getChatData($claim_chat_id,'title','') ;
                 $text .= ") \n	&gt;&gt; <a href='https://galihjk.my.id/?web_run_action=claim&code=$from_id|$gametype|$claim_chat_id|$claimcode'>[AMBIL]</a> &lt;&lt;\n";
@@ -190,18 +190,19 @@ elseif($command == "point"){
         }
         $text = "POINT ".$user_data['first_name'].": \n<b>$point</b>";
     }
-    if(!empty($user_data['w_point'])){
-        $text .= "\n\nPerolehan poin minggu ini:\n";
-        $total_w_point = 0;
-        foreach($user_data['w_point'] as $gametype=>$vals){
-            $text .= "- $gametype:\n";
-            foreach($vals as $val_chatid=>$val){
-                $text .= " -- ".getChatData($val_chatid,'title','').": $val\n";
-                $total_w_point += $val;
-            }
-        }
-        $text .= "TOTAL: $total_w_point";
-    }
+    // ini nanti dipake:
+    // if(!empty($user_data['w_point'])){
+    //     $text .= "\n\nPerolehan poin minggu ini:\n";
+    //     $total_w_point = 0;
+    //     foreach($user_data['w_point'] as $gametype=>$vals){
+    //         $text .= "- $gametype:\n";
+    //         foreach($vals as $val_chatid=>$val){
+    //             $text .= " -- ".getChatData($val_chatid,'title','').": $val\n";
+    //             $total_w_point += $val;
+    //         }
+    //     }
+    //     $text .= "TOTAL: $total_w_point";
+    // }
     $result = KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,

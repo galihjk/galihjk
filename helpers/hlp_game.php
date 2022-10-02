@@ -55,6 +55,15 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 	setUserPlaying($from_id, $chat_id, $game);
 }
 
+function stopPlayingGame($chat_id){
+	global $data;
+	setChatData($chat_id, [
+		'last_play'=>time(),
+		'idle_notif'=>false,
+	]);
+	unset($data['playing_chatters'][$chat_id]);
+}
+
 function setUserPlaying($user_id, $chat_id, $game){
 	global $config;
 
