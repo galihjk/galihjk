@@ -16,7 +16,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         if($chat_timeleft < 10 * 60){
             // bonus 10 menit untuk grup baru
             $leavetime = time() + 10*60;
-            $leavetime = time() + 10;//test
+            $leavetime = time() + 30;//test
         }
         else{
             $leavetime = $chat_leavetime;
@@ -27,6 +27,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
             'parse_mode'=>'HTML',
         ]);
         setChatData($chat_id,[
+            'active'=>true,
             'leavetime'=>$leavetime, 
         ],false);
     }

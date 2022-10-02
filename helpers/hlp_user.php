@@ -67,18 +67,21 @@ function checkExpiredUnclaimeds($user_id){
 	if(!empty($user['unclaimeds'])){
 		$unclaimeds = $user['unclaimeds'];
 	}
-	$unclaimeds_new = $unclaimeds;
-	foreach($unclaimeds_new as $gametype=>$claimchat){
-        foreach($claimchat as $claim_chat_id=>$claimvals){
-            foreach($claimvals as $claimcode=>$claimval){
-                $expired_in = $claimval[1] - time();
-				if($expired_in <= 0){
-					unset($unclaimeds_new[$gametype][$claim_chat_id][$claimcode]);
+	if(!empty($unclaimeds)){
+		$unclaimeds_new = $unclaimeds;
+		foreach($unclaimeds_new as $gametype=>$claimchat){
+			foreach($claimchat as $claim_chat_id=>$claimvals){
+				foreach($claimvals as $claimcode=>$claimval){
+					$expired_in = $claimval[1] - time();
+					if($expired_in <= 0){
+						unset($unclaimeds_new[$gametype][$claim_chat_id][$claimcode]);
+					}
 				}
-            }
-        }
-    }
-	if($unclaimeds_new != $unclaimeds){
-		setUser($user_id, ['unclaimeds'=>$unclaimeds_new]);
+			}
+		}
+		if($unclaimeds_new != $unclaimeds){
+			setUser($user_id, ['unclaimeds'=>$unclaimeds_new]);
+		}
 	}
+
 }
