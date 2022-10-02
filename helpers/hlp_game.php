@@ -53,6 +53,10 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 	$data['playing_chatters'][$chat_id]['bot'] = $config['bot_username'];
 	$data['playing_chatters'][$chat_id][$game] = $datagame;
 	setUserPlaying($from_id, $chat_id, $game);
+	setChatData($chat_id, [
+		'last_play'=>time(),
+		'idle_notif'=>false,
+	]);
 }
 
 function stopPlayingGame($chat_id){

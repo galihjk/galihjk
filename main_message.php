@@ -5,44 +5,65 @@ checkImpersonate($message_data["from"]);
 
 $chat_id = (string) $message_data["chat"]["id"];
 
-// check chat data every 5 minutes
-$setChatData = $message_data["chat"];
-$setChatData['active'] = true;
-setChatData($chat_id,$setChatData,true,5*60);
+//when group iddle (not playing game) =======
+if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
+    // check chat data every 10 minutes
+    $setChatData = $message_data["chat"];
+    $setChatData['active'] = true;
+    setChatData($chat_id,$setChatData,true,10*60);
 
-//check group chat idle time
-if(empty($data['playing_chatters'][$chat_id]) and isDiawali($chat_id,"-")){
-    $chat_last_play = getChatData($chat_id,'last_play',0);
+    //check group chat idle time
+    $chat_data = getChatData($chat_id);
+    $chat_active = $chat_data['active'] ?? false;
+    if(!$chat_active){
+        setChatData($chat_id,[
+            'active'=>true,
+            'idle_notif'=>false,
+        ]);
+    }
+    $chat_last_play = $chat_data['last_play'] ?? 0;
+    $chat_idle_timeleft = $chat_data['idle_timeleft'] ?? 0;
     $chat_idle_notif = getChatData($chat_id,'idle_notif',false);
-    $chat_idle_timeleft = getChatData($chat_id,'idle_timeleft',0);
     $since_last_play = time() - $chat_last_play;
     $bonus_time = max(0,(5*60)-$since_last_play); //bonus time up to 5 minutes after last play
     if(!$chat_idle_notif){
-        $bonus_time += 10; //bonus play + 10 seconds
-        $leave_timeleft = $chat_idle_timeleft + $bonus_time;
-        setChatData($chat_id,['idle_notif'=>true]);
+        $add_idle_time_left = 30;
+        $leave_timeleft = $chat_idle_timeleft + $bonus_time + $add_idle_time_left;
+        setChatData($chat_id,[
+            'idle_notif'=>true,
+            'idle_timeleft'=>$chat_idle_timeleft + $add_idle_time_left,
+        ]);
         KirimPerintah('sendMessage',[
-			'chat_id' => $chat_id,
-			'text'=> "<i>info:</i>\nSaya akan otomatis leave group dalam ".timeToSimpleText($leave_timeleft)." jika tidak ada yang main, karena BOT ini sedang dalam pengembangan. ",
-			'parse_mode'=>'HTML',
-		]);
+            'chat_id' => $chat_id,
+            'text'=> "<i>info:</i>\nSaya akan otomatis leave group dalam ".timeToSimpleText($leave_timeleft)." jika tidak ada yang main, karena BOT ini sedang dalam pengembangan. \nYuk /play",
+            'parse_mode'=>'HTML',
+        ]);
     }
     elseif($chat_idle_timeleft + $bonus_time <= 0){
+        $admins = KirimPerintah('getChatAdministrators',[
+            'chat_id' => $chat_id,
+        ]);
+        $text = "Wahai admin";
+        $text .= print_r($admins['result'],true);
+        $text .= "\nSaya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D";
+        // foreach($admins['result']){
+        //     "<a href='tg://user?id=$from_id'>".$data_user['first_name']."</a>"
+        // }
         setChatData($chat_id, [
             'active'=>false,
             'idle_notif'=>false,
         ], false);
         KirimPerintah('sendMessage',[
-			'chat_id' => $chat_id,
-			'text'=> "Wahai admin...\nSaya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D",
-			'parse_mode'=>'HTML',
-		]);
+            'chat_id' => $chat_id,
+            'text'=> $text,
+            'parse_mode'=>'HTML',
+        ]);
         KirimPerintah('leaveChat',[
             'chat_id' => $chat_id,
         ]);
+        goto skip_to_end;
     }
 }
-
 
 
 $message_id = $message_data["message_id"];
@@ -112,3 +133,7 @@ include("galihjk/main_commands.php");
 //     include('galihjk/ttss_msg_update.php');
 // }
 //====================================
+
+skip_to_end:
+
+;

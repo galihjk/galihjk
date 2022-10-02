@@ -58,5 +58,6 @@ function strToDB($str){
 }
 
 function timeToSimpleText($time){
+	if($time < 60) return "$time detik";
 	return ($time < 60*60 ? round($time/60) . " menit" : round($time/(60*60)) . " jam");
 }
