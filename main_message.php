@@ -16,6 +16,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         if($chat_timeleft < 10 * 60){
             // bonus 10 menit untuk grup baru
             $leavetime = time() + 10*60;
+            $leavetime = time() + 10;//test
         }
         else{
             $leavetime = $chat_leavetime;
@@ -28,7 +29,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         setChatData($chat_id,[
             'active'=>true,
             'leavetime'=>$leavetime, 
-        ]);
+        ],false);
     }
     elseif($chat_timeleft <= 0){
         $admins = KirimPerintah('getChatAdministrators',[
@@ -38,7 +39,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         foreach($admins['result'] as $item){
             $text .= "<a href='tg://user?id=".$item['user']['id']."'>.</a>";
         }
-        $text .= "\nSaya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D";
+        $text .= "\nSudah waktu nya saya pamit undur diri.. Saya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D";
         setChatData($chat_id, [
             'active'=>false,
         ], false);
