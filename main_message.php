@@ -28,25 +28,26 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
     $since_last_play = time() - $chat_last_play;
     $bonus_time = max(0,(5*60)-$since_last_play); //bonus time up to 5 minutes after last play
 
-    // KirimPerintah('sendMessage',[
-    //     'chat_id' => $config['id_developer'],
-    //     'text'=> "nih".print_r([
-    //         $chat_last_play,
-    //         $chat_idle_leavetime,
-    //         $chat_idle_timeleft,
-    //         $chat_idle_notif,
-    //         $since_last_play,
-    //         $bonus_time,
-    //     ],true),
-    //     'parse_mode'=>'HTML',
-    // ]);
+    KirimPerintah('sendMessage',[
+        'chat_id' => $config['id_developer'],
+        'text'=> "nih".print_r([
+            $chat_last_play,
+            $chat_idle_leavetime,
+            $chat_idle_timeleft,
+            $chat_idle_notif,
+            $since_last_play,
+            $bonus_time,
+            time(),
+        ],true),
+        'parse_mode'=>'HTML',
+    ]);
 
     if(!$chat_idle_notif){
         $add_idle_time_left = 30;
         $leave_timeleft = $chat_idle_timeleft + $bonus_time + $add_idle_time_left;
         setChatData($chat_id,[
             'idle_notif'=>true,
-            'idle_leavetime'=>time() + $chat_idle_timeleft + $add_idle_time_left,
+            'idle_leavetime'=>time() + $leave_timeleft,
         ]);
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
@@ -59,11 +60,11 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
             'chat_id' => $chat_id,
         ]);
         $text = "Wahai admin";
+        foreach($admins['result'] as $item){
+            $text .= "<a href='tg://user?id=".$item['user']['id']."'>.</a>";
+        }
         $text .= print_r($admins['result'],true);
         $text .= "\nSaya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D";
-        // foreach($admins['result']){
-        //     "<a href='tg://user?id=$from_id'>".$data_user['first_name']."</a>"
-        // }
         setChatData($chat_id, [
             'active'=>false,
             'idle_notif'=>false,
