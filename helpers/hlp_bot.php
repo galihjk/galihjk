@@ -88,6 +88,7 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
 	//kalau gagal kirim ke suatu chat id, non aktifkan
 	if(empty($debug['ok']) and !empty($data['chat_id'])){
 		setChatData($data['chat_id'],['active'=>false],false);
+		stopPlayingGame($data['chat_id']);
 	}
 	
     if(empty($debug['result']) and $perintah == "sendMessage"){
