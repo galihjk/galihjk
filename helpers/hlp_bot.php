@@ -59,6 +59,13 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
         $bot_token = $config['bot_token'];
     }
 
+	//set data yang berupa array menjadi json agar sesuai dengan api bot telegram 
+	foreach($data as $key => $val){
+		if(is_array($val)){
+			$data[$key] = json_encode($val);
+		}
+	}
+
     // Detek otomatis metode curl atau stream 
     if(is_callable('curl_init')) {
         $hasil = KirimPerintahCurl($bot_token,$perintah,$data);
