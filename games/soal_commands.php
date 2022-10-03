@@ -26,3 +26,11 @@ if($command == 'tambah_soal'){
     //     ],
     // ]);
 }
+else{
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> "command: $command",
+        'parse_mode'=>'HTML',
+        'reply_markup' => $reply_markup,
+    ]);
+}
