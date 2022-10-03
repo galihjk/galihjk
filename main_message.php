@@ -21,15 +21,17 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         else{
             $leavetime = $chat_leavetime;
         }
-        KirimPerintah('sendMessage',[
+        if(!empty(KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> "<i>info:</i>\nSaya akan otomatis leave group dalam ".timeToSimpleText($leavetime - time()).", karena BOT ini sedang dalam pengembangan. \nYuk /play",
             'parse_mode'=>'HTML',
-        ]);
-        setChatData($chat_id,[
-            'active'=>true,
-            'leavetime'=>$leavetime, 
-        ],false);
+        ])['ok'])){
+            setChatData($chat_id,[
+                'active'=>true,
+                'leavetime'=>$leavetime, 
+            ],false);
+        };
+        
     }
     elseif($chat_timeleft <= 0){
         $admins = KirimPerintah('getChatAdministrators',[
