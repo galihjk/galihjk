@@ -110,7 +110,7 @@ elseif($playdata['step'] == 'starting_start'){
     }
     $text .= "\n\nSoal 1-5: Mode Mayoritas 📈";
     $text .= "\nSoal 6-10: Mode Minoritas 📊";
-    $text .= "\nWaktu Maks: 45 detik";
+    $text .= "\nWaktu Maks: 30 detik";
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
@@ -143,7 +143,7 @@ elseif($playdata['step'] == 'kirim_soal'){
     }
     else{
         $data['change_step'][] = ['mamin', $chat_id, 'receive_inline'];
-        $data['playing_chatters'][$chat_id]['mamin']['waktu_habis_sisa'] = 45;
+        $data['playing_chatters'][$chat_id]['mamin']['waktu_habis_sisa'] = 30;
         $data['playing_chatters'][$chat_id]['mamin']['waktu_check_sisa'] = rand(25,35);
         $data['playing_chatters'][$chat_id]['mamin']['soal_msgid'] = "";
     
