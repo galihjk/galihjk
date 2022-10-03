@@ -101,6 +101,11 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
                     ]);
                 }
                 else{
+                    KirimPerintah('sendMessage',[
+                        'chat_id' => $chat_id,
+                        'text'=> "$emoji_like",
+                        'reply_to_message_id' => $message_id
+                    ]);
                     $data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] = 0;
                     $data['change_step'][] = ['mamin', $chat_id, 'starting_check'];
                     unset($data['playing_chatters'][$chat_id]['force_start']);

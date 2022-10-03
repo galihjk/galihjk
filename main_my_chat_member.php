@@ -1,9 +1,9 @@
 <?php
 
-KirimPerintah('sendMessage',[
-    'chat_id' => $config['id_developer'],
-    'text' => "nih:".print_r($update['my_chat_member'],true),
-]);
+// KirimPerintah('sendMessage',[
+//     'chat_id' => $config['id_developer'],
+//     'text' => "nih:".print_r($update['my_chat_member'],true),
+// ]);
 
 // if(!empty($update['my_chat_member']['new_chat_member']['status'])
 // and $update['my_chat_member']['new_chat_member']['status'] == 'kicked'){
