@@ -31,7 +31,7 @@ elseif($callback_query_data == "soal_survey_info"){
     $text .= "- Benda apa yang <b>biasanya</b>.....\n";
     $text .= "- Sebutkan nama ........ yang <b>biasa</b> orang ketahui!\n";
     $text .= "- Sebutkan macam ........ <b>menurut kebanyakan</b> orang!\n";
-    $text .= "- Apa ....... <b>favorit</b> orang?\n";
+    $text .= "- Apa ....... <b>favorit</b> orang?\n\n/soal_tambah";
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
@@ -57,7 +57,7 @@ elseif($callback_query_data == "soal_komkat_info"){
     $text .= " -- JAWABAN 2: MELATA\n";
     $text .= " -- JAWABAN 3: PANJANG\n";
     $text .= " -- JAWABAN 4: DESIS\n";
-    $text .= " -- JAWABAN 5: REPTIL\n";
+    $text .= " -- JAWABAN 5: REPTIL\n\n/soal_tambah";
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,

@@ -16,7 +16,7 @@ if($command == 'soal_tambah'){
     //kirim pesan dengan tombol
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> "Mau membuat soal yang jenis nya apa? (Klik tanda tanya untuk info)",
+        'text'=> "Mau membuat soal <b>jenis</b> apa? (Klik tanda tanya untuk info)",
         'parse_mode'=>'HTML',
         'reply_markup' => $reply_markup,
     ]);
