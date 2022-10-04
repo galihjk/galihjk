@@ -10,7 +10,7 @@ if($callback_query_data == "soal_survey_tambah"){
     ]);
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> "Balas pesan ini untuk membuat soal survey. \n".mentionUser($from_id),
+        'text'=> "[SOAL]\n\nBalas pesan ini untuk membuat soal survey. \n".mentionUser($from_id),
         'parse_mode'=>'HTML',
         'reply_markup' => [
             'force_reply'=>true,
@@ -23,7 +23,20 @@ elseif($callback_query_data == "soal_survey_info"){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
         'text'=> $emoji_like,
-    ]);	
+    ]);
+    $text = "<b>SOAL SURVEY</b>\n";
+    $text .= "<i>Dipakai untuk game yang berkaitan dengan survey, seperti kuis mayoritas minoritas.</i>\n\n";
+    $text .= "CONTOH:\n";
+    $text .= "- Apa yang <b>biasanya</b> orang lakukan.....\n";
+    $text .= "- Benda apa yang <b>biasanya</b>.....\n";
+    $text .= "- Sebutkan nama ........ yang <b>biasa</b> orang ketahui!\n";
+    $text .= "- Sebutkan macam ........ <b>menurut kebanyakan</b> orang!\n";
+    $text .= "- Apa ....... <b>favorit</b> orang?\n";
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> $text,
+        'parse_mode'=>'HTML',
+    ]);
 }
 elseif($callback_query_data == "soal_kuis_info"){
     KirimPerintah('answerCallbackQuery',[
@@ -36,6 +49,20 @@ elseif($callback_query_data == "soal_komkat_info"){
         'callback_query_id' => $update["callback_query"]['id'],
         'text'=> $emoji_like,
     ]);	
+    $text = "<b>KOMUNIKATA</b>\n";
+    $text .= "Permianan menebak 5 hal (terdiri dari satu atau dua kata) yang berkaitan dengan sebuah kata yang ada di soal.\n\n";
+    $text .= "CONTOH:\n";
+    $text .= "- SOAL: ULAR\n";
+    $text .= " -- JAWABAN 1: BISA\n";
+    $text .= " -- JAWABAN 2: MELATA\n";
+    $text .= " -- JAWABAN 3: PANJANG\n";
+    $text .= " -- JAWABAN 4: DESIS\n";
+    $text .= " -- JAWABAN 5: REPTIL\n";
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> $text,
+        'parse_mode'=>'HTML',
+    ]);
 }
 elseif($callback_query_data == "soal_huruf_info"){
     KirimPerintah('answerCallbackQuery',[

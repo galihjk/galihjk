@@ -81,14 +81,14 @@ if(isset($message_data["from"]["last_name"])){
 $from_name = $first_name . $last_name;
 $from_name = htmlspecialchars($from_name);
 
-$text = $message_data["text"];
+$message_text = $message_data["text"];
 
 $command = "";
 $command_after = "";
 
-if(substr($text,0,1) == "/"){
-    $command = substr(strtolower(trim(explode(" ",explode("@$botname",$text)[0])[0])),1);
-    $command_after = trim(str_ireplace("/$command","",str_ireplace("/$command@$botname","",$text)));
+if(substr($message_text,0,1) == "/"){
+    $command = substr(strtolower(trim(explode(" ",explode("@$botname",$message_text)[0])[0])),1);
+    $command_after = trim(str_ireplace("/$command","",str_ireplace("/$command@$botname","",$message_text)));
 }
 
 if($command == "start" and !isDiawali($chat_id,"-") and !empty($command_after) and isDiawali($command_after,"cmd_")){
@@ -116,11 +116,21 @@ if(!empty($from_id)){
     }
 }
 
-//developer commands 
-include("galihjk/developer_commands.php");
+//commands
+if(!empty($command)){
 
-//main commands
-include("galihjk/main_commands.php");
+    //developer commands 
+    include("galihjk/developer_commands.php");
+
+    //main commands
+    include("galihjk/main_commands.php");
+
+}
+
+//bot message replied 
+if(!empty($message_data['reply_to_message']) and $message_data['reply_to_message']['from']['username'] == $config['bot_username']){
+    include("galihjk/main_message_reply.php");
+}
 
 //message updates for active games====
 //TTSS MESSAGE UPDATE
