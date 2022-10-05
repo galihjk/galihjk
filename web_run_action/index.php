@@ -3,8 +3,6 @@ if(empty($include_action)){
     die("wrong access");
 }
 
-$config = include("galihjk/config.php");
-
 //helpers autoload
 $scandir = scandir('galihjk/helpers/');
 foreach($scandir as $file){
