@@ -44,3 +44,6 @@ $emoji_square_black = "⬛";
 $emoji_ban="🚫";
 $emoji_cross="❌";
 $emoji_thinking="🤔";
+$emoji_pencil = "✏️";
+$emoji_chat = "💬";
+$emoji_please = "🙏";

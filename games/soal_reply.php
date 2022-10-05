@@ -15,7 +15,12 @@ if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soa
             'text'=> "[SOAL SURVEY]\n\n$soal\n\n<i>Kontributor:</i> $first_name",
             'parse_mode'=>'HTML',
             'reply_markup' => inlineKeyBoard([
-                ["ID SOAL: $id_soal","underconstruction"]
+                ["$emoji_dislike DOWNvote (-1)","soal_downvote_$id_soal"],
+                ["$emoji_please unvote (0)","soal_unvote_$id_soal"],
+                ["$emoji_like UPvote (+1)","soal_upvote_$id_soal"],
+                ["$emoji_pencil Edit","https://t.me/".$config['bot_username']."/start=cmd_soal_edit_$id_soal"],
+                ["$emoji_cross Hapus","https://t.me/".$config['bot_username']."/start=cmd_soal_hapus_$id_soal"],
+                ["$emoji_chat Jawaban","https://t.me/".$config['bot_username']."/start=cmd_soal_jawaban_$id_soal"],
             ],2),
         ], time()+10
     ];

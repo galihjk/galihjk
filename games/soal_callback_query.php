@@ -70,6 +70,30 @@ elseif($callback_query_data == "soal_huruf_info"){
         'text'=> $emoji_like,
     ]);	
 }
+elseif(isDiawali($callback_query_data, "soal_downvote_")){
+    $id_soal = str_replace("soal_downvote_","",$callback_query_data);
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "DownVote: $id_soal\noleh:$from_id",
+        'show_alert'=>true,
+    ]);	
+}
+elseif(isDiawali($callback_query_data, "soal_unvote_")){
+    $id_soal = str_replace("soal_downvote_","",$callback_query_data);
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "UN: $id_soal\noleh:$from_id",
+        'show_alert'=>true,
+    ]);	
+}
+elseif(isDiawali($callback_query_data, "soal_upvote_")){
+    $id_soal = str_replace("soal_downvote_","",$callback_query_data);
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "UP: $id_soal\noleh:$from_id",
+        'show_alert'=>true,
+    ]);	
+}
 else{
 
 }

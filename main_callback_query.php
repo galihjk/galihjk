@@ -25,17 +25,16 @@ elseif(isset($update["callback_query"]) and $update["callback_query"]['data'] ==
     ]);	
 }
 
-//games
+//game
 else{
-    $gamefiles = scandir('galihjk/games/');
-    foreach($gamefiles as $file){
-        if(isDiakhiri($file,'_callback_query.php')){
-            $game = str_replace('_callback_query.php','',$file);
-            if(isDiawali($update["callback_query"]['data'],$game."_"))
-                include("galihjk/games/$game".'_callback_query.php')
-            ;
+    $explode = explode("_".$update["callback_query"]['data']);
+    if(count($explode) > 1){
+        $game = $explode[0];
+        if(file_exists("galihjk/games/$game".'_callback_query.php')){
+            include("galihjk/games/$game".'_callback_query.php');
         }
     }
+    
 }
 
 
