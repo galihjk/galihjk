@@ -14,7 +14,7 @@ if($callback_query_data == "soal_survey_tambah"){
         'parse_mode'=>'HTML',
         'reply_markup' => [
             'force_reply'=>true,
-            'input_field_placeholder'=>'Tulis soal yang mau ditambahkan',
+            'input_field_placeholder'=>'Tulis soalmu...',
             'selective'=>true,
         ],
     ]);
