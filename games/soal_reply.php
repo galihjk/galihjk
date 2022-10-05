@@ -1,13 +1,39 @@
 <?php
 if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soal survey. ")){
-    KirimPerintah('sendMessage',[
+    $soal = $message_text;
+    $channel_post = KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> "[SOAL]\n\nBalas pesan ini untuk membuat soal survey. \n$message_text\n".mentionUser($from_id),
+        'text'=> "Loading...",
         'parse_mode'=>'HTML',
-        'reply_markup' => [
-            'force_reply'=>true,
-            'input_field_placeholder'=>'Tulis soal yang mau ditambahkan',
-            'selective'=>true,
-        ],
     ]);
+    $id_soal = $channel_post['result']['message_id'];
+    $data['delayedPerintah'][] = ['editMessageText',
+        [
+            'chat_id' => $chat_id,
+            'text'=> "[SOAL SURVEY]\n\n$soal\n\n<i>Kontributor:</i> $first_name",
+            'parse_mode'=>'HTML',
+            'reply_markup' => inlineKeyBoard([
+                ["ID SOAL: $id_soal","underconstruction"]
+            ],2),
+        ], time()+10
+    ];
+    $data_soal = [
+        'soal'=>$soal,
+        'vote'=>[
+            [$from_id => 1],
+        ],
+        'vtsc'=>1,
+        'jawab'=>[],
+    ];
+    saveData("soal/survey/$id_soal",$data_soal);
+    // KirimPerintah('sendMessage',[
+    //     'chat_id' => $chat_id,
+    //     'text'=> "[SOAL]\n\nBalas pesan ini untuk membuat soal survey. \n$message_text\n".mentionUser($from_id),
+    //     'parse_mode'=>'HTML',
+    //     'reply_markup' => [
+    //         'force_reply'=>true,
+    //         'input_field_placeholder'=>'Tulis soal yang mau ditambahkan',
+    //         'selective'=>true,
+    //     ],
+    // ]);
 }
