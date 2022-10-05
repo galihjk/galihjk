@@ -27,7 +27,7 @@ elseif(isset($update["callback_query"]) and $update["callback_query"]['data'] ==
 
 //game
 else{
-    $explode = explode("_".$update["callback_query"]['data']);
+    $explode = explode("_",$update["callback_query"]['data']);
     if(count($explode) > 1){
         $game = $explode[0];
         if(file_exists("galihjk/games/$game".'_callback_query.php')){
