@@ -6,7 +6,7 @@ $from_id = $update["callback_query"]['from']['id'];
 if($callback_query_data == "soal_survey_tambah"){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "soal_survey_tambah $emoji_like",
+        'text'=> "$emoji_like",
     ]);
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
@@ -71,15 +71,53 @@ elseif($callback_query_data == "soal_huruf_info"){
     ]);	
 }
 elseif(isDiawali($callback_query_data, "soal_downvote_")){
-    $id_soal = str_replace("soal_downvote_","",$callback_query_data);
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
         'text'=> "DownVote: $id_soal\noleh:$from_id",
         'show_alert'=>true,
-    ]);	
+    ]);
+
+    $explode = explode("__",str_replace("soal_downvote_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $data_soal = loadData("soal/survey/$id_soal");
+    $my_vote = $data_soal['vote'][$from_id] ?? 0;
+    if((string) $my_vote !== "-1"){
+        $data_soal['vote'][$from_id] = -1;
+        $data_soal['vtsc'] -= 1;
+        saveData("soal/survey/$id_soal",$data_soal);
+
+        $vtsc = $data_soal['vtsc'];
+        $jenis_soal = 'survey';
+        $soal = $data_soal['soal'];
+        $channel_username = "@galihjksoal";
+        KirimPerintah('editMessageText',[
+            'chat_id' => $channel_username,
+            'message_id'=>$id_soal,
+            'text'=> "[SOAL ".strtoupper($jenis_soal)."]\n\n$soal\n\nVoteScore: $vtsc\n<i>Kontributor:</i> ...",
+            'parse_mode'=>'HTML',
+            'reply_markup' => inlineKeyBoard([
+                ["$emoji_dislike DOWNvote (-1)","soal_downvote_$id_soal"."__$jenis_soal"],
+                ["$emoji_please unvote (0)","soal_unvote_$id_soal"."__$jenis_soal"],
+                ["$emoji_like UPvote (+1)","soal_upvote_$id_soal"."__$jenis_soal"],
+                ["$emoji_pencil Edit","https://t.me/".$config['bot_username']."?start=cmd_soal_edit_$id_soal"."__$jenis_soal"],
+                ["$emoji_cross Hapus","https://t.me/".$config['bot_username']."?start=cmd_soal_hapus_$id_soal"."__$jenis_soal"],
+                ["$emoji_chat Jawaban","https://t.me/".$config['bot_username']."?start=cmd_soal_jawaban_$id_soal"."__$jenis_soal"],
+            ],3),
+        ]);
+    }
+    // [
+    //     'soal'=>$soal,
+    //     'vote'=>[
+    //         [$from_id => 1],
+    //     ],
+    //     'vtsc'=>1,
+    //     'jawab'=>[],
+    // ];
+    // saveData("soal/survey/$id_soal",$data_soal);
 }
 elseif(isDiawali($callback_query_data, "soal_unvote_")){
-    $id_soal = str_replace("soal_downvote_","",$callback_query_data);
+    $explode = explode("__",str_replace("soal_downvote_","",$callback_query_data));
+    $id_soal = $explode[0];
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
         'text'=> "UN: $id_soal\noleh:$from_id",
@@ -87,7 +125,8 @@ elseif(isDiawali($callback_query_data, "soal_unvote_")){
     ]);	
 }
 elseif(isDiawali($callback_query_data, "soal_upvote_")){
-    $id_soal = str_replace("soal_downvote_","",$callback_query_data);
+    $explode = explode("__",str_replace("soal_upvote_","",$callback_query_data));
+    $id_soal = $explode[0];
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
         'text'=> "UP: $id_soal\noleh:$from_id",

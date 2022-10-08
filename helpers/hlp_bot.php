@@ -131,43 +131,6 @@ function bot_execute($bot_token, $method, $param = []){
 }
 */
 
-
-function getBotSrv($botcode = "all", $prop = "all"){
-	$botsrv = [
-		'rnt'=>[
-			'name'=>'Rip the Name Tag',
-			'username'=>'RNT_game_bot',
-			'token'=>'297795291:AAE9ibj4SL7WH8hoiuvx7kTBr4tNabyQLic',
-			'status'=>'normal',
-			'lag'=>0,
-		],
-		'gjk'=>[
-			'name'=>'GalihJKBOT',
-			'username'=>'galihjkbot',
-			'token'=>'249532802:AAFeojs6d9x0iBISMZD-4tagoMsF4VLVmas',
-			'status'=>'normal',
-			'lag'=>0,
-		],
-	];
-	if($botcode != "all"){
-		$botsrv = $botsrv[$botcode];
-		if($prop != "all"){
-			if (empty($botsrv[$prop])) return false;
-			$botsrv = $botsrv[$prop];
-		}
-	}
-	else{
-		if($prop != "all"){
-			foreach($botsrv as $key=>$val){
-				$botsrv[$key] = [
-					$prop=>$val[$prop]
-				];
-			}
-		}
-	}
-	return $botsrv;
-}
-
 function checkPrivateChatOnly($chat_id, $command, $message_id){
 	global $config;
 	if(isDiawali($chat_id,"-")){
