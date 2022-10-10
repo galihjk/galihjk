@@ -61,3 +61,20 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
         ],3),
     ]);
 }
+
+function userContributeSoal($user_id){
+	$userdata =  getUser($user_id);
+	$point = $userdata['point'] ?? 0;
+	$last = $userdata['lstktrb'] ?? 0;
+	if(abs(time() - $last) > 1*60*60){ 
+		// 2 point in 1 hours
+		$point_add = 2;
+		$point += $point_add;
+		setUser($user_id, ['point' => $point]);
+		KirimPerintah('user_id',[
+			'chat_id' => $user_id,
+			'text'=> "Kamu mendapatkan $point_add /point",
+			'parse_mode'=>'HTML',
+		]);
+	}
+}

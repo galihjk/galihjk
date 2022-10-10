@@ -112,7 +112,9 @@ $from_id != $id_developer){
 //check user
 if(!empty($from_id)){
     if(empty(getUser($from_id))){
-        setUser($from_id, $message_data["from"]);
+        if(empty($message_data["from"]['is_bot'])){
+            setUser($from_id, $message_data["from"]);
+        }
     }
 }
 

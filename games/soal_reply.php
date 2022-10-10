@@ -12,7 +12,7 @@ if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soa
     $data_soal = [
         'soal'=>$soal,
         'vote'=>[
-            [$from_id => 1],
+            $from_id => 1,
         ],
         'vtsc'=>1,
         'jawab'=>[],
