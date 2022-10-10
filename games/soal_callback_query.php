@@ -92,7 +92,7 @@ elseif(isDiawali($callback_query_data, "soal_downvote_")){
             $data_soal['vtsc'] -= 1;
         }
 
-        if(!in_array($from_id, $data_soal['ktrb'])) $data_soal['ktrb'][] = (string) $from_id;
+        if(!in_array($from_id, $data_soal['ktrb'])) $data_soal['ktrb'][] = $from_id;
         
         saveData("soal/$jenis_soal/$id_soal",$data_soal);
 

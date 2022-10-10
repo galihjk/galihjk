@@ -42,7 +42,6 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
     foreach($data_soal['ktrb'] as $user_id){
         $kontributor_names[] = getUser($user_id)['first_name'] ?? "?";
     }
-    $kontributor_names = [];
     
     $text = "[SOAL ".strtoupper($jenis_soal)."]\n\n$soal\n\nVoteScore: $vtsc\n<i>Kontributor:</i> ".implode(", ",$kontributor_names);
 
