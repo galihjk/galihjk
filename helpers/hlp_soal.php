@@ -25,6 +25,3 @@
 		return implode("",$unique);
 	}
 */
-function getSoal($id){
-	return loadData("soal/survey/$id");
-}
