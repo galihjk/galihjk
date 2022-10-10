@@ -25,3 +25,39 @@
 		return implode("",$unique);
 	}
 */
+
+function updateSoalPost($id_soal, $jenis_soal, $data_soal){
+    global $emoji_dislike;
+    global $emoji_please;
+    global $emoji_like;
+    global $emoji_pencil;
+    global $emoji_cross;
+    global $emoji_chat;
+    global $config;
+
+    $channel_username = "@galihjksoal";
+    $vtsc = $data_soal['vtsc'];
+    $soal = $data_soal['soal'];
+    $kontributor_names = [];
+    foreach($data_soal['ktrb'] as $user_id){
+        $kontributor_names[] = getUser($user_id)['first_name'] ?? "";
+    }
+    $kontributor_names = [];
+    
+    $text = "[SOAL ".strtoupper($jenis_soal)."]\n\n$soal\n\nVoteScore: $vtsc\n<i>Kontributor:</i> ".implode(", ",$kontributor_names);
+
+    KirimPerintah('editMessageText',[
+        'chat_id' => $channel_username,
+        'message_id'=>$id_soal,
+        'text'=> $text,
+        'parse_mode'=>'HTML',
+        'reply_markup' => inlineKeyBoard([
+            ["$emoji_dislike DOWNvote (-1)","soal_downvote_$id_soal"."__$jenis_soal"],
+            ["$emoji_please unvote (0)","soal_unvote_$id_soal"."__$jenis_soal"],
+            ["$emoji_like UPvote (+1)","soal_upvote_$id_soal"."__$jenis_soal"],
+            ["$emoji_pencil Edit","https://t.me/".$config['bot_username']."?start=cmd_soal_edit_$id_soal"."__$jenis_soal"],
+            ["$emoji_cross Hapus","https://t.me/".$config['bot_username']."?start=cmd_soal_hapus_$id_soal"."__$jenis_soal"],
+            ["$emoji_chat Jawaban","https://t.me/".$config['bot_username']."?start=cmd_soal_jawaban_$id_soal"."__$jenis_soal"],
+        ],3),
+    ]);
+}
