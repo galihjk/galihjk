@@ -26,7 +26,7 @@
 	}
 */
 
-function updateSoalPost($id_soal, $jenis_soal, $data_soal, $user_id){
+function updateSoalPost($id_soal, $jenis_soal, $data_soal){
     global $emoji_dislike;
     global $emoji_please;
     global $emoji_like;
@@ -40,7 +40,7 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal, $user_id){
     $soal = $data_soal['soal'];
     $kontributor_names = [];
     foreach($data_soal['ktrb'] as $user_id){
-        $kontributor_names[] = getUser($user_id)['first_name'] ?? "";
+        $kontributor_names[] = getUser($user_id)['first_name'] ?? "?";
     }
     $kontributor_names = [];
     
@@ -70,7 +70,7 @@ function userContributeSoal($user_id){
 		// 2 point in 1 hours
 		$point_add = 2;
 		$point += $point_add;
-		setUser($user_id, ['point' => $point]);
+		setUser($user_id, ['point' => $point, 'lstktrb' => time()]);
 		KirimPerintah('user_id',[
 			'chat_id' => $user_id,
 			'text'=> "Kamu mendapatkan $point_add /point",
