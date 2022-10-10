@@ -73,7 +73,7 @@ elseif($callback_query_data == "soal_huruf_info"){
 elseif(isDiawali($callback_query_data, "soal_downvote_")){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "DownVote: $id_soal\noleh:$from_id",
+        'text'=> "Anda telah memilih DOWNVOTE",
         'show_alert'=>true,
     ]);
 
@@ -96,7 +96,9 @@ elseif(isDiawali($callback_query_data, "soal_downvote_")){
         
         saveData("soal/$jenis_soal/$id_soal",$data_soal);
 
-        updateSoalPost($id_soal,$jenis_soal,$data_soal);
+        updateSoalPost($id_soal,$jenis_soal,$data_soal, $from_id);
+
+        userContributeSoal($from_id);
 
     }
     // [

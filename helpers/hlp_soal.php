@@ -26,7 +26,7 @@
 	}
 */
 
-function updateSoalPost($id_soal, $jenis_soal, $data_soal){
+function updateSoalPost($id_soal, $jenis_soal, $data_soal, $user_id){
     global $emoji_dislike;
     global $emoji_please;
     global $emoji_like;

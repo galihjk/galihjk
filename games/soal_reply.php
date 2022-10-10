@@ -18,8 +18,9 @@ if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soa
         'jawab'=>[],
         'ktrb'=>[$from_id],
     ];
-    updateSoalPost($id_soal,$jenis_soal,$data_soal);
+    updateSoalPost($id_soal,$jenis_soal,$data_soal, $from_id);
     saveData("soal/$jenis_soal/$id_soal",$data_soal);
+    userContributeSoal($from_id);
 
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
