@@ -85,3 +85,16 @@ function checkExpiredUnclaimeds($user_id){
 	}
 
 }
+
+function checkUserUpdate($type, $update){
+	$from = $update[$type]["from"];
+	if(!empty($from['id'])){
+		$from_id = $from['id'];
+		if(empty(getUser($from_id))){
+			if(empty($from['is_bot'])){
+				unset($from['is_bot']);
+				setUser($from_id, $from);
+			}
+		}
+	}
+}

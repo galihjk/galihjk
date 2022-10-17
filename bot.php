@@ -24,43 +24,50 @@ if(abs($last_serve_time-time()) > 1){
 
 $update = json_decode(file_get_contents("php://input"), TRUE);
 if(!empty($update)) {
+
 	//================================================================
 	//poll:==========================
 	if(isset($update["poll"])){
+		checkUserUpdate("poll", $update);
 		include("galihjk/main_poll.php");
 	}
 
 	//callback query:==========================
 	elseif(isset($update["callback_query"])){
+		checkUserUpdate("callback_query", $update);
 		include("galihjk/main_callback_query.php");
 	}
 
 	//inline_query:==========================
 	elseif(isset($update['inline_query'])){
+		checkUserUpdate("inline_query", $update);
 		include("galihjk/main_inline_query.php");
 	}
 
 	//chosen_inline_result:==========================
 	elseif(isset($update['chosen_inline_result'])){
+		checkUserUpdate("chosen_inline_result", $update);
 		include("galihjk/main_chosen_inline_result.php");
 	}
 
 	//channel_post:==========================
 	elseif(isset($update['channel_post'])){
-
+		checkUserUpdate("channel_post", $update);
 	}
 	//edited_channel_post:==========================
 	elseif(isset($update['edited_channel_post'])){
-		
+		checkUserUpdate("edited_channel_post", $update);
 	}
 
 	//my_chat_member (start / stop bot):==========================
 	elseif(isset($update['my_chat_member'])){
+		checkUserUpdate("my_chat_member", $update);
 		include("galihjk/main_my_chat_member.php");
 	}
 
 	//message (basic chat message):==========================
 	elseif(isset($update['message'])){
+		checkUserUpdate("message", $update);
 		include("galihjk/main_message.php");
 	}
 
