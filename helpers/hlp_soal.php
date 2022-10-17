@@ -51,9 +51,9 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
         'text'=> $text,
         'parse_mode'=>'HTML',
         'reply_markup' => inlineKeyBoard([
-            ["$emoji_dislike DOWNvote (-1)","soal_downvote_$id_soal"."__$jenis_soal"],
+            ["$emoji_dislike DOWN (-1)","soal_downvote_$id_soal"."__$jenis_soal"],
             ["$emoji_please unvote (0)","soal_unvote_$id_soal"."__$jenis_soal"],
-            ["$emoji_like UPvote (+1)","soal_upvote_$id_soal"."__$jenis_soal"],
+            ["$emoji_like UP (+1)","soal_upvote_$id_soal"."__$jenis_soal"],
             ["$emoji_pencil Edit","https://t.me/".$config['bot_username']."?start=cmd_soal_edit_$id_soal"."__$jenis_soal"],
             ["$emoji_cross Hapus","https://t.me/".$config['bot_username']."?start=cmd_soal_hapus_$id_soal"."__$jenis_soal"],
             ["$emoji_chat Jawaban","https://t.me/".$config['bot_username']."?start=cmd_soal_jawaban_$id_soal"."__$jenis_soal"],
@@ -70,7 +70,7 @@ function userContributeSoal($user_id){
 		$point_add = 2;
 		$point += $point_add;
 		setUser($user_id, ['point' => $point, 'lstktrb' => time()]);
-		KirimPerintah('user_id',[
+		KirimPerintah('sendMessage',[
 			'chat_id' => $user_id,
 			'text'=> "Kamu mendapatkan $point_add /point",
 			'parse_mode'=>'HTML',

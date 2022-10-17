@@ -101,33 +101,70 @@ elseif(isDiawali($callback_query_data, "soal_downvote_")){
         userContributeSoal($from_id);
 
     }
-    // [
-    //     'soal'=>$soal,
-    //     'vote'=>[
-    //         [$from_id => 1],
-    //     ],
-    //     'vtsc'=>1,
-    //     'jawab'=>[],
-    // ];
-    // saveData("soal/survey/$id_soal",$data_soal);
 }
 elseif(isDiawali($callback_query_data, "soal_unvote_")){
-    $explode = explode("__",str_replace("soal_downvote_","",$callback_query_data));
-    $id_soal = $explode[0];
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "UN: $id_soal\noleh:$from_id",
+        'text'=> "Anda telah memilih UNVOTE",
         'show_alert'=>true,
-    ]);	
+    ]);
+
+    $explode = explode("__",str_replace("soal_unvote_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+    $my_vote = $data_soal['vote'][$from_id] ?? 0;
+    if((string) $my_vote !== "0"){
+        $data_soal['vote'][$from_id] = 0;
+        if((string) $my_vote === "1"){
+            $data_soal['vtsc'] -= 1;
+        }
+        else{
+            $data_soal['vtsc'] += 1;
+        }
+
+        if(!in_array($from_id, $data_soal['ktrb'])) $data_soal['ktrb'][] = $from_id;
+        
+        saveData("soal/$jenis_soal/$id_soal",$data_soal);
+
+        updateSoalPost($id_soal,$jenis_soal,$data_soal);
+
+        userContributeSoal($from_id);
+
+    }
 }
 elseif(isDiawali($callback_query_data, "soal_upvote_")){
-    $explode = explode("__",str_replace("soal_upvote_","",$callback_query_data));
-    $id_soal = $explode[0];
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "UP: $id_soal\noleh:$from_id",
+        'text'=> "Anda telah memilih UPVOTE",
         'show_alert'=>true,
-    ]);	
+    ]);
+
+    $explode = explode("__",str_replace("soal_upvote_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+    $my_vote = $data_soal['vote'][$from_id] ?? 0;
+    if((string) $my_vote !== "1"){
+        $data_soal['vote'][$from_id] = 1;
+        if((string) $my_vote === "0"){
+            $data_soal['vtsc'] += 1;
+        }
+        else{
+            $data_soal['vtsc'] += 2;
+        }
+
+        if(!in_array($from_id, $data_soal['ktrb'])) $data_soal['ktrb'][] = $from_id;
+        
+        saveData("soal/$jenis_soal/$id_soal",$data_soal);
+
+        updateSoalPost($id_soal,$jenis_soal,$data_soal);
+
+        userContributeSoal($from_id);
+
+    }
 }
 else{
 
