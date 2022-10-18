@@ -43,7 +43,7 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
         $kontributor_names[] = getUser($user_id)['first_name'] ?? "?";
     }
     
-    $text = "[SOAL ".strtoupper($jenis_soal)."]\n\n$soal\n\nVoteScore: $vtsc\n<i>Kontributor:</i> ".implode(", ",$kontributor_names);
+    $text = "[SOAL ".strtoupper($jenis_soal)."]\n<i>".implode(", ",$kontributor_names)."</i>\n==============\n\n$soal\n\nVoteScore: $vtsc\n ";
 
     KirimPerintah('editMessageText',[
         'chat_id' => $channel_username,
@@ -75,5 +75,10 @@ function userContributeSoal($user_id){
 			'text'=> "Kamu mendapatkan $point_add /point",
 			'parse_mode'=>'HTML',
 		]);
+		get_without_wait("https://galihjk.my.id/?web_run_action=delayed_perintah&method=sendMessage&delay=5&param_data=".json_encode([
+			'chat_id' => $user_id,
+			'text'=> "Kamu mendapatkan $point_add /point",
+			'parse_mode'=>'HTML',
+		]));
 	}
 }
