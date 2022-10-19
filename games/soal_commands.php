@@ -34,10 +34,17 @@ elseif(isDiawali($command,'soal_edit_')){
 elseif(isDiawali($command,'soal_hapus_')){
     $explode = explode("__",str_replace('soal_hapus_','',$command));
     $id_soal = $explode[0];
+    $jenis = $explode[1];
+    $text = "Kenapa kamu ingin menghapus soal ini?\nID:$jenis|$id_soal";
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> "HAPUS:\n".print_r(loadData("soal/survey/$id_soal"),true),
+        'text'=> $text,
         'parse_mode'=>'HTML',
+        'reply_markup' => [
+            'force_reply'=>true,
+            'input_field_placeholder'=>'Tulis alasanmu...',
+            'selective'=>true,
+        ],
     ]);
 }
 elseif(isDiawali($command,'soal_jawaban_')){
