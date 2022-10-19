@@ -35,7 +35,7 @@ elseif(isDiawali($command,'soal_hapus_')){
     $explode = explode("__",str_replace('soal_hapus_','',$command));
     $id_soal = $explode[0];
     $jenis = $explode[1];
-    $text = "Kenapa kamu ingin menghapus soal ini?\nID:$jenis|$id_soal";
+    $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\nID:$jenis|$id_soal";
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,

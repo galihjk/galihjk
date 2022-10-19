@@ -31,7 +31,7 @@ if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soa
         ],
     ]);
 }
-elseif(isDiawali($reply_to_message_text,"Kenapa kamu ingin menghapus soal ini?")){
+elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus soal ini?")){
     $explode = explode("ID:",$reply_to_message_text);
     if(!empty($explode[1])){
         $kodesoal = $explode[1];
@@ -57,4 +57,5 @@ elseif(isDiawali($reply_to_message_text,"Kenapa kamu ingin menghapus soal ini?")
             'force_reply'=>false,
         ],
     ]);
+    userContributeSoal($from_id);
 }

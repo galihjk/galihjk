@@ -98,7 +98,6 @@ elseif(isDiawali($callback_query_data, "soal_downvote_")){
 
         updateSoalPost($id_soal,$jenis_soal,$data_soal);
 
-        userContributeSoal($from_id);
 
     }
 }
@@ -130,7 +129,6 @@ elseif(isDiawali($callback_query_data, "soal_unvote_")){
 
         updateSoalPost($id_soal,$jenis_soal,$data_soal);
 
-        userContributeSoal($from_id);
 
     }
 }
@@ -162,7 +160,6 @@ elseif(isDiawali($callback_query_data, "soal_upvote_")){
 
         updateSoalPost($id_soal,$jenis_soal,$data_soal);
 
-        userContributeSoal($from_id);
 
     }
 }

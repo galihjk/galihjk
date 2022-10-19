@@ -75,11 +75,11 @@ function userContributeSoal($user_id){
 			'text'=> "Kamu mendapatkan $point_add /point",
 			'parse_mode'=>'HTML',
 		]));
-		KirimPerintah('sendMessage',[
-			'chat_id' => $user_id,
-			'text'=> "Kamu mendapatkan $point_add /point $url",
-			'parse_mode'=>'HTML',
-		]);
 		get_without_wait($url);
+		// KirimPerintah('sendMessage',[
+		// 	'chat_id' => $user_id,
+		// 	'text'=> "Kamu mendapatkan $point_add /point $url",
+		// 	'parse_mode'=>'HTML',
+		// ]);
 	}
 }
