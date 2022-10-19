@@ -34,15 +34,18 @@ elseif(isDiawali($command,'soal_edit_')){
 elseif(isDiawali($command,'soal_hapus_')){
     $explode = explode("__",str_replace('soal_hapus_','',$command));
     $id_soal = $explode[0];
-    $jenis = $explode[1];
-    $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\nID:$jenis|$id_soal";
+    $jenis_soal = $explode[1];
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+    if(!empty($data_soal['soal'])){
+        $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\n==========\n<i>".$data_soal['soal']."</i>\nID:$jenis_soal|$id_soal";
+    }
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
         'parse_mode'=>'HTML',
         'reply_markup' => [
             'force_reply'=>true,
-            'input_field_placeholder'=>'Tulis alasanmu...',
+            'input_field_placeholder'=>'Alasan Hapus',
             'selective'=>true,
         ],
     ]);

@@ -40,22 +40,20 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
             $jenis_soal = $explode2[0];
             $id_soal = $explode2[1];
             $data_soal = loadData("soal/$jenis_soal/$id_soal");
+            if(!empty($data_soal['soal'])){
+                $text = $emoji_up_hand . getUser($from_id)['first_name'] . " ingin menghapus soal ini dengan alasan: <b>$message_text</b>\n\n";
+                KirimPerintah('sendMessage',[
+                    'chat_id' => $channel_username,
+                    'text'=> $text,
+                    'parse_mode'=>'HTML',
+                    'reply_markup' => inlineKeyBoard([
+                        ["$emoji_check Setuju","soal_yesdelete_$id_soal"."__$jenis_soal"],
+                        ["$emoji_cross Jangan","soal_nodelete_$id_soal"."__$jenis_soal"],
+                    ],2),
+                ]);
+                userContributeSoal($from_id);
+            }
         }
     }
-    KirimPerintah('sendMessage',[
-        'chat_id' => $chat_id,
-        'text'=> print_r([
-            'Alasan'=>$message_text,
-            'Soal'=>$data_soal,
-            'explode'=>$explode,
-            'jenis_soal'=>$jenis_soal,
-            'id_soal'=>$id_soal,
-            'explode2'=>$explode2,
-        ],true),
-        'parse_mode'=>'HTML',
-        'reply_markup' => [
-            'force_reply'=>false,
-        ],
-    ]);
-    userContributeSoal($from_id);
+    
 }
