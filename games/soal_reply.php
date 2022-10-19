@@ -35,20 +35,26 @@ elseif(isDiawali($reply_to_message_text,"Kenapa kamu ingin menghapus soal ini?")
     $explode = explode("ID:",$reply_to_message_text);
     if(!empty($explode[1])){
         $kodesoal = $explode[1];
-        $explode = explode("|",$kodesoal);
-        if(!empty($explode[1])){
-            $jenis_soal = $explode[0];
-            $id_soal = $explode[1];
+        $explode2 = explode("|",$kodesoal);
+        if(!empty($explode2[1])){
+            $jenis_soal = $explode2[0];
+            $id_soal = $explode2[1];
             $data_soal = loadData("soal/$jenis_soal/$id_soal");
-            KirimPerintah('sendMessage',[
-                'chat_id' => $chat_id,
-                'text'=> "Alasan: $message_text. Soal: ".print_r($data_soal,true),
-                'parse_mode'=>'HTML',
-                'reply_markup' => [
-                    'force_reply'=>false,
-                ],
-            ]);
         }
     }
-    
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> print_r([
+            'Alasan'=>$message_text,
+            'Soal'=>$data_soal,
+            'explode'=>$explode,
+            'jenis_soal'=>$jenis_soal,
+            'id_soal'=>$id_soal,
+            'explode2'=>$explode2,
+        ],true),
+        'parse_mode'=>'HTML',
+        'reply_markup' => [
+            'force_reply'=>false,
+        ],
+    ]);
 }

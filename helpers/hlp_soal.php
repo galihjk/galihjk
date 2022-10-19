@@ -70,15 +70,16 @@ function userContributeSoal($user_id){
 		$point_add = 2;
 		$point += $point_add;
 		setUser($user_id, ['point' => $point, 'lstktrb' => time()]);
-		KirimPerintah('sendMessage',[
-			'chat_id' => $user_id,
-			'text'=> "Kamu mendapatkan $point_add /point",
-			'parse_mode'=>'HTML',
-		]);
-		get_without_wait("https://galihjk.my.id/?web_run_action=delayed_perintah&method=sendMessage&delay=5&param_data=".json_encode([
+		$url = "https://galihjk.my.id/?web_run_action=delayed_perintah&method=sendMessage&delay=5&param_data=".urlencode(json_encode([
 			'chat_id' => $user_id,
 			'text'=> "Kamu mendapatkan $point_add /point",
 			'parse_mode'=>'HTML',
 		]));
+		KirimPerintah('sendMessage',[
+			'chat_id' => $user_id,
+			'text'=> "Kamu mendapatkan $point_add /point $url",
+			'parse_mode'=>'HTML',
+		]);
+		get_without_wait($url);
 	}
 }
