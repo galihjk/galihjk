@@ -44,6 +44,24 @@ elseif(isDiawali($command,"user") and $chat_id == $id_developer){
     }
 }
 
+elseif($command == "tesjob" and $chat_id == $id_developer){
+    $filedata = "<?php
+        KirimPerintah('sendMessage',[
+            'chat_id' => '$chat_id',
+            'text'=> 'JOB JALAN!',
+            'parse_mode'=>'HTML',
+            'reply_to_message_id' => '$message_id'
+        ]);
+    ";
+    file_put_contents('galihjk/jobs/'.(time()+20).'.php', $filedata);
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> 'Tunggu 20 detik',
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+
 elseif($command == "tesdir" and $chat_id == $id_developer){
     $folder = "data/user/";
     $list = scandir($folder);

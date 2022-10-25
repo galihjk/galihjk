@@ -2,6 +2,17 @@
 
 $ada_yang_lagi_main = false;
 
+//jobs
+$scandir = scandir('galihjk/jobs/');
+foreach($scandir as $file){
+	if(substr($file,-4) == '.php'){
+		if(time() >= substr($file,0,strlen($file)-4)){
+			include("galihjk/jobs/$file");
+		}
+	}
+}
+//====
+
 //game playing loops
 if(!empty($data['playing_chatters'])){
 	foreach($data['playing_chatters'] as $chat_id=>$val_chatter){
