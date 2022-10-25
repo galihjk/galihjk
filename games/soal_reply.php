@@ -41,7 +41,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
             $id_soal = $explode2[1];
             $data_soal = loadData("soal/$jenis_soal/$id_soal");
             if(!empty($data_soal['soal'])){
-                if(!empty($data_soal['delsc'])){
+                if(isset($data_soal['delsc'])){
                     KirimPerintah('sendMessage',[
                         'chat_id' => $chat_id,
                         'text'=> "Soal ini memang sedang dalam proses penghapusan..",
