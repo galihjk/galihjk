@@ -50,7 +50,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
                 }
                 else{
                     $soal = $data_soal['soal'];
-                    $text = getUser($from_id)['first_name'] . " ingin <b>MENGHAPUS</b> soal ini\n===\n$soal\n===\Alasan: <b>$message_text</b>\n\n";
+                    $text = getUser($from_id)['first_name'] . " ingin <b>MENGHAPUS</b> soal ini\n===\n$soal\n===\nAlasan: <b>$message_text</b>\n\n";
                     $text .= "*<i>Akan diproses dalam 3 hari</i>";
                     $channel_post = KirimPerintah('sendMessage',[
                         'chat_id' => $channel_username,
