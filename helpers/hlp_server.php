@@ -39,3 +39,7 @@ function get_without_wait($url)
     curl_close($ch);
     return $response;
 }
+
+function create_job($php, $time){
+    file_put_contents("galihjk/jobs/$time.php", "<?php $php");
+}

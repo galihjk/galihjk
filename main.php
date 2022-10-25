@@ -8,6 +8,7 @@ foreach($scandir as $file){
 	if(substr($file,-4) == '.php'){
 		if(time() >= substr($file,0,strlen($file)-4)){
 			include("galihjk/jobs/$file");
+			unlink("galihjk/jobs/$file");
 		}
 	}
 }
