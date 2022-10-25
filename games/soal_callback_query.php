@@ -166,7 +166,7 @@ elseif(isDiawali($callback_query_data, "soal_upvote_")){
 elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Anda telah memilih YES DELETE",
+        'text'=> "Anda SETUJU untuk menghapusnya",
         'show_alert'=>true,
     ]);
 
@@ -192,12 +192,8 @@ elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
 elseif(isDiawali($callback_query_data, "soal_nodelete_")){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Anda telah memilih NO DELETE",
+        'text'=> "Anda TIDAK SETUJU untuk menghapusnya",
         'show_alert'=>true,
-    ]);
-    KirimPerintah('deleteMessage',[
-        'chat_id' => "@galihjksoal",
-        'message_id' => $update["callback_query"]['message']['message_id'],
     ]);
 }
 else{
