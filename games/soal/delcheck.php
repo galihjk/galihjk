@@ -9,6 +9,9 @@ if($delsc > 0){
     ]);
 }
 else{
+    unset($data_soal['delsc']);
+    unset($data_soal['delete']);
+    saveData("soal/$delcheck_jenis/$delcheck_id",$data_soal);
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> "<a href='/t.me/galihjksoal/$delcheck_id'>Soal ini</a> TIDAK disetujui untuk dihapus.",
