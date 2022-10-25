@@ -1,8 +1,8 @@
 <?php
+$channel_username = "@galihjksoal";
 if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soal survey. ")){
     $jenis_soal = 'survey';
     $soal = $message_text;
-    $channel_username = "@galihjksoal";
     $channel_post = KirimPerintah('sendMessage',[
         'chat_id' => $channel_username,
         'text'=> "Loading...",
