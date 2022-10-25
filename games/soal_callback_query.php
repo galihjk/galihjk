@@ -169,12 +169,8 @@ elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
         'text'=> "Anda telah memilih YES DELETE",
         'show_alert'=>true,
     ]);
-    KirimPerintah('deleteMessage',[
-        'chat_id' => "@galihjksoal",
-        'message_id' => $update["callback_query"]['message']['message_id'],
-    ]);
 
-    $explode = explode("__",str_replace("soal_downvote_","",$callback_query_data));
+    $explode = explode("__",str_replace("soal_yesdelete_","",$callback_query_data));
     $id_soal = $explode[0];
     $jenis_soal = $explode[1];
 
@@ -192,6 +188,17 @@ elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
         saveData("soal/$jenis_soal/$id_soal",$data_soal);
 
     }
+}
+elseif(isDiawali($callback_query_data, "soal_nodelete_")){
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "Anda telah memilih NO DELETE",
+        'show_alert'=>true,
+    ]);
+    KirimPerintah('deleteMessage',[
+        'chat_id' => "@galihjksoal",
+        'message_id' => $update["callback_query"]['message']['message_id'],
+    ]);
 }
 else{
 

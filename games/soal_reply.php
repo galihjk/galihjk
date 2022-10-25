@@ -46,6 +46,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
                     'chat_id' => $channel_username,
                     'text'=> $text,
                     'parse_mode'=>'HTML',
+                    'reply_to_message_id' =>$id_soal,
                     'reply_markup' => inlineKeyBoard([
                         ["$emoji_check Setuju","soal_yesdelete_$id_soal"."__$jenis_soal"],
                         ["$emoji_cross Jangan","soal_nodelete_$id_soal"."__$jenis_soal"],
