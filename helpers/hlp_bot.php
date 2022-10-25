@@ -55,6 +55,10 @@ function DapatkanUpdate($offset,$bot_token = "default")
 function KirimPerintah($perintah,$data,$bot_token = "default"){
     global $config;
     
+	if(empty($data)){
+		$data = [];
+	}
+
     if($bot_token == "default"){
         $bot_token = $config['bot_token'];
     }

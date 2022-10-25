@@ -39,6 +39,9 @@ elseif(isDiawali($command,'soal_hapus_')){
     if(!empty($data_soal['soal'])){
         $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\n==========\n<i>".$data_soal['soal']."</i>\nID:$jenis_soal|$id_soal";
     }
+    else{
+        $text = "Data sudah tidak tersedia saat ini.";
+    }
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
