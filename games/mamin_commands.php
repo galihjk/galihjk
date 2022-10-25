@@ -88,6 +88,11 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
     else{
         if(count($data['playing_chatters'][$chat_id]['mamin']['players']) < 3){
             $data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] = 0;
+            KirimPerintah('sendMessage',[
+                'chat_id' => $chat_id,
+                'text'=> "Permainan akan dihentikan jika jumlah pemain kurang dari tiga.",
+                'reply_to_message_id'=> $message_id,
+            ]);
         }
         else{
             if(empty($data['playing_chatters'][$chat_id]['force_start'])) $data['playing_chatters'][$chat_id]['force_start'] = [];

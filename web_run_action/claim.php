@@ -47,11 +47,12 @@ setUser($user_id,[
     'w_point'=>$w_point,
 ]);
 
-KirimPerintah('sendMessage',[
+$url = "https://galihjk.my.id/?web_run_action=delayed_perintah&method=sendMessage&delay=4&param_data=".urlencode(json_encode([
     'chat_id' => $user_id,
     'text'=> "Selamat! Anda telah mendapatkan $point_add /point ..",
     'parse_mode'=>'HTML',
-]);
+]));
+get_without_wait($url);
 
 $tokpeds = explode(" ",loadData("setting/tokpeds"));
 $tokpeds_index = loadData("setting/tokpeds_index",0);

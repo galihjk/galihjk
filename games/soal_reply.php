@@ -41,18 +41,26 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
             $id_soal = $explode2[1];
             $data_soal = loadData("soal/$jenis_soal/$id_soal");
             if(!empty($data_soal['soal'])){
-                $text = $emoji_up_hand . getUser($from_id)['first_name'] . " ingin menghapus soal ini dengan alasan: <b>$message_text</b>\n\n";
+                $soal = $data_soal['soal'];
+                $text = $emoji_up_hand . getUser($from_id)['first_name'] . " ingin <b>MENGHAPUS</b> soal ini\n===\n$soal\n===\ndengan alasan: <b>$message_text</b>\n\n";
+                $text .= "<i>Akan diproses dalam 3 hari</i>";
                 KirimPerintah('sendMessage',[
                     'chat_id' => $channel_username,
                     'text'=> $text,
                     'parse_mode'=>'HTML',
                     'reply_to_message_id' =>$id_soal,
                     'reply_markup' => inlineKeyBoard([
-                        ["$emoji_check Setuju","soal_yesdelete_$id_soal"."__$jenis_soal"],
+                        ["$emoji_check Hapus","soal_yesdelete_$id_soal"."__$jenis_soal"],
                         ["$emoji_cross Jangan","soal_nodelete_$id_soal"."__$jenis_soal"],
                     ],2),
                 ]);
                 userContributeSoal($from_id);
+                create_job("
+                \$delcheck_jenis = '$jenis_soal';
+                \$delcheck_id = '$id_soal';
+                \$chat_id = '$chat_id';
+                include('galihjk/games/soal/delcheck.php');
+                ",time()+10);
             }
         }
     }
