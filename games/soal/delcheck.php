@@ -11,11 +11,21 @@ if(!empty($data_soal['soal'])){
             'parse_mode'=>'HTML',
         ]);
         $deletechannel = "@soal_hilang_galihjk";
-        KirimPerintah('forwardMessage',[
+        KirimPerintah('sendMessage',[
             'chat_id' => $deletechannel,
-            'from_chat_id' => $channel_username,
-            'disable_notification' => true,
-            'protect_content' => true,
+            'text'=> "$delcheck_jenis DELETED ".print_r($data_soal,true),
+            'parse_mode'=>'HTML',
+        ]);
+        // KirimPerintah('forwardMessage',[
+        //     'chat_id' => $deletechannel,
+        //     'from_chat_id' => $channel_username,
+        //     'disable_notification' => true,
+        //     'protect_content' => true,
+        //     'message_id' => $delcheck_id,
+        // ]);
+        deleteData("soal/$delcheck_jenis/$delcheck_id");
+        KirimPerintah('deleteMessage',[
+            'chat_id' => "@galihjksoal",
             'message_id' => $delcheck_id,
         ]);
     }

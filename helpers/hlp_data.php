@@ -19,3 +19,8 @@ function loadData($name, $empty = []){
 	}
 	return $data;
 }
+
+function deleteData($name){
+	$filename="data/$name.json";
+	unlink($filename);
+}
