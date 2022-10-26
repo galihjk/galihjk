@@ -36,22 +36,33 @@ elseif(isDiawali($command,'soal_hapus_')){
     $id_soal = $explode[0];
     $jenis_soal = $explode[1];
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
-    if(!empty($data_soal['soal'])){
-        $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\n==========\n<i>".$data_soal['soal']."</i>\nID:$jenis_soal|$id_soal";
+    if(empty($data_soal['soal'])){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Data sudah tidak tersedia saat ini.",
+            'parse_mode'=>'HTML',
+        ]);
+    }
+    elseif(isset($data_soal['delsc'])){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Soal ini memang sedang dalam proses penghapusan..",
+            'parse_mode'=>'HTML',
+        ]);
     }
     else{
-        $text = "Data sudah tidak tersedia saat ini.";
+        $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\n==========\n<i>".$data_soal['soal']."</i>\nID:$jenis_soal|$id_soal";
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> $text,
+            'parse_mode'=>'HTML',
+            'reply_markup' => [
+                'force_reply'=>true,
+                'input_field_placeholder'=>'Alasan Hapus',
+                'selective'=>true,
+            ],
+        ]);
     }
-    KirimPerintah('sendMessage',[
-        'chat_id' => $chat_id,
-        'text'=> $text,
-        'parse_mode'=>'HTML',
-        'reply_markup' => [
-            'force_reply'=>true,
-            'input_field_placeholder'=>'Alasan Hapus',
-            'selective'=>true,
-        ],
-    ]);
 }
 elseif(isDiawali($command,'soal_jawaban_')){
     $explode = explode("__",str_replace('soal_jawaban_','',$command));

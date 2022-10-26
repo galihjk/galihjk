@@ -1,5 +1,6 @@
 <?php
 $data_soal = loadData("soal/$delcheck_jenis/$delcheck_id");
+$channel_username = "@galihjksoal";
 if(!empty($data_soal['soal'])){
     $delsc = $data_soal['delsc'] ?? 0;
     if($delsc > 0){
@@ -8,6 +9,14 @@ if(!empty($data_soal['soal'])){
             'chat_id' => $chat_id,
             'text'=> "Soal ini:\n===\n$soal\n===\ntelah disetujui untuk dihapus.",
             'parse_mode'=>'HTML',
+        ]);
+        $deletechannel = "@soal_hilang_galihjk";
+        KirimPerintah('forwardMessage',[
+            'chat_id' => $deletechannel,
+            'from_chat_id' => $channel_username,
+            'disable_notification' => true,
+            'protect_content' => true,
+            'message_id' => $delcheck_id,
         ]);
     }
     else{
