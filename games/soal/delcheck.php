@@ -11,6 +11,7 @@ if(!empty($data_soal['soal'])){
             'parse_mode'=>'HTML',
         ]);
         $deletechannel = "@soal_hilang_galihjk";
+        unset($data_soal);
         KirimPerintah('sendMessage',[
             'chat_id' => $deletechannel,
             'text'=> "$delcheck_jenis DELETED ".print_r($data_soal,true),
@@ -24,10 +25,18 @@ if(!empty($data_soal['soal'])){
         //     'message_id' => $delcheck_id,
         // ]);
         deleteData("soal/$delcheck_jenis/$delcheck_id");
-        KirimPerintah('deleteMessage',[
+        $deleteMsg = KirimPerintah('deleteMessage',[
             'chat_id' => "@galihjksoal",
             'message_id' => $delcheck_id,
         ]);
+        if(empty($deleteMsg[['ok']])){
+            KirimPerintah('sendMessage',[
+                'chat_id' => "@galihjksoal",
+                'text'=> "Help @galihjk soal ini tidak bisa dihapus",
+                'reply_to_message_id' =>$delcheck_id,
+                'parse_mode'=>'HTML',
+            ]);
+        }
     }
     else{
         unset($data_soal['delsc']);

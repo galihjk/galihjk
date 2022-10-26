@@ -16,7 +16,6 @@ if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soa
         ],
         'vtsc'=>1,
         'jawab'=>[],
-        'ktrb'=>[$from_id],
     ];
     updateSoalPost($id_soal,$jenis_soal,$data_soal);
     saveData("soal/$jenis_soal/$id_soal",$data_soal);

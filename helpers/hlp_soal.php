@@ -39,7 +39,7 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
     $vtsc = $data_soal['vtsc'];
     $soal = $data_soal['soal'];
     $kontributor_names = [];
-    foreach($data_soal['ktrb'] as $user_id){
+    foreach(array_keys($data_soal['vote']) as $user_id){
         $kontributor_names[] = getUser($user_id)['first_name'] ?? "?";
     }
     
