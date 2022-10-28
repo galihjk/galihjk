@@ -11,7 +11,6 @@ if(!empty($data_soal['soal'])){
             'parse_mode'=>'HTML',
         ]);
         $deletechannel = "@soal_hilang_galihjk";
-        unset($data_soal);
         KirimPerintah('sendMessage',[
             'chat_id' => $deletechannel,
             'text'=> "$delcheck_jenis DELETED ".print_r($data_soal,true),

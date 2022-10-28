@@ -48,3 +48,4 @@ $emoji_pencil = "✏️";
 $emoji_chat = "💬";
 $emoji_please = "🙏";
 $emoji_up_hand = "☝️";
+$emoji_down = "⬇️";

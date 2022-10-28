@@ -186,7 +186,21 @@ elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
 elseif(isDiawali($callback_query_data, "soal_nodelete_")){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Anda TIDAK SETUJU untuk menghapusnya",
+        'text'=> "TIDAK SETUJU UNDERCONSTRUCTION",
+        'show_alert'=>true,
+    ]);
+}
+elseif(isDiawali($callback_query_data, "soal_yesedit_")){
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "Anda SETUJU untuk mengeditnya UNDERCONSTRUCTION",
+        'show_alert'=>true,
+    ]);
+}
+elseif(isDiawali($callback_query_data, "soal_noedit_")){
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "Anda TIDAK SETUJU untuk mengeditnya UNDERCONSTRUCTION",
         'show_alert'=>true,
     ]);
 }

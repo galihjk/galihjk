@@ -25,11 +25,32 @@ if($command == 'soal_tambah'){
 elseif(isDiawali($command,'soal_edit_')){
     $explode = explode("__",str_replace('soal_edit_','',$command));
     $id_soal = $explode[0];
-    KirimPerintah('sendMessage',[
-        'chat_id' => $chat_id,
-        'text'=> "EDIT:\n".print_r(loadData("soal/survey/$id_soal"),true),
-        'parse_mode'=>'HTML',
-    ]);
+    $jenis_soal = $explode[1];
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+    if(empty($data_soal['soal'])){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Data sudah tidak tersedia saat ini.",
+            'parse_mode'=>'HTML',
+        ]);
+    }
+    elseif(isset($data_soal['editsc'])){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Soal ini sedang dalam proses edit..",
+            'parse_mode'=>'HTML',
+        ]);
+    }
+    else{
+        $text = "[SOAL]\n\nUntuk memudahkan proses edit, silakan <i>copy</i> dahulu soal yang sudah ada:\n\n<pre>"
+        .$data_soal['soal']."</pre>\n\nSetelah itu, balas (<i>reply</i>) pada pesan ini dengan soal baru. Anda dapat melakukan"
+        ."<i>paste</i> dan mengirimkannya setelah Anda edit. \n|ID:$jenis_soal|$id_soal";
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> $text,
+            'parse_mode'=>'HTML',
+        ]);
+    }
 }
 elseif(isDiawali($command,'soal_hapus_')){
     $explode = explode("__",str_replace('soal_hapus_','',$command));
@@ -51,7 +72,7 @@ elseif(isDiawali($command,'soal_hapus_')){
         ]);
     }
     else{
-        $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\n==========\n<i>".$data_soal['soal']."</i>\nID:$jenis_soal|$id_soal";
+        $text = "[SOAL]\n\nKenapa kamu ingin menghapus soal ini?\n\n==========\n<i>".$data_soal['soal']."</i>\n|ID:$jenis_soal|$id_soal";
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> $text,
