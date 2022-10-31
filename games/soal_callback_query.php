@@ -158,37 +158,72 @@ elseif(isDiawali($callback_query_data, "soal_upvote_")){
     }
 }
 elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
-    KirimPerintah('answerCallbackQuery',[
-        'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Anda SETUJU untuk menghapusnya",
-        'show_alert'=>true,
-    ]);
-
     $explode = explode("__",str_replace("soal_yesdelete_","",$callback_query_data));
     $id_soal = $explode[0];
     $jenis_soal = $explode[1];
 
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
-    if(empty($data_soal['delsc'])) $data_soal['delsc'] = 0;
-    $my_delete = $data_soal['delete'][$from_id] ?? 0;
-    if((string) $my_delete !== "1"){
-        $data_soal['delete'][$from_id] = 1;
-        if((string) $my_delete === "-1"){
-            $data_soal['delsc'] += 2;
-        }
-        else{
-            $data_soal['delsc'] += 1;
-        }
-        saveData("soal/$jenis_soal/$id_soal",$data_soal);
 
+    if(empty($data_soal)){
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Soal ini sudah tidak tersedia.",
+            'show_alert'=>true,
+        ]);
+    }
+    else{
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Anda SETUJU untuk menghapusnya",
+            'show_alert'=>true,
+        ]);
+        if(empty($data_soal['delsc'])) $data_soal['delsc'] = 0;
+        $my_delete = $data_soal['delete'][$from_id] ?? 0;
+        if((string) $my_delete !== "1"){
+            $data_soal['delete'][$from_id] = 1;
+            if((string) $my_delete === "-1"){
+                $data_soal['delsc'] += 2;
+            }
+            else{
+                $data_soal['delsc'] += 1;
+            }
+            saveData("soal/$jenis_soal/$id_soal",$data_soal);
+        }
     }
 }
 elseif(isDiawali($callback_query_data, "soal_nodelete_")){
-    KirimPerintah('answerCallbackQuery',[
-        'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "TIDAK SETUJU UNDERCONSTRUCTION",
-        'show_alert'=>true,
-    ]);
+    $explode = explode("__",str_replace("soal_nodelete_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+
+    if(empty($data_soal)){
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Soal ini sudah tidak tersedia.",
+            'show_alert'=>true,
+        ]);
+    }
+    else{
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Anda TIDAK SETUJU untuk menghapusnya",
+            'show_alert'=>true,
+        ]);
+        if(empty($data_soal['delsc'])) $data_soal['delsc'] = 0;
+        $my_delete = $data_soal['delete'][$from_id] ?? 0;
+        if((string) $my_delete !== "-1"){
+            $data_soal['delete'][$from_id] = -1;
+            if((string) $my_delete === "1"){
+                $data_soal['delsc'] -= 2;
+            }
+            else{
+                $data_soal['delsc'] -= 1;
+            }
+            saveData("soal/$jenis_soal/$id_soal",$data_soal);
+        }
+    }
 }
 elseif(isDiawali($callback_query_data, "soal_yesedit_")){
     KirimPerintah('answerCallbackQuery',[

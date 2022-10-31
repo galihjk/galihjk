@@ -23,19 +23,19 @@ if(!empty($data_soal['soal'])){
         //     'protect_content' => true,
         //     'message_id' => $delcheck_id,
         // ]);
-        deleteData("soal/$delcheck_jenis/$delcheck_id");
         $deleteMsg = KirimPerintah('deleteMessage',[
             'chat_id' => "@galihjksoal",
             'message_id' => $delcheck_id,
         ]);
         if(empty($deleteMsg[['ok']])){
-            KirimPerintah('sendMessage',[
+            KirimPerintah('editMessageText',[
                 'chat_id' => "@galihjksoal",
-                'text'=> "Help @galihjk soal ini tidak bisa dihapus",
-                'reply_to_message_id' =>$delcheck_id,
+                'text'=> "This message has been #deleted",
                 'parse_mode'=>'HTML',
+                'message_id' => $delcheck_id,
             ]);
         }
+        deleteData("soal/$delcheck_jenis/$delcheck_id");
     }
     else{
         unset($data_soal['delsc']);
