@@ -226,18 +226,72 @@ elseif(isDiawali($callback_query_data, "soal_nodelete_")){
     }
 }
 elseif(isDiawali($callback_query_data, "soal_yesedit_")){
-    KirimPerintah('answerCallbackQuery',[
-        'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Anda SETUJU untuk mengeditnya UNDERCONSTRUCTION",
-        'show_alert'=>true,
-    ]);
+    $explode = explode("__",str_replace("soal_yesedit_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+
+    if(empty($data_soal)){
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Soal ini sudah tidak tersedia.",
+            'show_alert'=>true,
+        ]);
+    }
+    else{
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Anda SETUJU atas pengeditan ini.",
+            'show_alert'=>true,
+        ]);
+        if(empty($data_soal['editsc'])) $data_soal['editsc'] = 0;
+        $my_edit = $data_soal['editvote'][$from_id] ?? 0;
+        if((string) $my_edit !== "1"){
+            $data_soal['editvote'][$from_id] = 1;
+            if((string) $my_edit === "-1"){
+                $data_soal['editsc'] += 2;
+            }
+            else{
+                $data_soal['editsc'] += 1;
+            }
+            saveData("soal/$jenis_soal/$id_soal",$data_soal);
+        }
+    }
 }
 elseif(isDiawali($callback_query_data, "soal_noedit_")){
-    KirimPerintah('answerCallbackQuery',[
-        'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Anda TIDAK SETUJU untuk mengeditnya UNDERCONSTRUCTION",
-        'show_alert'=>true,
-    ]);
+    $explode = explode("__",str_replace("soal_noedit_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+
+    if(empty($data_soal)){
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Soal ini sudah tidak tersedia.",
+            'show_alert'=>true,
+        ]);
+    }
+    else{
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Anda TIDAK SETUJU atas pengeditan ini.",
+            'show_alert'=>true,
+        ]);
+        if(empty($data_soal['editsc'])) $data_soal['editsc'] = 0;
+        $my_edit = $data_soal['editvote'][$from_id] ?? 0;
+        if((string) $my_edit !== "-1"){
+            $data_soal['editvote'][$from_id] = -1;
+            if((string) $my_edit === "1"){
+                $data_soal['editsc'] -= 2;
+            }
+            else{
+                $data_soal['editsc'] -= 1;
+            }
+            saveData("soal/$jenis_soal/$id_soal",$data_soal);
+        }
+    }
 }
 else{
 

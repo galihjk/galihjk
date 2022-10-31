@@ -43,8 +43,8 @@ elseif(isDiawali($command,'soal_edit_')){
     }
     else{
         $text = "[SOAL]\n\nUntuk memudahkan proses edit, silakan <i>copy</i> dahulu soal yang sudah ada:\n\n<pre>"
-        .$data_soal['soal']."</pre>\n\nSetelah itu, balas (<i>reply</i>) pada pesan ini dengan soal baru. Anda dapat melakukan"
-        ."<i>paste</i> dan mengirimkannya setelah Anda edit. \n|ID:$jenis_soal|$id_soal";
+        .$data_soal['soal']."</pre>\n\nSetelah itu, <b>balas (<i>reply</i>) <b>pada pesan ini</b> dengan soal baru. Anda dapat melakukan"
+        ." <i>paste</i> dan mengirimkannya setelah Anda edit. \n|ID:$jenis_soal|$id_soal";
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> $text,

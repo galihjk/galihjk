@@ -13,7 +13,7 @@ if(!empty($data_soal['soal'])){
         $editetechannel = "@soal_hilang_galihjk";
         KirimPerintah('sendMessage',[
             'chat_id' => $editetechannel,
-            'text'=> "$editcheck_jenis edited ".print_r($data_soal,true),
+            'text'=> "$editcheck_jenis $editcheck_id edited ".print_r($data_soal,true),
             'parse_mode'=>'HTML',
         ]);
         // KirimPerintah('forwardMessage',[
@@ -40,6 +40,7 @@ if(!empty($data_soal['soal'])){
     else{
         unset($data_soal['editsc']);
         unset($data_soal['edit']);
+        unset($data_soal['editvote']);
         saveData("soal/$editcheck_jenis/$editcheck_id",$data_soal);
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
