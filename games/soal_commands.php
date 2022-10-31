@@ -49,6 +49,11 @@ elseif(isDiawali($command,'soal_edit_')){
             'chat_id' => $chat_id,
             'text'=> $text,
             'parse_mode'=>'HTML',
+            'reply_markup' => [
+                'force_reply'=>true,
+                'input_field_placeholder'=>'Soal Update',
+                'selective'=>true,
+            ],
         ]);
     }
 }

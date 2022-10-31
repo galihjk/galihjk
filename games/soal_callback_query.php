@@ -232,10 +232,10 @@ elseif(isDiawali($callback_query_data, "soal_yesedit_")){
 
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
 
-    if(empty($data_soal)){
+    if(empty($data_soal['edit'])){
         KirimPerintah('answerCallbackQuery',[
             'callback_query_id' => $update["callback_query"]['id'],
-            'text'=> "Soal ini sudah tidak tersedia.",
+            'text'=> "Proses pengeditan sudah berakhir.",
             'show_alert'=>true,
         ]);
     }
@@ -266,10 +266,10 @@ elseif(isDiawali($callback_query_data, "soal_noedit_")){
 
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
 
-    if(empty($data_soal)){
+    if(empty($data_soal['edit'])){
         KirimPerintah('answerCallbackQuery',[
             'callback_query_id' => $update["callback_query"]['id'],
-            'text'=> "Soal ini sudah tidak tersedia.",
+            'text'=> "Proses pengeditan sudah berakhir",
             'show_alert'=>true,
         ]);
     }
