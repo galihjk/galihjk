@@ -108,6 +108,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nUntuk memudahkan proses edit,
                     ]);
                 }
                 else{
+                    $data_soal['editby'] = $from_id;
                     $data_soal['editsc'] = 0;
                     $data_soal['edit'] = $message_text;
                     saveData("soal/$jenis_soal/$id_soal",$data_soal);

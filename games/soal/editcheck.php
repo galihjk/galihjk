@@ -16,6 +16,27 @@ if(!empty($data_soal['soal'])){
             'text'=> "$editcheck_jenis $editcheck_id edited ".print_r($data_soal,true),
             'parse_mode'=>'HTML',
         ]);
+        $data_soal['soal'] = $data_soal['edit'];
+        $creator = "";
+        $editor = [$data_soal['editby']=>0];
+        foreach($data_soal['vote'] as $k=>$v){
+            if($creator == ""){
+                $creator = [$k=>$v];
+                unset($data_soal['vote'][$k]);
+            }
+            if($k == $data_soal['editby']){
+                $editor = [$k=>$v];
+                unset($data_soal['vote'][$k]);
+            }
+        }
+        $data_soal['vote'] = $creator + $editor + $data_soal['vote'];
+        unset($data_soal['editby']);
+        unset($data_soal['editsc']);
+        unset($data_soal['edit']);
+        unset($data_soal['editvote']);
+        saveData("soal/$editcheck_jenis/$editcheck_id",$data_soal);
+        updateSoalPost($editcheck_id,$editcheck_jenis,$data_soal);
+
         // KirimPerintah('forwardMessage',[
         //     'chat_id' => $editetechannel,
         //     'from_chat_id' => $channel_username,
@@ -38,6 +59,7 @@ if(!empty($data_soal['soal'])){
         // }
     }
     else{
+        unset($data_soal['editby']);
         unset($data_soal['editsc']);
         unset($data_soal['edit']);
         unset($data_soal['editvote']);

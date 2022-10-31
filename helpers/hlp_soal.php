@@ -41,6 +41,7 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
     $kontributor_names = [];
     foreach(array_keys($data_soal['vote']) as $user_id){
         $kontributor_names[] = getUser($user_id)['first_name'] ?? "?";
+		if(count($kontributor_names)>=10) break;
     }
     
     $text = "[SOAL ".strtoupper($jenis_soal)."]\n<i>".implode(", ",$kontributor_names)."</i>\n==============\n\n$soal\n\nVoteScore: $vtsc\n ";
