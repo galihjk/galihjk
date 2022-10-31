@@ -20,6 +20,7 @@ function KirimPerintahStream($bot_token,$perintah,$data){
 }
 
 function KirimPerintahCurl($bot_token,$perintah,$data){
+	if(empty($data)) $data = [];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,BotKirim($bot_token,$perintah));
     curl_setopt($ch, CURLOPT_POST, count($data));

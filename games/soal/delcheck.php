@@ -27,7 +27,7 @@ if(!empty($data_soal['soal'])){
             'chat_id' => "@galihjksoal",
             'message_id' => $delcheck_id,
         ]);
-        if(empty($deleteMsg[['ok']])){
+        if(empty($deleteMsg['ok'])){
             KirimPerintah('editMessageText',[
                 'chat_id' => "@galihjksoal",
                 'text'=> "This message has been #deleted",
