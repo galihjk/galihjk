@@ -40,6 +40,7 @@ if(!empty($data_soal['soal'])){
     else{
         unset($data_soal['delsc']);
         unset($data_soal['delete']);
+        unset($data_soal['alasan']);
         saveData("soal/$delcheck_jenis/$delcheck_id",$data_soal);
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,

@@ -49,6 +49,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
                 }
                 else{
                     $data_soal['delsc'] = 0;
+                    $data_soal['alasan'] = $message_text;
                     saveData("soal/$jenis_soal/$id_soal",$data_soal);
                     $soal = $data_soal['soal'];
                     $text = getUser($from_id)['first_name'] . " ingin <b>MENGHAPUS</b> soal ini\n===\n$soal\n===\nAlasan: <b>$message_text</b>\n\n";
