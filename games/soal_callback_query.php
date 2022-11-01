@@ -306,7 +306,7 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
         'text'=> "Berhasil $plusminustxt skor untuk '$jawaban_submit'. \n"
-            .$data_soal['jawab'][$jawaban_submit]."->".($data_soal['jawab'][$jawaban_submit]+1),
+            .$data_soal['jawab'][$jawaban_submit]." => ".($data_soal['jawab'][$jawaban_submit]+1),
         'show_alert'=>true,
     ]);
     if($plusminus == "+"){
@@ -317,32 +317,6 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     }
     saveData("soal/$jenis_soal/$id_soal",$data_soal);
     soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
-    // if(empty($data_soal['edit'])){
-    //     KirimPerintah('answerCallbackQuery',[
-    //         'callback_query_id' => $update["callback_query"]['id'],
-    //         'text'=> "Proses pengeditan sudah berakhir",
-    //         'show_alert'=>true,
-    //     ]);
-    // }
-    // else{
-    //     KirimPerintah('answerCallbackQuery',[
-    //         'callback_query_id' => $update["callback_query"]['id'],
-    //         'text'=> "Anda TIDAK SETUJU atas pengeditan ini.",
-    //         'show_alert'=>true,
-    //     ]);
-    //     if(empty($data_soal['editsc'])) $data_soal['editsc'] = 0;
-    //     $my_edit = $data_soal['editvote'][$from_id] ?? 0;
-    //     if((string) $my_edit !== "-1"){
-    //         $data_soal['editvote'][$from_id] = -1;
-    //         if((string) $my_edit === "1"){
-    //             $data_soal['editsc'] -= 2;
-    //         }
-    //         else{
-    //             $data_soal['editsc'] -= 1;
-    //         }
-    //         saveData("soal/$jenis_soal/$id_soal",$data_soal);
-    //     }
-    // }
 }
 elseif(isDiawali($callback_query_data, "soal_buatjwb_")){
     $explode = explode("__",str_replace("soal_buatjwb_","",$callback_query_data));
@@ -350,7 +324,18 @@ elseif(isDiawali($callback_query_data, "soal_buatjwb_")){
     $jenis_soal = $explode[1];
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
     if(!empty($data_soal)){
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "Tulis Jawabanmu!",
+        ]);
         soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, "force_reply");
+    }
+    else{
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "ERROR",
+            'show_alert'=>true,
+        ]);
     }
 }
 else{

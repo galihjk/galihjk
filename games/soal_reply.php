@@ -20,15 +20,15 @@ if(isDiawali($reply_to_message_text,"[SOAL]\n\nBalas pesan ini untuk membuat soa
     updateSoalPost($id_soal,$jenis_soal,$data_soal);
     saveData("soal/$jenis_soal/$id_soal",$data_soal);
     userContributeSoal($from_id);
-
-    KirimPerintah('sendMessage',[
-        'chat_id' => $chat_id,
-        'text'=> "Berhasil. Lihat soalmu di: https://t.me/galihjksoal/$id_soal",
-        'parse_mode'=>'HTML',
-        'reply_markup' => [
-            'force_reply'=>false,
-        ],
-    ]);
+    soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
+    // KirimPerintah('sendMessage',[
+    //     'chat_id' => $chat_id,
+    //     'text'=> "Berhasil. Lihat soalmu di: https://t.me/galihjksoal/$id_soal",
+    //     'parse_mode'=>'HTML',
+    //     'reply_markup' => [
+    //         'force_reply'=>false,
+    //     ],
+    // ]);
 }
 elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus soal ini?")){
     $explode = explode("|ID:",$reply_to_message_text);
