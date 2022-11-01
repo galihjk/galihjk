@@ -107,11 +107,12 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 		];
 		foreach($data_soal['jawab'] as $k=>$v){
 			$vplus = $v+1;
+			$vminus = $v-1;
 			$inlinekeyboard_arr[] = ["➕ $v+1=$vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
 			$inlinekeyboard_arr[] = [$k, '~~'];
-			$inlinekeyboard_arr[] = ["➖ $v-1=", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+			$inlinekeyboard_arr[] = ["➖ $v-1=$vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 		}
-		$inlinekeyboard_arr[] = ["Buat Jawaban", 'soal_buatjwb_'.$id_soal.'__'.$jenis_soal];
+		$inlinekeyboard_arr[] = ["Buat Jawaban Baru", 'soal_buatjwb_'.$id_soal.'__'.$jenis_soal];
 		$reply_markup = inlineKeyBoard($inlinekeyboard_arr,3);
 	}
 	if(empty($edit_id) or $edit_id == "force_reply"){

@@ -301,10 +301,12 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     $plusminus = $explode[2];
     $jawaban_submit = $explode[3];
 
+    $plusminustxt = ($plusminus == "+" ? "menambahkan" : "mengurangi");
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "nih:$callback_query_data ",
+        'text'=> "Berhasil $plusminustxt skor untuk '$jawaban_submit'. \n"
+            .$data_soal['jawab'][$jawaban_submit]."->".($data_soal['jawab'][$jawaban_submit]+1),
         'show_alert'=>true,
     ]);
     if($plusminus == "+"){
@@ -343,7 +345,7 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     // }
 }
 elseif(isDiawali($callback_query_data, "soal_buatjwb_")){
-    $explode = explode("__",str_replace("soal_noedit_","",$callback_query_data));
+    $explode = explode("__",str_replace("soal_buatjwb_","",$callback_query_data));
     $id_soal = $explode[0];
     $jenis_soal = $explode[1];
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
