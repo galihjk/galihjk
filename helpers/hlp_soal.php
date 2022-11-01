@@ -113,7 +113,7 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 		}
 		$reply_markup = inlineKeyBoard($inlinekeyboard_arr,3);
 	}
-	if(empty($edit_id)){
+	if(!empty($edit_id)){
 		KirimPerintah('editMessageText',[
             'message_id' => $edit_id,
 			'chat_id' => $chat_id,
