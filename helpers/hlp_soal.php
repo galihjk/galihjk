@@ -91,7 +91,7 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 	$output = "[SOAL]\n\nJawaban untuk:\n======\n";
 	$output .= $data_soal['soal'];
 	$output .= "\n======\n\nBalas pada pesan ini untuk menambahkan jawaban\n|ID:$jenis_soal|$id_soal";;
-	if(empty($data_soal['jawab'])){
+	if(empty($data_soal['jawab']) or $edit_id == "force_reply"){
 		$reply_markup = [
 			'force_reply'=>true,
 			'input_field_placeholder'=>'Tulis Jawaban',
@@ -111,11 +111,11 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 			$inlinekeyboard_arr[] = [$k, '~~'];
 			$inlinekeyboard_arr[] = ["➖ $v-1=", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 		}
+		$inlinekeyboard_arr[] = ["Buat Jawaban", 'soal_buatjwb_'.$id_soal.'__'.$jenis_soal];
 		$reply_markup = inlineKeyBoard($inlinekeyboard_arr,3);
 	}
-	if(!empty($edit_id)){
-		KirimPerintah('editMessageText',[
-            'message_id' => $edit_id,
+	if(empty($edit_id) or $edit_id == "force_reply"){
+		KirimPerintah('sendMessage',[
 			'chat_id' => $chat_id,
 			'text'=> $output,
 			'parse_mode'=>'HTML',
@@ -123,7 +123,8 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 		]);
 	}
 	else{
-		KirimPerintah('sendMessage',[
+		KirimPerintah('editMessageText',[
+            'message_id' => $edit_id,
 			'chat_id' => $chat_id,
 			'text'=> $output,
 			'parse_mode'=>'HTML',

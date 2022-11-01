@@ -307,7 +307,12 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
         'text'=> "nih:$callback_query_data ",
         'show_alert'=>true,
     ]);
-    $data_soal['jawab'][$jawaban_submit] ++;
+    if($plusminus == "+"){
+        $data_soal['jawab'][$jawaban_submit] ++;
+    }
+    else{
+        $data_soal['jawab'][$jawaban_submit] --;
+    }
     saveData("soal/$jenis_soal/$id_soal",$data_soal);
     soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
     // if(empty($data_soal['edit'])){
@@ -336,6 +341,15 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     //         saveData("soal/$jenis_soal/$id_soal",$data_soal);
     //     }
     // }
+}
+elseif(isDiawali($callback_query_data, "soal_buatjwb_")){
+    $explode = explode("__",str_replace("soal_noedit_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+    if(!empty($data_soal)){
+        soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, "force_reply");
+    }
 }
 else{
 
