@@ -7,7 +7,7 @@ if(!empty($data_soal['soal'])){
         $soal = $data_soal['soal'];
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
-            'text'=> "Soal ini:\n===\n$soal\n===\ntelah disetujui untuk diedit.",
+            'text'=> "<a href='t.me/galihjksoal/$editcheck_id'>Soal ini</a>\n===\n$soal\n===\ntelah disetujui untuk diedit.",
             'parse_mode'=>'HTML',
         ]);
         $editetechannel = "@soal_hilang_galihjk";
@@ -36,27 +36,6 @@ if(!empty($data_soal['soal'])){
         unset($data_soal['editvote']);
         saveData("soal/$editcheck_jenis/$editcheck_id",$data_soal);
         updateSoalPost($editcheck_id,$editcheck_jenis,$data_soal);
-
-        // KirimPerintah('forwardMessage',[
-        //     'chat_id' => $editetechannel,
-        //     'from_chat_id' => $channel_username,
-        //     'disable_notification' => true,
-        //     'protect_content' => true,
-        //     'message_id' => $editcheck_id,
-        // ]);
-        // editeteData("soal/$editcheck_jenis/$editcheck_id");
-        // $editeteMsg = KirimPerintah('deleteMessage',[
-        //     'chat_id' => "@galihjksoal",
-        //     'message_id' => $editcheck_id,
-        // ]);
-        // if(empty($deleteMsg[['ok']])){
-            KirimPerintah('sendMessage',[
-                'chat_id' => "@galihjksoal",
-                'text'=> "SOAL INI PERLU DIEDIT JADI ".$data_soal['edit'],
-                'reply_to_message_id' =>$editcheck_id,
-                'parse_mode'=>'HTML',
-            ]);
-        // }
     }
     else{
         unset($data_soal['editby']);

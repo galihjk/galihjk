@@ -293,6 +293,44 @@ elseif(isDiawali($callback_query_data, "soal_noedit_")){
         }
     }
 }
+elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
+    $explode = explode("__",str_replace("soal_jwbsc_","",$callback_query_data));
+    $id_soal = $explode[0];
+    $jenis_soal = $explode[1];
+
+    $data_soal = loadData("soal/$jenis_soal/$id_soal");
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "nih:$callback_query_data ".print_r($data_soal,1),
+        'show_alert'=>true,
+    ]);
+    // if(empty($data_soal['edit'])){
+    //     KirimPerintah('answerCallbackQuery',[
+    //         'callback_query_id' => $update["callback_query"]['id'],
+    //         'text'=> "Proses pengeditan sudah berakhir",
+    //         'show_alert'=>true,
+    //     ]);
+    // }
+    // else{
+    //     KirimPerintah('answerCallbackQuery',[
+    //         'callback_query_id' => $update["callback_query"]['id'],
+    //         'text'=> "Anda TIDAK SETUJU atas pengeditan ini.",
+    //         'show_alert'=>true,
+    //     ]);
+    //     if(empty($data_soal['editsc'])) $data_soal['editsc'] = 0;
+    //     $my_edit = $data_soal['editvote'][$from_id] ?? 0;
+    //     if((string) $my_edit !== "-1"){
+    //         $data_soal['editvote'][$from_id] = -1;
+    //         if((string) $my_edit === "1"){
+    //             $data_soal['editsc'] -= 2;
+    //         }
+    //         else{
+    //             $data_soal['editsc'] -= 1;
+    //         }
+    //         saveData("soal/$jenis_soal/$id_soal",$data_soal);
+    //     }
+    // }
+}
 else{
 
 }
