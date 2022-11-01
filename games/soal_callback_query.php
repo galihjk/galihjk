@@ -2,7 +2,7 @@
 $callback_query_data = $update["callback_query"]['data'];
 $chat_id = (string) $update["callback_query"]["message"]["chat"]["id"];
 $from_id = $update["callback_query"]['from']['id'];
-$message_id = $update["callback_query"]["message_id"];
+$message_id = $update["callback_query"]["message"]["message_id"];
 
 if($callback_query_data == "soal_survey_tambah"){
     KirimPerintah('answerCallbackQuery',[

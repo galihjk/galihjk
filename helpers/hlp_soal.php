@@ -106,9 +106,10 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 			['⬇️KURANGI⬇️', '~~'],
 		];
 		foreach($data_soal['jawab'] as $k=>$v){
-			$inlinekeyboard_arr[] = ["➕ $v+1=".($v+1), 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
+			$vplus = $v+1;
+			$inlinekeyboard_arr[] = ["➕ $v+1=$vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
 			$inlinekeyboard_arr[] = [$k, '~~'];
-			$inlinekeyboard_arr[] = ["➖ $v-1=".($v-1), 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+			$inlinekeyboard_arr[] = ["➖ $v-1=", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 		}
 		$reply_markup = inlineKeyBoard($inlinekeyboard_arr,3);
 	}
