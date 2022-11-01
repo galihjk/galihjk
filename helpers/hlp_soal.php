@@ -84,3 +84,38 @@ function userContributeSoal($user_id){
 		// ]);
 	}
 }
+
+function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal){
+	$data_soal = loadData("soal/$jenis_soal/$id_soal");
+	if(!$data_soal) return false;
+	$output = "[SOAL]\n\nJawaban untuk:\n======\n";
+	$output .= $data_soal['soal'];
+	$output .= "\n======\n\nBalas pada pesan ini untuk menambahkan jawaban\n|ID:$jenis_soal|$id_soal";;
+	if(empty($data_soal['jawab'])){
+		$reply_markup = [
+			'force_reply'=>true,
+			'input_field_placeholder'=>'Tulis Jawaban',
+			'selective'=>true,
+		];
+	}
+	else{
+		arsort($data_soal['jawab']);
+		$inlinekeyboard_arr = [
+			['⬇️TAMBAHKAN⬇️', '~~'],
+			['⬇️JAWABAN⬇️', '~~'],
+			['⬇️KURANGI⬇️', '~~'],
+		];
+		foreach($data_soal['jawab'] as $k=>$v){
+			$inlinekeyboard_arr[] = ["➕ $v+1=".$v+1, 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+'];
+			$inlinekeyboard_arr[] = [$k, '~~'];
+			$inlinekeyboard_arr[] = ["➖ $v-1=".$v-1, 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-'];
+		}
+		$reply_markup = inlineKeyBoard($inlinekeyboard_arr,3);
+	}
+	KirimPerintah('sendMessage',[
+		'chat_id' => $chat_id,
+		'text'=> $output,
+		'parse_mode'=>'HTML',
+		'reply_markup' => $reply_markup,
+	]);
+}

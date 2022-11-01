@@ -161,12 +161,16 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nJawaban untuk:\n======\n")){
             $id_soal = $explode2[1];
             $data_soal = loadData("soal/$jenis_soal/$id_soal");
             if(!empty($data_soal['soal'])){
-                $jawaban_submit = $message_text;
-                KirimPerintah('sendMessage',[
-                    'chat_id' => $chat_id,
-                    'text'=> "Kamu menambahkan jawaban '$jawaban_submit' untuk soal $jenis_soal -- http://t.me/galihjksoal/$id_soal",
-                    'parse_mode'=>'HTML',
-                ]);
+                $jawaban_submit = strtoupper(preg_replace("/[^A-Za-z0-9]/", "-",$message_text));
+                if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
+                $data_soal['jawab'][$jawaban_submit] ++;
+                saveData("soal/$jenis_soal/$id_soal",$data_soal);
+                soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
+                // KirimPerintah('sendMessage',[
+                //     'chat_id' => $chat_id,
+                //     'text'=> "Kamu menambahkan jawaban '$jawaban_submit' untuk soal $jenis_soal -- http://t.me/galihjksoal/$id_soal",
+                //     'parse_mode'=>'HTML',
+                // ]);
                 // if(isset($data_soal['editsc'])){
                 //     KirimPerintah('sendMessage',[
                 //         'chat_id' => $chat_id,
