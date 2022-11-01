@@ -2,6 +2,7 @@
 $callback_query_data = $update["callback_query"]['data'];
 $chat_id = (string) $update["callback_query"]["message"]["chat"]["id"];
 $from_id = $update["callback_query"]['from']['id'];
+$message_id = $update["callback_query"]["message_id"];
 
 if($callback_query_data == "soal_survey_tambah"){
     KirimPerintah('answerCallbackQuery',[
@@ -297,13 +298,18 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     $explode = explode("__",str_replace("soal_jwbsc_","",$callback_query_data));
     $id_soal = $explode[0];
     $jenis_soal = $explode[1];
+    $plusminus = $explode[2];
+    $jawaban_submit = $explode[3];
 
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
     KirimPerintah('answerCallbackQuery',[
         'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "nih:$callback_query_data ".print_r($data_soal,1),
+        'text'=> "nih:$callback_query_data ",
         'show_alert'=>true,
     ]);
+    $data_soal['jawab'][$jawaban_submit] ++;
+    saveData("soal/$jenis_soal/$id_soal",$data_soal);
+    soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
     // if(empty($data_soal['edit'])){
     //     KirimPerintah('answerCallbackQuery',[
     //         'callback_query_id' => $update["callback_query"]['id'],
