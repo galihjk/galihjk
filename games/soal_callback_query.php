@@ -294,6 +294,18 @@ elseif(isDiawali($callback_query_data, "soal_noedit_")){
         }
     }
 }
+elseif(isDiawali($callback_query_data, "soal_jwbscshow_")){
+    $explode = explode("__",str_replace("soal_jwbscshow_","",$callback_query_data));
+    $jawaban_submit = $explode[0];
+    $jawaban_skor = $explode[1];
+
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> "Jawaban: '$jawaban_submit'. \n"
+            ."Skor: " . $jawaban_skor,
+        'show_alert'=>true,
+    ]);
+}
 elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     $explode = explode("__",str_replace("soal_jwbsc_","",$callback_query_data));
     $id_soal = $explode[0];
