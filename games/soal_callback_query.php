@@ -165,7 +165,7 @@ elseif(isDiawali($callback_query_data, "soal_yesdelete_")){
 
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
 
-    if(empty($data_soal)){
+    if(empty($data_soal['alasan'])){
         KirimPerintah('answerCallbackQuery',[
             'callback_query_id' => $update["callback_query"]['id'],
             'text'=> "Soal ini sudah tidak tersedia.",
@@ -199,7 +199,7 @@ elseif(isDiawali($callback_query_data, "soal_nodelete_")){
 
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
 
-    if(empty($data_soal)){
+    if(empty($data_soal['alasan'])){
         KirimPerintah('answerCallbackQuery',[
             'callback_query_id' => $update["callback_query"]['id'],
             'text'=> "Soal ini sudah tidak tersedia.",
