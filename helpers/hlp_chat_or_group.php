@@ -14,7 +14,7 @@ function setChatData($chat_id, $data_set_chat, $update_last_active = true, $upda
 	}
 	$data_chat = getChatData($chat_id);
     $last_active = $data_chat['last_active'] ?? 0;
-    if(abs(time() - $last_active) > $update_if_time_dif){
+    if($update_if_time_dif < 0 or abs(time() - $last_active) > $update_if_time_dif){
         foreach($data_set_chat as $k=>$v){
             $data_chat[$k]=$v;
         }

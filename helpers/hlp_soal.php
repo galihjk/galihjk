@@ -172,5 +172,5 @@ function soal_get($jenis_soal, $except = []){
 function soal_setSudah($chat_id, $id_soal, $type){
 	$soal_sudah = getChatData($chat_id,'soal_sudah');
 	$soal_sudah[$id_soal] = $type;
-	setChatData($chat_id,['soal_sudah' => $soal_sudah]);
+	setChatData($chat_id,['soal_sudah' => $soal_sudah], false, -1);
 }
