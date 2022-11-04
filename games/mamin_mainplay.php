@@ -153,7 +153,8 @@ elseif($playdata['step'] == 'kirim_soal'){
     
         $mamin_kirim_soal = mamin_kirim_soal($chat_id,$data['playing_chatters'][$chat_id]['mamin']);
         $data['playing_chatters'][$chat_id]['mamin']['soal_msgid'] = $mamin_kirim_soal['botresult']['result']['message_id'];
-        $data['playing_chatters'][$chat_id]['mamin']['soal_sudah'][] = $mamin_kirim_soal['data_soal']['id'];
+        // $data['playing_chatters'][$chat_id]['mamin']['soal_sudah'][] = $mamin_kirim_soal['data_soal']['id'];
+        soal_setSudah($chat_id, $mamin_kirim_soal['data_soal']['id'],'survey');
         $data['playing_chatters'][$chat_id]['mamin']['data_soal'] = $mamin_kirim_soal['data_soal'];
     }
 }

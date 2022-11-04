@@ -79,7 +79,7 @@ elseif($command == "soaldir" and $chat_id == $id_developer){
 elseif($command == "tessoal39" and $chat_id == $id_developer){
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> 'nih'.soal_get('survey',['39']),
+        'text'=> 'nih'.print_r(soal_get('survey',['39']),1),
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);
@@ -87,7 +87,36 @@ elseif($command == "tessoal39" and $chat_id == $id_developer){
 elseif($command == "tessoal" and $chat_id == $id_developer){
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> 'nih'.soal_get('survey'),
+        'text'=> 'nih'.print_r(soal_get('survey',['39']),1),
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+elseif($command == "tessoalget" and $from_id == $id_developer){
+    //ambil soal secara acak
+    $soal_sudah = getChatData($chat_id,'soal_sudah');
+    $soal_get = soal_get('survey',array_keys($soal_sudah));
+    if($soal_get == "habis!"){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Soal sudah habis, soal lama bisa muncul lagi. \n\n(* yuk tambah soal di @galihjksoal)",
+            'parse_mode'=>'HTML',
+        ]);
+        setChatData($chat_id,['soal_sudah' => []]);
+        $soal_get = soal_get('survey');
+    }
+    if(empty($soal_get['soal'])){
+        $data_soal = [
+            'id'=>'ERROR',
+            'soal'=>"ERROR $soal_no",
+        ];
+    }
+    else{
+        $data_soal = $soal_get;
+    }
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> 'nih'.print_r($data_soal,1),
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);

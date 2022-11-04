@@ -137,36 +137,39 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 function soal_get($jenis_soal, $except = []){
     $folder = "data/soal/$jenis_soal/";
     $list = scandir($folder);
-	$data_soals=[];
+	shuffle($list);
+	$data_soal_got = [];
+	$id_soal = "";
 	foreach($list as $k=>$file){
 		if(!isDiakhiri($file,".json")
 			or in_array(str_replace(".json", "",$file),$except)
 		){
-			unset($list[$k]);
+			continue;
 		}
 		else{
 			$id_soal = str_replace(".json", "",$file);
 			$data_soal = loadData("soal/$jenis_soal/$id_soal");
 			if(empty($data_soal['vtsc'])){
-				unset($list[$k]);
+				continue;
 			}
 			elseif($data_soal['vtsc'] < 2){
-				unset($list[$k]);
+				continue;
 			}
 			else{
-				$list[$k] = $id_soal;
-				$data_soals[$id_soal] = $data_soal;
+				$data_soal_got = $data_soal;
+				break;
 			}
 		}
 	}
-	$list = array_values($list);
-	$count = count($list);
-	if(empty($count)){
+	if(empty($data_soal_got)){
 		return "habis!";
 	}
-	else{
-		$random = rand(0,$count-1);
-		$id_soal = $list[$random];
-		return $data_soals[$id_soal];
-	}
+	$data_soal_got['id'] = $id_soal;
+	return $data_soal_got;
+}
+
+function soal_setSudah($chat_id, $id_soal, $type){
+	$soal_sudah = getChatData($chat_id,'soal_sudah');
+	$soal_sudah[$id_soal] = $type;
+	setChatData($chat_id,['soal_sudah' => $soal_sudah]);
 }

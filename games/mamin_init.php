@@ -10,16 +10,27 @@ function mamin_kirim_soal($chat_id, $playdata, $soal_baru = true){
 
     if($soal_baru){
         //ambil soal secara acak
-        $soal_get = soal_get($playdata['soal_sudah']);
+        $soal_sudah = getChatData($chat_id,'soal_sudah');
+        $soal_get = soal_get('survey',array_keys($soal_sudah));
         if($soal_get == "habis!"){
-            $habis = true;
+            KirimPerintah('sendMessage',[
+                'chat_id' => $chat_id,
+                'text'=> "Soal sudah habis, soal lama bisa muncul lagi. \n\n(* yuk tambah soal di @galihjksoal)",
+                'parse_mode'=>'HTML',
+            ]);
+            setChatData($chat_id,['soal_sudah' => []]);
+            $soal_get = soal_get('survey');
         }
-        //under.......
-
-        //
-        $data_soal = [
-            'soal'=>"SOAL ". $soal_no
-        ];
+        if(empty($soal_get['soal'])){
+            $data_soal = [
+                'id'=>'ERROR',
+                'soal'=>"ERROR $soal_no",
+            ];
+        }
+        else{
+            $data_soal = $soal_get;
+        }
+        
     }
     else{
         $data_soal = $playdata['data_soal'];

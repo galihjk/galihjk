@@ -41,7 +41,6 @@ elseif($subcommand == "play"){
             'startmsgid'=>$startmsgid,
             'remind_join'=>0,
             'player_change'=>true,
-            'soal_sudah'=>[],
             'players'=>[
                 $from_id => [
                     'score'=>0,
