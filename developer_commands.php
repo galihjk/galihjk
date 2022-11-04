@@ -87,7 +87,7 @@ elseif($command == "tessoal39" and $chat_id == $id_developer){
 elseif($command == "tessoal" and $chat_id == $id_developer){
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=> 'nih'.print_r(soal_get('survey',['39']),1),
+        'text'=> 'nih'.print_r(soal_get('survey'),1),
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);
