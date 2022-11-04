@@ -1,4 +1,8 @@
 <?php
+function soal_get($type, $except = []){
+
+}
+
 function mamin_kirim_soal($chat_id, $playdata, $soal_baru = true){
     global $emoji_square;
     global $emoji_square_check;
@@ -8,6 +12,9 @@ function mamin_kirim_soal($chat_id, $playdata, $soal_baru = true){
     $update_msgid = ($soal_baru ? false : $playdata['soal_msgid']);
 
     if($soal_baru){
+        //ambil soal secara acak
+        $soal_get = soal_get($playdata['soal_sudah']);
+        //
         $data_soal = [
             'soal'=>"SOAL ". $soal_no
         ];

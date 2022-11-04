@@ -59,6 +59,23 @@ elseif($command == "tesjob" and $chat_id == $id_developer){
     ]);
 }
 
+elseif($command == "soaldir" and $chat_id == $id_developer){
+    $folder = "data/soal/survey/";
+    $list = scandir($folder);
+    $output = "nih:\n";
+    foreach($list as $item){
+        if(isDiakhiri($item,".json")){
+            $output .= "- $item: ".(round((time() - filemtime($folder.$item))/60))."\n";
+        }
+    }
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> $output,
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+
 elseif($command == "tesdir" and $chat_id == $id_developer){
     $folder = "data/user/";
     $list = scandir($folder);
