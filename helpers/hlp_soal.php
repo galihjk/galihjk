@@ -133,3 +133,40 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 		]);
 	}
 }
+
+function soal_get($jenis_soal, $except = []){
+    $folder = "data/soal/$jenis_soal/";
+    $list = scandir($folder);
+	$data_soals=[];
+	foreach($list as $k=>$file){
+		if(!isDiakhiri($file,".json")
+			or in_array(str_replace(".json", "",$file),$except)
+		){
+			unset($list[$k]);
+		}
+		else{
+			$id_soal = str_replace(".json", "",$file);
+			$data_soal = loadData("soal/$jenis_soal/$id_soal");
+			if(empty($data_soal['vtsc'])){
+				unset($list[$k]);
+			}
+			elseif($data_soal['vtsc'] < 2){
+				unset($list[$k]);
+			}
+			else{
+				$list[$k] = $id_soal;
+				$data_soals[$id_soal] = $data_soal;
+			}
+		}
+	}
+	$list = array_values($list);
+	$count = count($list);
+	if(empty($count)){
+		return "habis!";
+	}
+	else{
+		$random = rand(0,$count-1);
+		$id_soal = $list[$random];
+		return $data_soals[$id_soal];
+	}
+}

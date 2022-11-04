@@ -76,6 +76,23 @@ elseif($command == "soaldir" and $chat_id == $id_developer){
     ]);
 }
 
+elseif($command == "tessoal39" and $chat_id == $id_developer){
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> 'nih'.soal_get('survey',['39']),
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+elseif($command == "tessoal" and $chat_id == $id_developer){
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> 'nih'.soal_get('survey'),
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+
 elseif($command == "tesdir" and $chat_id == $id_developer){
     $folder = "data/user/";
     $list = scandir($folder);
