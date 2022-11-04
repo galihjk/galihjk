@@ -114,6 +114,7 @@ elseif($command == "tessoalget" and $from_id == $id_developer){
     else{
         $data_soal = $soal_get;
     }
+    soal_setSudah($chat_id, $data_soal['id'],'survey');
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> 'nih'.print_r($data_soal,1),
