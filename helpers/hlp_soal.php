@@ -101,14 +101,19 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 	else{
 		arsort($data_soal['jawab']);
 		$inlinekeyboard_arr = [
-			['⬇️Tambah⬇️', '~~'],
-			['⬇️Jawaban⬇️', '~~'],
 			['⬇️Kurangi⬇️', '~~'],
+			['⬇️Jawaban⬇️', '~~'],
+			['⬇️Tambah⬇️', '~~'],
 		];
 		foreach($data_soal['jawab'] as $k=>$v){
 			$vplus = $v+1;
 			$vminus = $v-1;
-			$inlinekeyboard_arr[] = ["➖ $v-1=$vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+			if($vminus <= 0){
+				$inlinekeyboard_arr[] = ["➖ (Hapus)", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+			}
+			else{
+				$inlinekeyboard_arr[] = ["➖ $v-1=$vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+			}
 			$inlinekeyboard_arr[] = [$k, 'soal_jwbscshow_'.$k.'__'.$v];
 			$inlinekeyboard_arr[] = ["➕ $v+1=$vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
 		}

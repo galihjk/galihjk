@@ -73,8 +73,8 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
                             \$delcheck_msgid = '$post_message_id';
                             include('galihjk/games/soal/delcheck.php');
                             ",
-                            // time()+(3*24*60*60)
-                            time()+20
+                            time()+(3*24*60*60)
+                            // time()+20
                         );
                         KirimPerintah('sendMessage',[
                             'chat_id' => $chat_id,
@@ -134,8 +134,8 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nUntuk memudahkan proses edit,
                             \$editcheck_msgid = '$post_message_id';
                             include('galihjk/games/soal/editcheck.php');
                             ",
-                            // time()+(3*24*60*60)
-                            time()+20
+                            time()+(3*24*60*60)
+                            // time()+20
                         );
                         KirimPerintah('sendMessage',[
                             'chat_id' => $chat_id,
@@ -152,70 +152,31 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nUntuk memudahkan proses edit,
 }
 elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nJawaban untuk:\n======\n")){
     //TAMBAH JAWABAN SOAL
-    $explode = explode("|ID:",$reply_to_message_text);
-    if(!empty($explode[1])){
-        $kodesoal = $explode[1];
-        $explode2 = explode("|",$kodesoal);
-        if(!empty($explode2[1])){
-            $jenis_soal = $explode2[0];
-            $id_soal = $explode2[1];
-            $data_soal = loadData("soal/$jenis_soal/$id_soal");
-            if(!empty($data_soal['soal'])){
-                $jawaban_submit = strtoupper(preg_replace("/[^A-Za-z0-9]/", "-",$message_text));
-                if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
-                $data_soal['jawab'][$jawaban_submit] ++;
-                saveData("soal/$jenis_soal/$id_soal",$data_soal);
-                soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
-                // KirimPerintah('sendMessage',[
-                //     'chat_id' => $chat_id,
-                //     'text'=> "Kamu menambahkan jawaban '$jawaban_submit' untuk soal $jenis_soal -- http://t.me/galihjksoal/$id_soal",
-                //     'parse_mode'=>'HTML',
-                // ]);
-                // if(isset($data_soal['editsc'])){
-                //     KirimPerintah('sendMessage',[
-                //         'chat_id' => $chat_id,
-                //         'text'=> "Soal ini sedang dalam proses edit..",
-                //         'parse_mode'=>'HTML',
-                //     ]);
-                // }
-                // else{
-                //     $data_soal['editby'] = $from_id;
-                //     $data_soal['editsc'] = 0;
-                //     $data_soal['edit'] = $message_text;
-                //     saveData("soal/$jenis_soal/$id_soal",$data_soal);
-                //     $soal = $data_soal['soal'];
-                //     $text = getUser($from_id)['first_name'] . " ingin <b>MENGUBAH</b> soal ini\n===\n$soal\n$emoji_down$emoji_down MENJADI $emoji_down$emoji_down\n<b>$message_text</b>\n===\n";
-                //     $text .= "*<i>Akan diproses dalam 3 hari</i>";
-                //     $channel_post = KirimPerintah('sendMessage',[
-                //         'chat_id' => $channel_username,
-                //         'text'=> $text,
-                //         'parse_mode'=>'HTML',
-                //         'reply_to_message_id' =>$id_soal,
-                //         'reply_markup' => inlineKeyBoard([
-                //             ["$emoji_check Setuju","soal_yesedit_$id_soal"."__$jenis_soal"],
-                //             ["$emoji_cross Jangan","soal_noedit_$id_soal"."__$jenis_soal"],
-                //         ],2),
-                //     ]);
-                //     if(!empty($channel_post['result']['message_id'])){
-                //         $post_message_id = $channel_post['result']['message_id'];
-                //         create_job("
-                //             \$editcheck_jenis = '$jenis_soal';
-                //             \$editcheck_id = '$id_soal';
-                //             \$chat_id = '$chat_id';
-                //             \$editcheck_msgid = '$post_message_id';
-                //             include('galihjk/games/soal/editcheck.php');
-                //             ",
-                //             // time()+(3*24*60*60)
-                //             time()+20
-                //         );
-                //         KirimPerintah('sendMessage',[
-                //             'chat_id' => $chat_id,
-                //             'text'=> "Silakan konfirmasi di sini jika anda yakin: https://t.me/galihjksoal/$post_message_id",
-                //             'parse_mode'=>'HTML',
-                //         ]);
-                //     }                    
-                // }
-                userContributeSoal($from_id);
+    if(strlen($message_text) > 30){
+        KirimPerintah('sendMessage',[
+            'chat_id' => $chat_id,
+            'text'=> "Gagal: Panjang jawaban tidak boleh melebihi 30 karakter.\n\nPanjang: ".strlen($message_text),
+            'parse_mode'=>'HTML',
+        ]);
+    }
+    else{
+        $explode = explode("|ID:",$reply_to_message_text);
+        if(!empty($explode[1])){
+            $kodesoal = $explode[1];
+            $explode2 = explode("|",$kodesoal);
+            if(!empty($explode2[1])){
+                $jenis_soal = $explode2[0];
+                $id_soal = $explode2[1];
+                $data_soal = loadData("soal/$jenis_soal/$id_soal");
+                if(!empty($data_soal['soal'])){
+                    // $jawaban_submit = strtoupper(preg_replace("/[^A-Za-z0-9 ]/", "-",$message_text));
+                    $jawaban_submit = cleanWord($message_text);
+                    if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
+                    $data_soal['jawab'][$jawaban_submit] ++;
+                    saveData("soal/$jenis_soal/$id_soal",$data_soal);
+                    soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
+                    userContributeSoal($from_id);
+                }
             }
         }
     }

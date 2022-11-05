@@ -61,3 +61,9 @@ function timeToSimpleText($time){
 	if($time < 60) return "$time detik";
 	return ($time < 60*60 ? round($time/60) . " menit" : round($time/(60*60)) . " jam");
 }
+
+function cleanWord($text, $replace = " ", $upper=true){
+	$text = preg_replace('/[^A-Z0-9\-]/', $replace, $text);
+	if($upper) $text = strtoupper($text);
+	return $text;
+}
