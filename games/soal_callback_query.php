@@ -326,6 +326,9 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     }
     else{
         $data_soal['jawab'][$jawaban_submit] --;
+        if($data_soal['jawab'][$jawaban_submit] < 0){
+            unset($data_soal['jawab'][$jawaban_submit]);
+        }
     }
     saveData("soal/$jenis_soal/$id_soal",$data_soal);
     soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
