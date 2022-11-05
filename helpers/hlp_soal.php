@@ -91,7 +91,11 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 	$output = "[SOAL]\n\nJawaban untuk:\n======\n";
 	$output .= $data_soal['soal'];
 	$output .= "\n======\n\nBalas pada pesan ini untuk menambahkan jawaban\n|ID:$jenis_soal|$id_soal";;
-	if(empty($data_soal['jawab']) or $edit_id == "force_reply"){
+	if(
+		(!($edit_id != "force_reply" and !empty($edit_id)))
+		and
+		(empty($data_soal['jawab']) or $edit_id == "force_reply")
+	){
 		$reply_markup = [
 			'force_reply'=>true,
 			'input_field_placeholder'=>'Tulis Jawaban',
