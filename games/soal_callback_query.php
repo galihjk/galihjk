@@ -315,12 +315,7 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
 
     $plusminustxt = ($plusminus == "+" ? "menambahkan" : "mengurangi");
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
-    KirimPerintah('answerCallbackQuery',[
-        'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> "Berhasil $plusminustxt skor untuk '$jawaban_submit'. \n"
-            .$data_soal['jawab'][$jawaban_submit]." => ".($data_soal['jawab'][$jawaban_submit]+1),
-        'show_alert'=>true,
-    ]);
+    $is_hapus = false;
     if($plusminus == "+"){
         $data_soal['jawab'][$jawaban_submit] ++;
     }
@@ -328,8 +323,20 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
         $data_soal['jawab'][$jawaban_submit] --;
         if($data_soal['jawab'][$jawaban_submit] < 0){
             unset($data_soal['jawab'][$jawaban_submit]);
+            $is_hapus = true;
         }
     }
+    if($is_hapus){
+        $text_alert = "Berhasil menghapus jawaban '$jawaban_submit'.";
+    }
+    else{
+        $text_alert = "Berhasil $plusminustxt skor untuk '$jawaban_submit'. \n" .$data_soal['jawab'][$jawaban_submit]." => ".($data_soal['jawab'][$jawaban_submit]+1);
+    }
+    KirimPerintah('answerCallbackQuery',[
+        'callback_query_id' => $update["callback_query"]['id'],
+        'text'=> $text_alert,
+        'show_alert'=>true,
+    ]);
     saveData("soal/$jenis_soal/$id_soal",$data_soal);
     soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
 }
