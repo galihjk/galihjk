@@ -316,7 +316,7 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     $plusminustxt = ($plusminus == "+" ? "menambahkan" : "mengurangi");
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
     $is_hapus = false;
-    if(empty($data_soal['jawab'][$jawaban_submit])){
+    if(!isset($data_soal['jawab'][$jawaban_submit])){
         KirimPerintah('answerCallbackQuery',[
             'callback_query_id' => $update["callback_query"]['id'],
             'text'=> "ERROR: Data sudah tidak ada.",
