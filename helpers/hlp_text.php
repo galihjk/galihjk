@@ -64,6 +64,7 @@ function timeToSimpleText($time){
 
 function cleanWord($text, $replace = " ", $upper=true){
 	$text = preg_replace('/[^A-Za-z0-9\-]/', $replace, $text);
+	$text = preg_replace('/\s+/', ' ', trim($text));
 	if($upper) $text = strtoupper($text);
 	return $text;
 }
