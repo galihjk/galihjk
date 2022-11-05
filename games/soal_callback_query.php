@@ -316,29 +316,41 @@ elseif(isDiawali($callback_query_data, "soal_jwbsc_")){
     $plusminustxt = ($plusminus == "+" ? "menambahkan" : "mengurangi");
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
     $is_hapus = false;
-    if($plusminus == "+"){
-        $data_soal['jawab'][$jawaban_submit] ++;
+    if(empty($data_soal['jawab'][$jawaban_submit])){
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> "ERROR: Data sudah tidak ada.",
+            'show_alert'=>true,
+        ]);
     }
     else{
-        $data_soal['jawab'][$jawaban_submit] --;
-        if($data_soal['jawab'][$jawaban_submit] < 0){
-            unset($data_soal['jawab'][$jawaban_submit]);
-            $is_hapus = true;
+        $jawaban_submit_awal = $data_soal['jawab'][$jawaban_submit];
+        if($plusminus == "+"){
+            $data_soal['jawab'][$jawaban_submit] ++;
         }
+        else{
+            $data_soal['jawab'][$jawaban_submit] --;
+            if($data_soal['jawab'][$jawaban_submit] < 0){
+                unset($data_soal['jawab'][$jawaban_submit]);
+                $is_hapus = true;
+            }
+        }
+        if($is_hapus){
+            $text_alert = "Berhasil menghapus jawaban '$jawaban_submit'.";
+        }
+        else{
+            $text_alert = "Berhasil $plusminustxt skor untuk '$jawaban_submit'. \n" .
+            $jawaban_submit_awal
+            ." => ".($data_soal['jawab'][$jawaban_submit]);
+        }
+        KirimPerintah('answerCallbackQuery',[
+            'callback_query_id' => $update["callback_query"]['id'],
+            'text'=> $text_alert,
+            'show_alert'=>true,
+        ]);
+        saveData("soal/$jenis_soal/$id_soal",$data_soal);
+        soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
     }
-    if($is_hapus){
-        $text_alert = "Berhasil menghapus jawaban '$jawaban_submit'.";
-    }
-    else{
-        $text_alert = "Berhasil $plusminustxt skor untuk '$jawaban_submit'. \n" .$data_soal['jawab'][$jawaban_submit]." => ".($data_soal['jawab'][$jawaban_submit]+1);
-    }
-    KirimPerintah('answerCallbackQuery',[
-        'callback_query_id' => $update["callback_query"]['id'],
-        'text'=> $text_alert,
-        'show_alert'=>true,
-    ]);
-    saveData("soal/$jenis_soal/$id_soal",$data_soal);
-    soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $message_id);
 }
 elseif(isDiawali($callback_query_data, "soal_buatjwb_")){
     $explode = explode("__",str_replace("soal_buatjwb_","",$callback_query_data));
