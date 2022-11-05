@@ -169,13 +169,21 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nJawaban untuk:\n======\n")){
                 $id_soal = $explode2[1];
                 $data_soal = loadData("soal/$jenis_soal/$id_soal");
                 if(!empty($data_soal['soal'])){
-                    // $jawaban_submit = strtoupper(preg_replace("/[^A-Za-z0-9 ]/", "-",$message_text));
-                    $jawaban_submit = cleanWord($message_text);
-                    if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
-                    $data_soal['jawab'][$jawaban_submit] ++;
-                    saveData("soal/$jenis_soal/$id_soal",$data_soal);
-                    soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
-                    userContributeSoal($from_id);
+                    if(count($data_soal['jawab']) >= 15){
+                        KirimPerintah('sendMessage',[
+                            'chat_id' => $chat_id,
+                            'text'=> "GAGAL: Mohon maaf, maksimal jumlah jawaban adalah 15.",
+                            'parse_mode'=>'HTML',
+                        ]);
+                    }
+                    else{
+                        $jawaban_submit = cleanWord($message_text);
+                        if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
+                        $data_soal['jawab'][$jawaban_submit] ++;
+                        saveData("soal/$jenis_soal/$id_soal",$data_soal);
+                        soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
+                        userContributeSoal($from_id);
+                    }
                 }
             }
         }

@@ -339,11 +339,20 @@ elseif(isDiawali($callback_query_data, "soal_buatjwb_")){
     $jenis_soal = $explode[1];
     $data_soal = loadData("soal/$jenis_soal/$id_soal");
     if(!empty($data_soal)){
-        KirimPerintah('answerCallbackQuery',[
-            'callback_query_id' => $update["callback_query"]['id'],
-            'text'=> "Tulis Jawabanmu!",
-        ]);
-        soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, "force_reply");
+        if(count($data_soal['jawab']) >= 15){
+            KirimPerintah('answerCallbackQuery',[
+                'callback_query_id' => $update["callback_query"]['id'],
+                'text'=> "GAGAL: Mohon maaf, maksimal jumlah jawaban adalah 15.",
+                'show_alert'=>true,
+            ]);
+        }
+        else{
+            KirimPerintah('answerCallbackQuery',[
+                'callback_query_id' => $update["callback_query"]['id'],
+                'text'=> "Tulis Jawabanmu!",
+            ]);
+            soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, "force_reply");
+        }
     }
     else{
         KirimPerintah('answerCallbackQuery',[
