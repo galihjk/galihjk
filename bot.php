@@ -22,13 +22,12 @@ if(!empty($data)){
 		saveData("last_serve_time",time());
 		include('galihjk/main.php');
 	}
+	$update = json_decode(file_get_contents("php://input"), TRUE);
+	if(!empty($update)) {
+		include('galihjk/main_update.php');
+	}
+	echo "<pre>";
+	print_r($data);
+	saveData("data", $data);
 }
 
-$update = json_decode(file_get_contents("php://input"), TRUE);
-if(!empty($update)) {
-	include('galihjk/main_update.php');
-}
-echo "<pre>";
-print_r($data);
-
-saveData("data", $data);
