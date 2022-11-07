@@ -44,7 +44,9 @@ if(!empty($data['delayedPerintah'])){
 if(!empty($data['change_step'])){
 	foreach($data['change_step'] as $key=>$val){
 		if(!isset($val[3]) or time() >= $val[3]){
-			$data['playing_chatters'][$val[1]][$val[0]]['step'] = $val[2];
+			if(!empty($data['playing_chatters'][$val[1]]['playing']) and $data['playing_chatters'][$val[1]]['playing'] == $val[0]){
+				$data['playing_chatters'][$val[1]][$val[0]]['step'] = $val[2];
+			}
 			unset($data['change_step'][$key]);
 		}
 	}
