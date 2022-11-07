@@ -27,7 +27,15 @@ if(!empty($data['playing_chatters'])){
 	}
 }
 
-if (!$ada_yang_lagi_main) server_stop();
+if (!$ada_yang_lagi_main){
+	KirimPerintah('sendMessage',[
+		'chat_id' => $id_developer,
+		'text'=> "Tidak ada yang main, server akan tidur.\n".print_r($data,1),
+		'parse_mode'=>'HTML',
+	]);
+	file_put_contents("TidakAdaYangMain.txt",print_r($data,1));
+	server_stop();
+}
 
 //delayedPerintah
 if(!empty($data['delayedPerintah'])){
