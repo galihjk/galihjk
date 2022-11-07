@@ -169,7 +169,8 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nJawaban untuk:\n======\n")){
                 $id_soal = $explode2[1];
                 $data_soal = loadData("soal/$jenis_soal/$id_soal");
                 if(!empty($data_soal['soal'])){
-                    if(count($data_soal['jawab']) >= 15){
+                    $jawaban_submit = cleanWord($message_text);
+                    if(count($data_soal['jawab']) >= 15 and empty($data_soal['jawab'][$jawaban_submit])){
                         KirimPerintah('sendMessage',[
                             'chat_id' => $chat_id,
                             'text'=> "GAGAL: Mohon maaf, maksimal jumlah jawaban adalah 15.",
@@ -177,10 +178,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nJawaban untuk:\n======\n")){
                         ]);
                     }
                     else{
-                        $jawaban_submit = cleanWord($message_text);
-                        if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
-                        $data_soal['jawab'][$jawaban_submit] ++;
-                        saveData("soal/$jenis_soal/$id_soal",$data_soal);
+                        soal_addJawaban($id_soal, $jenis_soal, $jawaban_submit);
                         soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal);
                         userContributeSoal($from_id);
                     }

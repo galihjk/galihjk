@@ -103,23 +103,25 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 		];
 	}
 	else{
-		arsort($data_soal['jawab']);
-		$inlinekeyboard_arr = [
-			['⬇️Kurangi⬇️', '~~'],
-			['⬇️Jawaban⬇️', '~~'],
-			['⬇️Tambah⬇️', '~~'],
-		];
-		foreach($data_soal['jawab'] as $k=>$v){
-			$vplus = $v+1;
-			$vminus = $v-1;
-			if($vminus < 0){
-				$inlinekeyboard_arr[] = ["➖ (Hapus)", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
-			}
-			else{
-				$inlinekeyboard_arr[] = ["➖ $v => $vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
-			}
-			$inlinekeyboard_arr[] = [$k, 'soal_jwbscshow_'.$k.'__'.$v];
-			$inlinekeyboard_arr[] = ["➕ $v => $vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
+		if(!empty($data_soal['jawab'])){
+			arsort($data_soal['jawab']);
+			$inlinekeyboard_arr = [
+				['⬇️Kurangi⬇️', '~~'],
+				['⬇️Jawaban⬇️', '~~'],
+				['⬇️Tambah⬇️', '~~'],
+			];
+			foreach($data_soal['jawab'] as $k=>$v){
+				$vplus = $v+1;
+				$vminus = $v-1;
+				if($vminus < 0){
+					$inlinekeyboard_arr[] = ["➖ (Hapus)", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+				}
+				else{
+					$inlinekeyboard_arr[] = ["➖ $v => $vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+				}
+				$inlinekeyboard_arr[] = [$k, 'soal_jwbscshow_'.$k.'__'.$v];
+				$inlinekeyboard_arr[] = ["➕ $v => $vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
+			}	
 		}
 		$inlinekeyboard_arr[] = ["@galihjksoal", 'http://t.me/galihjksoal/'.$id_soal];
 		$inlinekeyboard_arr[] = ["✨ Buat Jawaban", 'soal_buatjwb_'.$id_soal.'__'.$jenis_soal];
@@ -182,4 +184,34 @@ function soal_setSudah($chat_id, $id_soal, $type){
 	$soal_sudah = getChatData($chat_id,'soal_sudah');
 	$soal_sudah[$id_soal] = $type;
 	setChatData($chat_id,['soal_sudah' => $soal_sudah], false, -1);
+}
+
+function soal_addJawaban($id_soal, $jenis_soal, $jawaban){
+	$data_soal = loadData("soal/$jenis_soal/$id_soal");
+	if(!empty($data_soal['soal'])){
+		if(empty($data_soal['jawab'])) $data_soal['jawab'] = [];
+		$jawaban_submit = cleanWord($jawaban);
+		if(strlen($message_text) > 30) return false;
+		arsort($data_soal['jawab']);
+		if(count($data_soal['jawab']) >= 15 and empty($data_soal['jawab'][$jawaban_submit])){
+			if((string) $data_soal['jawab'][array_key_last($data_soal['jawab'])] === "1"){
+				unset($data_soal['jawab'][array_key_last($data_soal['jawab'])]);
+			}
+			else{
+				return false;
+			}
+		}
+		if(empty($data_soal['jawab'][$jawaban_submit])) $data_soal['jawab'][$jawaban_submit] = 0;
+		$data_soal['jawab'][$jawaban_submit] ++;
+		$total_skor = array_sum($data_soal['jawab']);
+		if($total_skor > 150){
+			//reset skor jawaban
+			foreach ($data_soal['jawab'] as $jwb=>$jwbsc){
+				$data_soal['jawab'][$jwb] = round(100*$jwbsc/$total_skor);
+			}
+		}
+		
+		saveData("soal/$jenis_soal/$id_soal",$data_soal);
+	}
+	
 }

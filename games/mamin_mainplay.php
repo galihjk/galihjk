@@ -307,6 +307,10 @@ elseif($playdata['step'] == 'check_jawaban'){
         unset($data['playing_chatters'][$chat_id]['mamin']['next_join_player']);
     }
 
+    foreach($jawabans as $jwb){
+        soal_addJawaban($playdata['data_soal']['id'],'survey',$jwb);
+    }
+
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
