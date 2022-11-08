@@ -7,21 +7,21 @@ if($playdata['step'] == 'starting'){
         $data['change_step'][] = ['mamin', $chat_id, 'starting_check'];
     }
     else{
-        $data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] -= $jeda;
+        $data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] -= $jeda;
         if(
-            ($data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] <= 55
-            and $data['playing_chatters'][$chat_id]['mamin']['remind_join'] == 0)
+            ($data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] <= 55
+            and $data_playing_chatters[$chat_id]['mamin']['remind_join'] == 0)
             or
-            ($data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] <= 40
-            and $data['playing_chatters'][$chat_id]['mamin']['remind_join'] == 1)
+            ($data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] <= 40
+            and $data_playing_chatters[$chat_id]['mamin']['remind_join'] == 1)
             or
-            ($data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] <= 25
-            and $data['playing_chatters'][$chat_id]['mamin']['remind_join'] == 2)
+            ($data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] <= 25
+            and $data_playing_chatters[$chat_id]['mamin']['remind_join'] == 2)
             or
-            ($data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] <= 10
-            and $data['playing_chatters'][$chat_id]['mamin']['remind_join'] == 3)
+            ($data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] <= 10
+            and $data_playing_chatters[$chat_id]['mamin']['remind_join'] == 3)
         ){
-            $data['playing_chatters'][$chat_id]['mamin']['remind_join'] += 1;
+            $data_playing_chatters[$chat_id]['mamin']['remind_join'] += 1;
             KirimPerintah('sendMessage',[
                 'chat_id' => $chat_id,
                 'text'=> "Permainan akan dimulai ".ceil($playdata['starting_timeleft'])." detik lagi\n"
@@ -35,7 +35,7 @@ if($playdata['step'] == 'starting'){
     }
 }
 elseif($playdata['step'] == 'starting_check'){
-    $data['playing_chatters'][$chat_id]['mamin']['player_change'] = false;
+    $data_playing_chatters[$chat_id]['mamin']['player_change'] = false;
     $text = "Pemain:\n";
     foreach($playdata['players'] as $k=>$v){
         $text .= "- ".namaLengkap($k)."\n";
@@ -55,11 +55,11 @@ elseif($playdata['step'] == 'starting_check'){
         $data['change_step'][] = ['mamin', $chat_id, 'waiting'];
         if($syarat_terpenuhi){
             $text .= "\n\nWaktu tunggu habis";
-            $data['change_step'][] = ['mamin', $chat_id, 'starting_start', time()+5,];
+            $data['change_step'][] = ['mamin', $chat_id, 'starting_start', time()+3,];
         }
         else{
             $text .= "\n\n<b>SYARAT TIDAK TERPENUHI!</b>";
-            $data['change_step'][] = ['mamin', $chat_id, 'game_end', time()+3];
+            $data['change_step'][] = ['mamin', $chat_id, 'game_end', time()+2];
             $data['delayedPerintah'][] = ['sendMessage',
                 [
                     'chat_id' => $chat_id,
@@ -94,7 +94,7 @@ elseif($playdata['step'] == 'starting_check'){
                 ]);
             }
             $last_msgid = $last_check['result']['message_id'];
-            $data['playing_chatters'][$chat_id]['mamin']['last_check_msgid'] = $last_msgid;
+            $data_playing_chatters[$chat_id]['mamin']['last_check_msgid'] = $last_msgid;
         }
         $data['change_step'][] = ['mamin', $chat_id, 'starting'];
         if($playdata['starting_timeleft'] > 10){
@@ -124,9 +124,9 @@ elseif($playdata['step'] == 'starting_start'){
                 ."*<i>skor = jml pemain lain yg jawabannya sama dikali 10</i>\n"
                 ."*<i>bonus skor +5 jika jawabannya valid</i>",
             'parse_mode'=>'HTML',
-        ], time()+5
+        ], time()+3
     ];
-    $data['playing_chatters'][$chat_id]['mamin']['soal_no'] = 1;
+    $data_playing_chatters[$chat_id]['mamin']['soal_no'] = 1;
     $data['change_step'][] = ['mamin', $chat_id, 'kirim_soal', time()+10];
 }
 elseif($playdata['step'] == 'kirim_soal'){
@@ -143,27 +143,27 @@ elseif($playdata['step'] == 'kirim_soal'){
     }
     else{
         $data['change_step'][] = ['mamin', $chat_id, 'receive_inline'];
-        $data['playing_chatters'][$chat_id]['mamin']['waktu_habis_sisa'] = 30;
-        $data['playing_chatters'][$chat_id]['mamin']['waktu_check_sisa'] = rand(25,35);
-        $data['playing_chatters'][$chat_id]['mamin']['soal_msgid'] = "";
+        $data_playing_chatters[$chat_id]['mamin']['waktu_habis_sisa'] = 30;
+        $data_playing_chatters[$chat_id]['mamin']['waktu_check_sisa'] = rand(25,35);
+        $data_playing_chatters[$chat_id]['mamin']['soal_msgid'] = "";
     
-        foreach($data['playing_chatters'][$chat_id]['mamin']['players'] as $player_id=>$player_data){
-            $data['playing_chatters'][$chat_id]['mamin']['players'][$player_id]['jawab'] = "";
+        foreach($data_playing_chatters[$chat_id]['mamin']['players'] as $player_id=>$player_data){
+            $data_playing_chatters[$chat_id]['mamin']['players'][$player_id]['jawab'] = "";
         }
     
-        $mamin_kirim_soal = mamin_kirim_soal($chat_id,$data['playing_chatters'][$chat_id]['mamin']);
-        $data['playing_chatters'][$chat_id]['mamin']['soal_msgid'] = $mamin_kirim_soal['botresult']['result']['message_id'];
-        // $data['playing_chatters'][$chat_id]['mamin']['soal_sudah'][] = $mamin_kirim_soal['data_soal']['id'];
+        $mamin_kirim_soal = mamin_kirim_soal($chat_id,$data_playing_chatters[$chat_id]['mamin']);
+        $data_playing_chatters[$chat_id]['mamin']['soal_msgid'] = $mamin_kirim_soal['botresult']['result']['message_id'];
+        // $data_playing_chatters[$chat_id]['mamin']['soal_sudah'][] = $mamin_kirim_soal['data_soal']['id'];
         soal_setSudah($chat_id, $mamin_kirim_soal['data_soal']['id'],'survey');
-        $data['playing_chatters'][$chat_id]['mamin']['data_soal'] = $mamin_kirim_soal['data_soal'];
+        $data_playing_chatters[$chat_id]['mamin']['data_soal'] = $mamin_kirim_soal['data_soal'];
     }
 }
 elseif($playdata['step'] == 'receive_inline'){
     if($playdata['waktu_habis_sisa'] > 0){
-        $data['playing_chatters'][$chat_id]['mamin']['waktu_habis_sisa'] -= $jeda;
+        $data_playing_chatters[$chat_id]['mamin']['waktu_habis_sisa'] -= $jeda;
         if($playdata['waktu_habis_sisa']<= $playdata['waktu_check_sisa']
         and $playdata['waktu_check_sisa'] >= 10){
-            $data['playing_chatters'][$chat_id]['mamin']['waktu_check_sisa'] -= rand(15,30);
+            $data_playing_chatters[$chat_id]['mamin']['waktu_check_sisa'] -= rand(15,30);
             $data['change_step'][] = ['mamin', $chat_id, 'cek_waktu_habis'];
         }
     }
@@ -174,7 +174,7 @@ elseif($playdata['step'] == 'receive_inline'){
 elseif($playdata['step'] == 'cek_waktu_habis'){
     mamin_kirim_soal($chat_id,$playdata,false);
     if($playdata['waktu_habis_sisa'] > 0){
-        $data['playing_chatters'][$chat_id]['mamin']['step'] = "receive_inline";
+        $data_playing_chatters[$chat_id]['mamin']['step'] = "receive_inline";
         $text = "Sisa waktu: ". ceil($playdata['waktu_habis_sisa']) . " detik\n";
         foreach($playdata['players'] as $k=>$v){
             if(empty($v['jawab'])){
@@ -244,7 +244,7 @@ elseif($playdata['step'] == 'check_jawaban'){
             foreach($jawabans as $player_id=>$jawaban_pemain){
                 if($jawaban_pemain == $jawaban){
                     $text .= " -- " . mentionUser($player_id) . "\n";
-                    $data['playing_chatters'][$chat_id]['mamin']['players'][$player_id]['score'] += $skornya;
+                    $data_playing_chatters[$chat_id]['mamin']['players'][$player_id]['score'] += $skornya;
                 }
             }
             $text .= "\n";
@@ -268,7 +268,7 @@ elseif($playdata['step'] == 'check_jawaban'){
                 foreach($jawabans as $player_id=>$jawaban_pemain){
                     if($jawaban_pemain == $jawaban){
                         $text .= " -- " . mentionUser($player_id) . "\n";
-                        $data['playing_chatters'][$chat_id]['mamin']['players'][$player_id]['score'] += $skornya;
+                        $data_playing_chatters[$chat_id]['mamin']['players'][$player_id]['score'] += $skornya;
                     }
                 }
                 $text .= "\n";
@@ -287,24 +287,24 @@ elseif($playdata['step'] == 'check_jawaban'){
         $text .= "- <b>Tidak Menjawab</b> (-5):\n";
         foreach($tidak_jawab as $player_id_tidak_jawab){
             $text .= " -- " . mentionUser($player_id_tidak_jawab) . "\n";
-            $data['playing_chatters'][$chat_id]['mamin']['players'][$player_id_tidak_jawab]['score'] -= 5;
+            $data_playing_chatters[$chat_id]['mamin']['players'][$player_id_tidak_jawab]['score'] -= 5;
         }
         $text .= "\n";
     }
 
-    $data['playing_chatters'][$chat_id]['mamin']['soal_no'] ++;
+    $data_playing_chatters[$chat_id]['mamin']['soal_no'] ++;
 
-    if(!empty($data['playing_chatters'][$chat_id]['mamin']['next_join_player'])){
-        $next_join_player = array_keys($data['playing_chatters'][$chat_id]['mamin']['next_join_player']);
+    if(!empty($data_playing_chatters[$chat_id]['mamin']['next_join_player'])){
+        $next_join_player = array_keys($data_playing_chatters[$chat_id]['mamin']['next_join_player']);
         $mention_new_join = [];
         foreach($next_join_player as $v){
-            if(empty($data['playing_chatters'][$chat_id]['mamin']['players'][$v])){
-                $data['playing_chatters'][$chat_id]['mamin']['players'][$v] = ['score'=>0];
+            if(empty($data_playing_chatters[$chat_id]['mamin']['players'][$v])){
+                $data_playing_chatters[$chat_id]['mamin']['players'][$v] = ['score'=>0];
             }
             $mention_new_join[] = mentionUser($v);
         }
         $text .= "Ada pemain yang bergabung nih: " . implode(", ", $mention_new_join) . "\n";
-        unset($data['playing_chatters'][$chat_id]['mamin']['next_join_player']);
+        unset($data_playing_chatters[$chat_id]['mamin']['next_join_player']);
     }
 
     foreach($jawabans as $jwb){
@@ -319,7 +319,7 @@ elseif($playdata['step'] == 'check_jawaban'){
     ]);
 
     if($playdata['soal_no'] >= 10){
-        $data['change_step'][] = ['mamin', $chat_id, 'game_end', time()+5];
+        $data['change_step'][] = ['mamin', $chat_id, 'game_end', time()+3];
     }
     elseif($playdata['soal_no'] == 5){
         $data['delayedPerintah'][] = ['sendMessage',
@@ -330,12 +330,12 @@ elseif($playdata['step'] == 'check_jawaban'){
                     ."*<i>Jika jawaban valid, skor = jml pemain dibagi jml jawabanmu dan yg sama dgn mu, dikali 10, kemudian dikurangi 5.\n"
                     ."Jika tidak valid, skor nya nol.</i>",
                 'parse_mode'=>'HTML',
-            ], time()+4
+            ], time()+3
         ];
-        $data['change_step'][] = ['mamin', $chat_id, 'kirim_soal', time()+8];
+        $data['change_step'][] = ['mamin', $chat_id, 'kirim_soal', time()+5];
     }
     else{
-        $data['change_step'][] = ['mamin', $chat_id, 'kirim_soal', time()+5];
+        $data['change_step'][] = ['mamin', $chat_id, 'kirim_soal', time()+3];
     }
 
     
@@ -382,7 +382,7 @@ elseif($playdata['step'] == 'game_end'){
                 'text'=> $text,
                 'parse_mode'=>'HTML',
                 'disable_web_page_preview' => true,
-            ], time()+2
+            ], time()+1
         ];        
     }
     stopPlayingGame($chat_id);

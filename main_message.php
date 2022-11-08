@@ -6,7 +6,7 @@ checkImpersonate($message_data["from"]);
 $chat_id = (string) $message_data["chat"]["id"];
 
 //when group iddle (not playing game) =======
-if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
+if(isDiawali($chat_id,"-") and empty($data_playing_chatters[$chat_id])){
     //check group chat leave time
     $chat_data = getChatData($chat_id);
     $chat_leavetime = $chat_data['leavetime'] ?? time();
@@ -128,7 +128,7 @@ if(!empty($message_data['reply_to_message']) and $message_data['reply_to_message
 
 //message updates for active games====
 //TTSS MESSAGE UPDATE
-// if(!empty($data['playing_chatters'][$chat_id]['playing']) and $data['playing_chatters'][$chat_id]['playing'] == "ttss"
+// if(!empty($data_playing_chatters[$chat_id]['playing']) and $data_playing_chatters[$chat_id]['playing'] == "ttss"
 // ){
 //     include('galihjk/ttss_msg_update.php');
 // }

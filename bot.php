@@ -24,7 +24,11 @@ if(!empty($data)){
 	saveData("last_serve_time",time());
 	$update = json_decode(file_get_contents("php://input"), TRUE);
 	if(!empty($update)) {
+		$data_playing_chatters = loadData("data_playing_chatters");
 		include('galihjk/main_update.php');
+		if(!empty($data_playing_chatters)){
+			saveData("data_playing_chatters",$data_playing_chatters);
+		}
 	}
 	echo "<pre>";
 	print_r($data);

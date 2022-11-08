@@ -56,9 +56,9 @@ elseif($subcommand == "play"){
         server_start(true);
     }
 }
-elseif($subcommand == "extend" and !empty($data['playing_chatters'][$chat_id]['mamin']['step'])
-and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "starting_check"])){
-    if(empty($data['playing_chatters'][$chat_id]['mamin']['players'][$from_id])){
+elseif($subcommand == "extend" and !empty($data_playing_chatters[$chat_id]['mamin']['step'])
+and in_array($data_playing_chatters[$chat_id]['mamin']['step'],["starting", "starting_check"])){
+    if(empty($data_playing_chatters[$chat_id]['mamin']['players'][$from_id])){
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> "Kamu belum ikutan, ayo /join !",
@@ -66,8 +66,8 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
         ]);
     }
     else{
-        $data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] = 120;
-        $data['playing_chatters'][$chat_id]['mamin']['remind_join'] = 0;
+        $data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] = 120;
+        $data_playing_chatters[$chat_id]['mamin']['remind_join'] = 0;
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> "Waktu tunggu telah diset menjadi 120 detik.",
@@ -75,9 +75,9 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
     }
     
 }
-elseif($subcommand == "force_start" and !empty($data['playing_chatters'][$chat_id]['mamin']['step'])
-and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "starting_check"]) ){
-    if(empty($data['playing_chatters'][$chat_id]['mamin']['players'][$from_id])){
+elseif($subcommand == "force_start" and !empty($data_playing_chatters[$chat_id]['mamin']['step'])
+and in_array($data_playing_chatters[$chat_id]['mamin']['step'],["starting", "starting_check"]) ){
+    if(empty($data_playing_chatters[$chat_id]['mamin']['players'][$from_id])){
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> "Kamu belum ikutan, ayo /join !",
@@ -85,8 +85,8 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
         ]);
     }
     else{
-        if(count($data['playing_chatters'][$chat_id]['mamin']['players']) < 3){
-            $data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] = 0;
+        if(count($data_playing_chatters[$chat_id]['mamin']['players']) < 3){
+            $data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] = 0;
             KirimPerintah('sendMessage',[
                 'chat_id' => $chat_id,
                 'text'=> "Permainan akan dihentikan jika jumlah pemain kurang dari tiga.",
@@ -94,10 +94,10 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
             ]);
         }
         else{
-            if(empty($data['playing_chatters'][$chat_id]['force_start'])) $data['playing_chatters'][$chat_id]['force_start'] = [];
-            if(!in_array($from_id, $data['playing_chatters'][$chat_id]['force_start'])){
-                $data['playing_chatters'][$chat_id]['force_start'][] = $from_id;
-                if(count($data['playing_chatters'][$chat_id]['force_start']) < 2){
+            if(empty($data_playing_chatters[$chat_id]['force_start'])) $data_playing_chatters[$chat_id]['force_start'] = [];
+            if(!in_array($from_id, $data_playing_chatters[$chat_id]['force_start'])){
+                $data_playing_chatters[$chat_id]['force_start'][] = $from_id;
+                if(count($data_playing_chatters[$chat_id]['force_start']) < 2){
                     KirimPerintah('sendMessage',[
                         'chat_id' => $chat_id,
                         'text'=> "$from_name ingin mulai sekarang, <b>perlu seorang lagi</b> nih yang jalanin command /force_start",
@@ -110,9 +110,9 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
                         'text'=> "$emoji_like",
                         'reply_to_message_id' => $message_id
                     ]);
-                    $data['playing_chatters'][$chat_id]['mamin']['starting_timeleft'] = 0;
+                    $data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] = 0;
                     $data['change_step'][] = ['mamin', $chat_id, 'starting_check'];
-                    unset($data['playing_chatters'][$chat_id]['force_start']);
+                    unset($data_playing_chatters[$chat_id]['force_start']);
                 }
             }
         }
@@ -121,28 +121,28 @@ and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "
 }
 elseif($subcommand == "join"){
     if(checkUserNotPlayingAnyGame($from_id, $chat_id, $message_id)){
-        if(!empty($data['playing_chatters'][$chat_id]['mamin']['step']) 
-        // and in_array($data['playing_chatters'][$chat_id]['mamin']['step'],["starting", "starting_check"])
+        if(!empty($data_playing_chatters[$chat_id]['mamin']['step']) 
+        // and in_array($data_playing_chatters[$chat_id]['mamin']['step'],["starting", "starting_check"])
         ){
             setUserPlaying($from_id, $chat_id, "mamin");
-            if(empty($data['playing_chatters'][$chat_id]['mamin']['flee'][$from_id])){
-                $data['playing_chatters'][$chat_id]['mamin']['players'][$from_id] = [
+            if(empty($data_playing_chatters[$chat_id]['mamin']['flee'][$from_id])){
+                $data_playing_chatters[$chat_id]['mamin']['players'][$from_id] = [
                     'score'=>0,
                 ];
             }
             else{
-                $data['playing_chatters'][$chat_id]['mamin']['players'][$from_id] = $data['playing_chatters'][$chat_id]['mamin']['flee'][$from_id];
-                unset($data['playing_chatters'][$chat_id]['mamin']['flee'][$from_id]);
+                $data_playing_chatters[$chat_id]['mamin']['players'][$from_id] = $data_playing_chatters[$chat_id]['mamin']['flee'][$from_id];
+                unset($data_playing_chatters[$chat_id]['mamin']['flee'][$from_id]);
             }
-            $data['playing_chatters'][$chat_id]['mamin']['player_change'] = true;
+            $data_playing_chatters[$chat_id]['mamin']['player_change'] = true;
             KirimPerintah('sendMessage',[
                 'chat_id' => $chat_id,
                 'text'=> "$emoji_like",
                 'reply_to_message_id' => $message_id
             ]);
             /*
-                if(!empty($data['playing_chatters'][$chat_id]['mamin']['soal_no'])){
-                    $next_soal = $data['playing_chatters'][$chat_id]['mamin']['soal_no'] + 1;
+                if(!empty($data_playing_chatters[$chat_id]['mamin']['soal_no'])){
+                    $next_soal = $data_playing_chatters[$chat_id]['mamin']['soal_no'] + 1;
                     if($next_soal <= 10){
                         setUserPlaying($from_id, $chat_id, "mamin");
                         KirimPerintah('sendMessage',[
@@ -150,7 +150,7 @@ elseif($subcommand == "join"){
                             'text'=> "$emoji_like",
                             'reply_to_message_id' => $message_id
                         ]);
-                        $data['playing_chatters'][$chat_id]['mamin']['next_join_player'][$from_id] = true;
+                        $data_playing_chatters[$chat_id]['mamin']['next_join_player'][$from_id] = true;
                     }
                     else{
                         KirimPerintah('sendMessage',[
@@ -173,12 +173,12 @@ elseif($subcommand == "join"){
     
 }
 elseif($subcommand == "flee"){
-    if(!empty($data['playing_chatters'][$chat_id]['mamin']['step'])){
+    if(!empty($data_playing_chatters[$chat_id]['mamin']['step'])){
         setUserWinRate($from_id, false, false);
         $unsetuser = unsetUserPlaying($from_id);
-        $data['playing_chatters'][$chat_id]['mamin']['flee'][$from_id] = $data['playing_chatters'][$chat_id]['mamin']['players'][$from_id];
-        unset($data['playing_chatters'][$chat_id]['mamin']['players'][$from_id]);
-        $data['playing_chatters'][$chat_id]['mamin']['player_change'] = true;
+        $data_playing_chatters[$chat_id]['mamin']['flee'][$from_id] = $data_playing_chatters[$chat_id]['mamin']['players'][$from_id];
+        unset($data_playing_chatters[$chat_id]['mamin']['players'][$from_id]);
+        $data_playing_chatters[$chat_id]['mamin']['player_change'] = true;
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
             'text'=> "$emoji_dislike" . print_r($unsetuser,true),
@@ -190,7 +190,7 @@ elseif($subcommand == "flee"){
     }
 }
 elseif($subcommand == "skip"){
-    $data['playing_chatters'][$chat_id]['mamin']['soal_no'] = 9;
+    $data_playing_chatters[$chat_id]['mamin']['soal_no'] = 9;
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> "$from_id $id_developer $emoji_dislike",
