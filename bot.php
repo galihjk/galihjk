@@ -16,12 +16,6 @@ $id_developer = $config['id_developer'];
 include('galihjk/initiate.php');
 
 if(!empty($data)){
-	$last_serve_time = intval(loadData("last_serve_time") ?? time());
-	if(abs($last_serve_time-time()) > 1){
-		$jeda = time() - intval($last_serve_time);
-		include('galihjk/main.php');
-	}
-	saveData("last_serve_time",time());
 	$update = json_decode(file_get_contents("php://input"), TRUE);
 	if(!empty($update)) {
 		$data_playing_chatters = loadData("data_playing_chatters");
@@ -29,6 +23,14 @@ if(!empty($data)){
 		if(!empty($data_playing_chatters)){
 			saveData("data_playing_chatters",$data_playing_chatters);
 		}
+	}
+	else{
+		$last_serve_time = intval(loadData("last_serve_time") ?? time());
+		if(abs($last_serve_time-time()) > 1){
+			$jeda = time() - intval($last_serve_time);
+			include('galihjk/main.php');
+		}
+		saveData("last_serve_time",time());
 	}
 	echo "<pre>";
 	print_r($data);

@@ -22,7 +22,7 @@ if(!empty($srvstatus['run_code'])){
 		$srvstatus = loadData("srvstatus");
 		$srvstatus['time'] = time();
 		saveData("srvstatus",$srvstatus);
-		file_get_contents("https://galihjk.my.id/?bot=9fb4d360c8df1a9d3d829e17ac3275b4");
+		file_get_contents("https://galihjk.my.id/?bot=9fb4d360c8df1a9d3d829e17ac3275b4&serve=1");
 		get_without_wait("https://galihjk.my.id/?runserver=f9c19a9ebb552c48c83fd79636039705&code=$run_code");
 	}
 	else{
