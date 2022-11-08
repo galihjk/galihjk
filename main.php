@@ -57,7 +57,7 @@ if(!empty($data['change_step'])){
 				$data_playing_chatters[$val[1]][$val[0]]['step'] = $val[2];
 			}
 			else{
-				file_put_contents("gjlog/error_change_step".date("YmdHis").".txt",print_r($val,1));
+				file_put_contents("gjlog/error_change_step".date("YmdHis").".txt",print_r([$data_playing_chatters,$val],1));
 			}
 			unset($data['change_step'][$key]);
 		}
