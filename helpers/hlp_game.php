@@ -50,14 +50,14 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 	global $data_playing_chatters;
 
 	$data_playing_chatters[$chat_id]['playing'] = $game;
-	$data_playing_chatters[$chat_id]['bot'] = $config['bot_username'];
 	$data_playing_chatters[$chat_id][$game] = $datagame;
 	setUserPlaying($from_id, $chat_id, $game);
 }
 
 function stopPlayingGame($chat_id){
 	global $data_playing_chatters;
-	unset($data_playing_chatters[$chat_id]);
+	$data_playing_chatters[$chat_id]['playing'] = "";
+	$data_playing_chatters[$chat_id][$game] = [];
 }
 
 function setUserPlaying($user_id, $chat_id, $game){

@@ -282,7 +282,7 @@ elseif($playdata['step'] == 'check_jawaban'){
             foreach($tidak_valid as $player_id=>$jawaban_pemain){
                 $text .= " -- " . mentionUser($player_id) . " : $jawaban_pemain\n";
             }
-            $text .= "<i>*Untuk menambah jawaban valid, buka link soal lalu pilih tombol jawab.</i>\n\n";
+            $text .= "<i>*cek jawaban valid di @galihjksoal</i>\n\n";
         }
     }
     
