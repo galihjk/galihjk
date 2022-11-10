@@ -19,7 +19,7 @@ if(!empty($data_playing_chatters)){
 	foreach($data_playing_chatters as $chat_id=>$val_chatter){
 		if(!empty($val_chatter['playing'])){
 			$ada_yang_lagi_main = true;
-			$game = $val_chatter['playing']['game'];
+			$game = $val_chatter['playing'];
 			$playdata = $val_chatter[$game];
 			
 			include('galihjk/games/'.$game.'_mainplay.php');
