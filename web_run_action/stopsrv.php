@@ -1,2 +1,0 @@
-<?php
-server_stop();

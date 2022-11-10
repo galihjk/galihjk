@@ -47,7 +47,7 @@ setUser($user_id,[
     'w_point'=>$w_point,
 ]);
 
-$url = "https://galihjk.my.id/?web_run_action=delayed_perintah&method=sendMessage&delay=4&param_data=".urlencode(json_encode([
+$url = "https://galihjk.my.id/?web_run_action=delayed_perintah&method=sendMessage&delay=8&param_data=".urlencode(json_encode([
     'chat_id' => $user_id,
     'text'=> "Selamat! Anda telah mendapatkan $point_add /point ..",
     'parse_mode'=>'HTML',
