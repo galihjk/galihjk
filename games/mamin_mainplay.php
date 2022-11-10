@@ -2,7 +2,10 @@
 echo "<pre style=color:red>";
 print_r($playdata);
 echo "</pre>";
-if($playdata['step'] == 'starting'){
+if(empty($data_playing_chatters[$chat_id])){
+    file_put_contents("ERROR mainplay data_playing_chatters NOT LOADED.txt","ERROR mainplay data_playing_chatters NOT LOADED.txt");
+}
+elseif($playdata['step'] == 'starting'){
     if($playdata['starting_timeleft'] <= 0){
         $data['change_step'][] = ['mamin', $chat_id, 'starting_check'];
     }

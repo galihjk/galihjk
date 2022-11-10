@@ -55,7 +55,10 @@ if(!empty($data['change_step'])){
 	// 0 'game', 1 $chat_id, 2 'step', 3 time()+xx
 	if(!empty($data_playing_chatters)){
 		foreach($data['change_step'] as $key=>$val){
-			if(!isset($val[3]) or time() >= $val[3]){
+			if(empty($data_playing_chatters[$val[1]])){
+				file_put_contents("ERROR change_step data_playing_chatters NOT LOADED.txt","ERROR change_step data_playing_chatters NOT LOADED.txt");
+			}
+			elseif(!isset($val[3]) or time() >= $val[3]){
 				if(!empty($data_playing_chatters[$val[1]]['playing']) and $data_playing_chatters[$val[1]]['playing'] == $val[0]){
 					$data_playing_chatters[$val[1]][$val[0]]['step'] = $val[2];
 				}
