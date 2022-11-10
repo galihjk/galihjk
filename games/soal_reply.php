@@ -53,7 +53,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
                     saveData("soal/$jenis_soal/$id_soal",$data_soal);
                     $soal = $data_soal['soal'];
                     $text = getUser($from_id)['first_name'] . " ingin <b>MENGHAPUS</b> soal ini\n===\n$soal\n===\nAlasan: <b>$message_text</b>\n\n";
-                    $text .= "*<i>Akan diproses dalam 3 hari</i>";
+                    $text .= "*<i>Akan diproses dalam 2 hari</i>";
                     $channel_post = KirimPerintah('sendMessage',[
                         'chat_id' => $channel_username,
                         'text'=> $text,
@@ -73,7 +73,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nKenapa kamu ingin menghapus s
                             \$delcheck_msgid = '$post_message_id';
                             include('galihjk/games/soal/delcheck.php');
                             ",
-                            time()+(3*24*60*60)
+                            time()+(2*24*60*60)
                             // time()+20
                         );
                         KirimPerintah('sendMessage',[
@@ -114,7 +114,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nUntuk memudahkan proses edit,
                     saveData("soal/$jenis_soal/$id_soal",$data_soal);
                     $soal = $data_soal['soal'];
                     $text = getUser($from_id)['first_name'] . " ingin <b>MENGUBAH</b> soal ini\n===\n$soal\n$emoji_down$emoji_down MENJADI $emoji_down$emoji_down\n<b>$message_text</b>\n===\n";
-                    $text .= "*<i>Akan diproses dalam 3 hari</i>";
+                    $text .= "*<i>Akan diproses dalam 2 hari</i>";
                     $channel_post = KirimPerintah('sendMessage',[
                         'chat_id' => $channel_username,
                         'text'=> $text,
@@ -134,7 +134,7 @@ elseif(isDiawali($reply_to_message_text,"[SOAL]\n\nUntuk memudahkan proses edit,
                             \$editcheck_msgid = '$post_message_id';
                             include('galihjk/games/soal/editcheck.php');
                             ",
-                            time()+(3*24*60*60)
+                            time()+(2*24*60*60)
                             // time()+20
                         );
                         KirimPerintah('sendMessage',[
