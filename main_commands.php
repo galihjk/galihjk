@@ -73,13 +73,13 @@ elseif($command == "stop"){
             'parse_mode'=>'HTML',
             'reply_to_message_id' => $message_id
         ]);	
-        if($data_playing_chatters[$chat_id]['playing'] == "ttss"){
-            KirimPerintah('deleteMessage',[
-                'chat_id' => $chat_id,
-                'message_id'=> $data_playing_chatters[$chat_id]['ttss']['board_msgid'],
-            ]);
-            unset($data_playing_chatters[$chat_id]['ttss']);
-        }
+        // if($data_playing_chatters[$chat_id]['playing'] == "ttss"){
+        //     KirimPerintah('deleteMessage',[
+        //         'chat_id' => $chat_id,
+        //         'message_id'=> $data_playing_chatters[$chat_id]['ttss']['board_msgid'],
+        //     ]);
+        //     unset($data_playing_chatters[$chat_id]['ttss']);
+        // }
         // $data_playing_chatters[$chat_id]['playing'] = false;	
         // clear memory and stop playing
         $data_playing_chatters[$chat_id] = [

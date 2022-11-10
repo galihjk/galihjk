@@ -32,7 +32,20 @@ if(!empty($data)){
 	$last_serve_time = intval(loadData("last_serve_time") ?? time());
 	if(abs($last_serve_time-time()) > 1){
 		$jeda = time() - intval($last_serve_time);
-		include('galihjk/main.php');
+		$data_playing_chatters = loadData("data_playing_chatters");
+		if(!empty($data_playing_chatters)){
+			include('galihjk/main.php');
+			if(empty($data_playing_chatters)){
+				file_put_contents("ERROR data_playing_chatters NOT LOADED 4.txt","data_playing_chatters DATA NOT LOADED 4.txt");
+			}
+			else{
+				saveData("data_playing_chatters",$data_playing_chatters);
+			}
+		}
+		else{
+			file_put_contents("ERROR data_playing_chatters NOT LOADED3.txt","data_playing_chatters DATA NOT LOADED3.txt");
+		}
+		
 	}
 	saveData("last_serve_time",time());
 
@@ -40,9 +53,17 @@ if(!empty($data)){
 	
 	if(!empty($update)) {
 		$data_playing_chatters = loadData("data_playing_chatters");
-		include('galihjk/main_update.php');
 		if(!empty($data_playing_chatters)){
-			saveData("data_playing_chatters",$data_playing_chatters);
+			include('galihjk/main_update.php');
+			if(empty($data_playing_chatters)){
+				file_put_contents("ERROR data_playing_chatters NOT LOADED 2.txt","data_playing_chatters DATA NOT LOADED 2.txt");
+			}
+			else{
+				saveData("data_playing_chatters",$data_playing_chatters);
+			}
+		}
+		else{
+			file_put_contents("ERROR data_playing_chatters NOT LOADED.txt","data_playing_chatters DATA NOT LOADED.txt");
 		}
 	}
 	

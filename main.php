@@ -15,7 +15,6 @@ foreach($scandir as $file){
 //====
 
 //game playing loops
-$data_playing_chatters = loadData("data_playing_chatters");
 if(!empty($data_playing_chatters)){
 	foreach($data_playing_chatters as $chat_id=>$val_chatter){
 		if(!empty($val_chatter['playing'])){
@@ -26,6 +25,9 @@ if(!empty($data_playing_chatters)){
 			include('galihjk/games/'.$game.'_mainplay.php');
 		}
 	}
+}
+else{
+	file_put_contents("data_playing_chatters_kosong.txt","au ah!");
 }
 
 if (!$ada_yang_lagi_main){
