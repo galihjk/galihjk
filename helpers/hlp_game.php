@@ -58,7 +58,7 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 
 function stopPlayingGame($chat_id){
 	global $data_playing_chatters;
-	
+
 	$data_playing_chatters[$chat_id]['playing'] = [];
 	$data_playing_chatters[$chat_id][$game] = [];
 }
@@ -100,9 +100,7 @@ function setUserWinRate($user_id, $rank, $playercount){
 		$win_ratio = ($playercount - ($rank-1))/$playercount;
 	}
 	$playing = getUser($user_id)['playing'];
-	if(){
-
-	}
+	if(empty($playing)) $playing = [];
 	$playing['win_ratio'] = $win_ratio;
 	setUser($user_id,['playing'=>$playing]);
 	return $win_ratio;
