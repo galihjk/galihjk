@@ -29,6 +29,7 @@ while(count($updates) >= 100){
 }
 foreach($updates as $update){
 	include('galihjk/main_update.php');
+	$update_id = 1+$update["update_id"];
 }
 
 $data_last_serve_time = loadData("last_serve_time",0);

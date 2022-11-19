@@ -37,7 +37,7 @@ if (!$ada_yang_lagi_main){
 	// 	'parse_mode'=>'HTML',
 	// ]);
 	file_put_contents("TidakAdaYangMain.txt",print_r($data,1));
-	server_stop();
+	// server_stop();
 }
 
 //delayedPerintah

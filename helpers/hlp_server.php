@@ -24,7 +24,8 @@ function server_start($check_already_running=false){
     $srvstatus['run_code'] = $run_code;
     KirimPerintah('sendMessage',[
         'chat_id' => $id_developer,
-        'text' => 'Server Started: '.$run_code,
+        'text' => 'Server Started: '.$run_code . " \nSTOP: https://galihjk.my.id/?web_run_action=srv_stop",
+        'disable_web_page_preview' => true,
 	]);
     saveData("srvstatus",$srvstatus);
     get_without_wait("https://galihjk.my.id/?runserver=f9c19a9ebb552c48c83fd79636039705&code=$run_code");
