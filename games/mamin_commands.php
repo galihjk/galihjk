@@ -1,4 +1,6 @@
 <?php
+include_once("galihjk/games/mamin_init.php");
+
 if(empty($command)){
 	goto sudahi;
 }

@@ -1,4 +1,6 @@
 <?php 
+include_once("galihjk/games/mamin_init.php");
+
 $jawaban = cleanWord(
     substr($update['inline_query']['query'],0,20)
 );// substr(preg_replace('/[^A-Z0-9\-]/', '-', strtoupper($update['inline_query']['query'])),0,20);

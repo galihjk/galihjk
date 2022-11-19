@@ -1,4 +1,6 @@
 <?php
+include_once("galihjk/games/mamin_init.php");
+
 echo "<pre style=color:red>";
 print_r($playdata);
 echo "</pre>";

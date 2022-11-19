@@ -1,4 +1,5 @@
 <?php
+include_once("galihjk/games/mamin_init.php");
 
 $explode = explode("|",$chosen_inline_result['result_id']);
 

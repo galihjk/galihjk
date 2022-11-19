@@ -23,9 +23,9 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
 }
 
 //initiate for games
-$gamefiles = scandir('galihjk/games/');
-foreach($gamefiles as $file){
-	if(isDiakhiri($file,'_init.php')){
-		include("galihjk/games/$file");
-	}
-}
+// $gamefiles = scandir('galihjk/games/');
+// foreach($gamefiles as $file){
+// 	if(isDiakhiri($file,'_init.php')){
+// 		include("galihjk/games/$file");
+// 	}
+// }
