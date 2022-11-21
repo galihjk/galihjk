@@ -63,6 +63,7 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
 		saveData("last_perintah_bot",json_encode([
 			'time' => time(),
 			'perintah' => $perintah,
+			'data' => $data,
 		]));
 	}
     

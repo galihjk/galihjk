@@ -239,6 +239,19 @@ elseif($command == "startsrv" and $chat_id == $id_developer){
     ]);
 }
 
+elseif($command == "lstprnth" and $chat_id == $id_developer){
+    server_start();
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text' => "lstprnth: ".print_r([
+            'last_perintah_bot'=>loadData("last_perintah_bot",0),
+            'currenttime'=>time(),
+        ],1),
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id
+    ]);
+}
+
 elseif($command == "stopsrv" and $chat_id == $id_developer){
     server_stop();
     KirimPerintah('sendMessage',[
