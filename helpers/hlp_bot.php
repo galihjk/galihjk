@@ -60,11 +60,11 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
     global $config;
 
 	if($perintah != "getUpdates"){
-		saveData("last_perintah_bot",json_encode([
+		saveData("last_perintah_bot",[
 			'time' => time(),
 			'perintah' => $perintah,
 			'data' => $data,
-		]));
+		]);
 	}
     
 	if(empty($data)){

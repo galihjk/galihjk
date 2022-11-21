@@ -240,7 +240,6 @@ elseif($command == "startsrv" and $chat_id == $id_developer){
 }
 
 elseif($command == "lstprnth" and $chat_id == $id_developer){
-    server_start();
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text' => "lstprnth: ".print_r([
