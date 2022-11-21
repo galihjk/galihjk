@@ -38,9 +38,15 @@ saveData("last_serve_time",time());
 $jeda = time() - intval($last_serve_time);
 include('galihjk/main.php');
 
+$last_perintah_bot = loadData("last_perintah_bot",0);
+if(!empty($last_perintah_bot['time']) and abs($last_perintah_bot['time'] - time()) > 20){
+	//jika tidak ada perintah bot dalam 20 detik
+	server_stop();
+}
+
 saveData("data_playing_chatters",$data_playing_chatters);
 saveData("updid_$token",$update_id);
-
+saveData("data", $data);
 /*
 	if(!empty($data)){
 		

@@ -58,6 +58,13 @@ function DapatkanUpdate($offset,$bot_token = "default")
 
 function KirimPerintah($perintah,$data,$bot_token = "default"){
     global $config;
+
+	if($perintah != "getUpdates"){
+		saveData("last_perintah_bot",json_encode([
+			'time' => time(),
+			'perintah' => $perintah,
+		]));
+	}
     
 	if(empty($data)){
 		$data = [];
