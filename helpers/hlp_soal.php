@@ -58,6 +58,7 @@ function updateSoalPost($id_soal, $jenis_soal, $data_soal){
             ["$emoji_pencil Edit","https://t.me/".$config['bot_username']."?start=cmd_soal_edit_$id_soal"."__$jenis_soal"],
             ["$emoji_cross Hapus","https://t.me/".$config['bot_username']."?start=cmd_soal_hapus_$id_soal"."__$jenis_soal"],
             ["$emoji_chat Jawaban","https://t.me/".$config['bot_username']."?start=cmd_soal_jawaban_$id_soal"."__$jenis_soal"],
+            ["✨ Buat Soal","https://t.me/".$config['bot_username']."?start=cmd_soal_tambah"],
         ],3),
     ]);
 }
@@ -117,10 +118,10 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 					$inlinekeyboard_arr[] = ["[➖] (Hapus)", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 				}
 				else{
-					$inlinekeyboard_arr[] = ["[➖] $v => $vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+					$inlinekeyboard_arr[] = ["[➖] $v ⤵️ $vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 				}
 				$inlinekeyboard_arr[] = [$k, 'soal_jwbscshow_'.$k.'__'.$v];
-				$inlinekeyboard_arr[] = ["[➕] $v => $vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
+				$inlinekeyboard_arr[] = ["[➕] $v ⤴️ $vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
 			}	
 		}
 		$inlinekeyboard_arr[] = ["@galihjksoal", 'http://t.me/galihjksoal/'.$id_soal];

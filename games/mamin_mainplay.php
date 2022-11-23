@@ -236,7 +236,7 @@ elseif($playdata['step'] == 'check_jawaban'){
     // $jawaban_valid = json_decode($playdata['data_soal']['jawaban'],true);
     $jawaban_valid = $playdata['data_soal']['jawab'];
     $text = "JAWABAN PEMAIN:\n\n";
-    $text .= "\n\nDEBUG:".print_r($playdata['data_soal'],1)."\n\n";
+    // $text .= "\n\nDEBUG:".print_r($playdata['data_soal'],1)."\n\n";
     if($playdata['soal_no'] <= 5){
         //mayo score
         foreach($array_count_values as $jawaban=>$skorcnt){

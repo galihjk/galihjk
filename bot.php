@@ -19,14 +19,7 @@ $update_id = loadData("updid_$token",0);
 $data_playing_chatters = loadData("data_playing_chatters");
 
 $updates = DapatkanUpdate($update_id, $token);
-//skip jika 100 (max getupdate)
-while(count($updates) >= 100){
-	echo "\n skip 100 $token id=$update_id\n";
-	foreach ($updates as $update){
-		$update_id = 1+$update["update_id"];
-	}
-	$updates = DapatkanUpdate($update_id, $token);
-}
+
 foreach($updates as $update){
 	include('galihjk/main_update.php');
 	$update_id = 1+$update["update_id"];

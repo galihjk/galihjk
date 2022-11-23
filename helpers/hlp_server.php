@@ -4,9 +4,21 @@ function server_stop(){
     saveData("srvstatus",$srvstatus);
 }
 
-function server_start($check_already_running=false){
+function server_start($check_already_running=false, $drop_pending = true){
     global $token;
     global $id_developer;
+
+    if($drop_pending){
+        $update_id = 0;
+        $updates = DapatkanUpdate($update_id, $token);
+        $maxloop = 1000;
+        while(count($updates) >= 1){
+            $maxloop --;
+            $update_id = 1+end($updates)["update_id"];
+            $updates = DapatkanUpdate($update_id, $token);
+            if($maxloop < 1) break;
+        }
+    }
 
     if($check_already_running){
         $srvstatus = loadData("srvstatus");
