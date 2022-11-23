@@ -233,9 +233,10 @@ elseif($playdata['step'] == 'check_jawaban'){
     $tidak_valid = [];
     $array_count_values = array_count_values($jawabans);
     arsort($array_count_values);
-    $jawaban_valid = json_decode($playdata['data_soal']['jawaban'],true);
-    $text = "\n\nDEBUG:".print_r($jawaban_valid,1)."\n\n";
+    // $jawaban_valid = json_decode($playdata['data_soal']['jawaban'],true);
+    $jawaban_valid = $playdata['data_soal']['jawaban'];
     $text = "JAWABAN PEMAIN:\n\n";
+    $text .= "\n\nDEBUG:".print_r($jawaban_valid,1)."\n\n";
     if($playdata['soal_no'] <= 5){
         //mayo score
         foreach($array_count_values as $jawaban=>$skorcnt){

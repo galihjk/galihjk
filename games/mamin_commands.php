@@ -109,7 +109,7 @@ and in_array($data_playing_chatters[$chat_id]['mamin']['step'],["starting", "sta
                 else{
                     KirimPerintah('sendMessage',[
                         'chat_id' => $chat_id,
-                        'text'=> "$emoji_like",
+                        'text'=> "$emoji_like OK! Tunggu sebentar..",
                         'reply_to_message_id' => $message_id
                     ]);
                     $data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] = 0;
