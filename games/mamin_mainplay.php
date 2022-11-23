@@ -234,6 +234,7 @@ elseif($playdata['step'] == 'check_jawaban'){
     $array_count_values = array_count_values($jawabans);
     arsort($array_count_values);
     $jawaban_valid = json_decode($playdata['data_soal']['jawaban'],true);
+    $text = "\n\nDEBUG:".print_r($jawaban_valid,1)."\n\n";
     $text = "JAWABAN PEMAIN:\n\n";
     if($playdata['soal_no'] <= 5){
         //mayo score
@@ -284,7 +285,7 @@ elseif($playdata['step'] == 'check_jawaban'){
             foreach($tidak_valid as $player_id=>$jawaban_pemain){
                 $text .= " -- " . mentionUser($player_id) . " : $jawaban_pemain\n";
             }
-            $text .= "<i>*cek jawaban valid di @galihjksoal</i>\n\n";
+            $text .= "<i>*cek jawaban valid di link soal</i>\n\n";
         }
     }
     

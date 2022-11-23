@@ -114,13 +114,13 @@ function soal_kirimEditorJawaban($chat_id, $jenis_soal, $id_soal, $edit_id = "")
 				$vplus = $v+1;
 				$vminus = $v-1;
 				if($vminus < 0){
-					$inlinekeyboard_arr[] = ["➖ (Hapus)", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+					$inlinekeyboard_arr[] = ["[➖] (Hapus)", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 				}
 				else{
-					$inlinekeyboard_arr[] = ["➖ $v => $vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
+					$inlinekeyboard_arr[] = ["[➖] $v => $vminus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__-__'.$k];
 				}
 				$inlinekeyboard_arr[] = [$k, 'soal_jwbscshow_'.$k.'__'.$v];
-				$inlinekeyboard_arr[] = ["➕ $v => $vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
+				$inlinekeyboard_arr[] = ["[➕] $v => $vplus", 'soal_jwbsc_'.$id_soal.'__'.$jenis_soal.'__+__'.$k];
 			}	
 		}
 		$inlinekeyboard_arr[] = ["@galihjksoal", 'http://t.me/galihjksoal/'.$id_soal];

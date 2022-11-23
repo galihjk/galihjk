@@ -41,6 +41,7 @@ function mamin_kirim_soal($chat_id, $playdata, $soal_baru = true){
 
     $text .= ($playdata['soal_no'] <= 5 ? "Mode: Mayoritas 📈\n" : "Mode: Minoritas 📊\n");
     $text .= "Sisa Waktu: ".max(0, round($playdata['waktu_habis_sisa']))." detik\n";
+    $text .= "Link soal: <a href='t.me/galihjksoal/".$data_soal['id']."'>Buka</a>\n";
     $text .= "\nYang lain boleh /join\n";
     foreach($players as $k=>$v){
         if(empty($v['jawab']) or $soal_baru){
