@@ -32,7 +32,8 @@ elseif($subcommand == "play"){
     if(checkUserNotPlayingAnyGame($from_id, $chat_id, $message_id)){
         $result = KirimPerintah('sendAnimation',[
             'chat_id' => $chat_id,
-            'animation' => 'CgACAgUAAxkBAAIEGWMeeR-w3CJUBUUjPl_2PWYy36MmAAJnBQACnE34VM0GSJKN9AcXKQQ',
+            // 'animation' => 'CgACAgUAAxkBAAIEGWMeeR-w3CJUBUUjPl_2PWYy36MmAAJnBQACnE34VM0GSJKN9AcXKQQ',
+            'animation' => 'CgACAgUAAxkBAALHa2N-3z1MSV2MenFwfOhCwXTOLQUNAALfBgACxrD5V8vgk_f6z8n4KwQ',
             'caption' => "Kuis Mayo Mino\n\nAyo Ikutan!!\nklik >>> /join\n\nPermainan dimulai oleh: ". mentionUser($from_id),
             'parse_mode'=>'HTML',
         ]);
@@ -114,7 +115,6 @@ and in_array($data_playing_chatters[$chat_id]['mamin']['step'],["starting", "sta
                     ]);
                     $data_playing_chatters[$chat_id]['mamin']['starting_timeleft'] = 0;
                     $data['change_step'][] = ['mamin', $chat_id, 'starting_check'];
-                    unset($data_playing_chatters[$chat_id]['force_start']);
                 }
             }
         }
