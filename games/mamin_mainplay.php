@@ -57,6 +57,7 @@ elseif($playdata['step'] == 'starting_check'){
         $text .= "$emoji_cross ($jml_pemain)";
     }
     if($playdata['starting_timeleft'] <= 0){
+        unset($data_playing_chatters[$chat_id]['force_start']);
         $data['change_step'][] = ['mamin', $chat_id, 'waiting'];
         if($syarat_terpenuhi){
             $text .= "\n\nWaktu tunggu habis";
@@ -108,7 +109,6 @@ elseif($playdata['step'] == 'starting_check'){
     }
 }
 elseif($playdata['step'] == 'starting_start'){
-    unset($data_playing_chatters[$chat_id]['force_start']);
     $data['change_step'][] = ['mamin', $chat_id, 'waiting'];
     $text = "Permainan akan segera dimulai,,\n\nBERSIAPLAH";
     foreach($playdata['players'] as $k=>$v){

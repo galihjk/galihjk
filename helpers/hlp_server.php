@@ -41,7 +41,7 @@ function server_start($check_already_running=false, $drop_pending = true){
 	// ]);
     $botresult = KirimPerintah('editMessageText',[
         'chat_id' => '@galihjkdev',
-        'text'=> "STATUS @galihjkbot: ON🟢\nStarted: ".date("Y-m-d H:i:s"),
+        'text'=> "STATUS @galihjkbot: ON🟢\nStarted at: ".date("Y-m-d H:i:s"),
         'parse_mode'=>'HTML',
         'message_id' => '10859',
     ]);
