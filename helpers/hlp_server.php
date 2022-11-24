@@ -12,7 +12,7 @@ function server_start($check_already_running=false, $drop_pending = true){
         $update_id = 0;
         $updates = DapatkanUpdate($update_id, $token);
         $maxloop = 1000;
-        while(count($updates) >= 1){
+        while(count($updates) >= 50){
             $maxloop --;
             $update_id = 1+end($updates)["update_id"];
             $updates = DapatkanUpdate($update_id, $token);
@@ -34,11 +34,17 @@ function server_start($check_already_running=false, $drop_pending = true){
     
     $run_code = md5(date("YmdHis").rand(0,99));
     $srvstatus['run_code'] = $run_code;
-    KirimPerintah('sendMessage',[
-        'chat_id' => $id_developer,
-        'text' => 'Server Started: '.$run_code . " \nSTOP: https://galihjk.my.id/?web_run_action=srv_stop",
-        'disable_web_page_preview' => true,
-	]);
+    // KirimPerintah('sendMessage',[
+    //     'chat_id' => $id_developer,
+    //     'text' => 'Server Started: '.$run_code . " \nSTOP: https://galihjk.my.id/?web_run_action=srv_stop",
+    //     'disable_web_page_preview' => true,
+	// ]);
+    $botresult = KirimPerintah('editMessageText',[
+        'chat_id' => '@galihjkdev',
+        'text'=> "STATUS @galihjkbot: ON🟢\nStarted: ".date("Y-m-d H:i:s"),
+        'parse_mode'=>'HTML',
+        'message_id' => '10859',
+    ]);
     saveData("srvstatus",$srvstatus);
     get_without_wait("https://galihjk.my.id/?runserver=f9c19a9ebb552c48c83fd79636039705&code=$run_code");
 }
