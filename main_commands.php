@@ -195,9 +195,8 @@ elseif($command == "donate"){
 elseif($command == "sudahdonate"){
     KirimPerintah('sendMessage',[
         'chat_id' => '-1001659244433', //group admin galihjkbot
-        'text'=> "Ada donasi dari ".print_r(getUser($from_id),1),
+        'text'=> "Ada donasi dari $from_id".print_r(getUser($from_id),1),
         'parse_mode'=>'HTML',
-        'reply_to_message_id' => $message_id,
         'disable_web_page_preview' => true,
     ]);
     KirimPerintah('sendMessage',[
