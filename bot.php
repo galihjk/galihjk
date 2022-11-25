@@ -32,8 +32,8 @@ $jeda = time() - intval($last_serve_time);
 include('galihjk/main.php');
 
 $last_perintah_bot = loadData("last_perintah_bot",0);
-if(!empty($last_perintah_bot['time']) and abs($last_perintah_bot['time'] - time()) > 120){
-	//jika tidak ada perintah bot dalam 120 detik
+if(!empty($last_perintah_bot['time']) and abs($last_perintah_bot['time'] - time()) > 5*60){
+	//jika tidak ada perintah bot dalam 5 menit
 	server_stop();
 }
 

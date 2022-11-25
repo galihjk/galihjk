@@ -26,17 +26,17 @@ if(!empty($srvstatus['run_code'])){
 		get_without_wait("https://galihjk.my.id/?runserver=f9c19a9ebb552c48c83fd79636039705&code=$run_code");
 	}
 	else{
-		KirimPerintah('sendMessage',[
-			'chat_id' => '227024160',
-			'text' => 'Server '.$_GET['code'].' has been terminated. Changed to: '.$run_code,
-		]);
+		// KirimPerintah('sendMessage',[
+		// 	'chat_id' => '227024160',
+		// 	'text' => 'Server '.$_GET['code'].' has been terminated. Changed to: '.$run_code,
+		// ]);
 	}
 }
 else{
 	$botresult = KirimPerintah('editMessageText',[
         'chat_id' => '@galihjkdev',
         'text'=> "STATUS @galihjkbot: OFF🔴\nStopped at: ".date("Y-m-d H:i:s") 
-			."\n>>><a href='https://galihjk.my.id/?web_run_action=srv_start'>START</a>" ,
+			."\n>>> [<a href='https://galihjk.my.id/?web_run_action=srv_start'>START</a>]\n<i>*click start above to activate</i>" ,
         'parse_mode'=>'HTML',
         'message_id' => '10859',
     ]);

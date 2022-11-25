@@ -178,6 +178,37 @@ elseif($command == "claim"){
     ]);
 }
 
+elseif($command == "donate"){
+    KirimPerintah('sendPhoto',[
+        'chat_id' => $chat_id,
+        'photo'=> 'AgACAgUAAxkBAALIHmN_-hzPLJaRha78vzxsCyh42WrZAALYsTEbdLABVBtdrFjPKDjDAQADAgADbQADKwQ',
+        'caption'=> 'Gopay Galihjk 087868573677',
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id,
+        'disable_web_page_preview' => true,
+        'reply_markup' => inlineKeyBoard([
+            ['Saya Sudah Kirim', "https://t.me/".$config['bot_username']."?start=cmd_sudahdonate"],
+        ])
+    ]);
+}
+
+elseif($command == "sudahdonate"){
+    KirimPerintah('sendMessage',[
+        'chat_id' => '-1001659244433', //group admin galihjkbot
+        'text'=> "Ada donasi dari ".print_r(getUser($from_id),1),
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id,
+        'disable_web_page_preview' => true,
+    ]);
+    KirimPerintah('sendMessage',[
+        'chat_id' => $chat_id,
+        'text'=> "Waah,, Alhamdulillah.. Terimakasih banyak yaa,, donasi Anda sungguh berarti.. :D\nKonfirmasi ke @galihjk yaa, kasih tau aja kamu kirim berapa..",
+        'parse_mode'=>'HTML',
+        'reply_to_message_id' => $message_id,
+        'disable_web_page_preview' => true,
+    ]);
+}
+
 elseif($command == "point"){
     $user_data = getUser($from_id);
     if(empty($user_data)){
