@@ -1,6 +1,6 @@
 <?php
 
-if($command == "allowgroup" and $chat_id == $id_developer){
+// if($command == "allowgroup" and $chat_id == $id_developer){
 //     if(!empty($command_after)){
 //         $data['allowed_groups'][$command_after] = true;
 //         $result = executeQuery("update settings set value = '".serialize($data['allowed_groups'])."' where key='allowed_groups'", "DB_GJK");
