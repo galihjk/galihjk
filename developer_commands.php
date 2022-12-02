@@ -184,7 +184,7 @@ elseif(isDiawali($command,"data__") and $chat_id == $id_developer){
     $datakey = $explode[1];
     $datashow = [];
     $dataget = $data[$datakey];
-    if(!empty($explode[2])){
+    if(isset($explode[2])){
         $datashow = $data[$datakey][$explode[2]];
     }
     else{

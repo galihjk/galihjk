@@ -37,6 +37,7 @@ include('galihjk/main.php');
 // 	server_stop();
 // }
 
+$data['playing_chatters'] = $data_playing_chatters;
 saveData("updid_$token",$update_id);
 saveData("data", $data);
 /*

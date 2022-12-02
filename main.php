@@ -68,7 +68,7 @@ if(!empty($data['change_step'])){
 				unset($data['change_step'][$key]);
 			}
 		}
-		saveData("data_playing_chatters",$data_playing_chatters);
+		// saveData("data_playing_chatters",$data_playing_chatters);
 	}
 	else{
 		file_put_contents("data_playing_chatters_kosong2.txt","au ah!2");
