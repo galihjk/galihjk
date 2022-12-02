@@ -1,25 +1,25 @@
 <?php
 
 if($command == "allowgroup" and $chat_id == $id_developer){
-    if(!empty($command_after)){
-        $data['allowed_groups'][$command_after] = true;
-        $result = executeQuery("update settings set value = '".serialize($data['allowed_groups'])."' where key='allowed_groups'", "DB_GJK");
-        KirimPerintah('sendMessage',[
-            'chat_id' => $chat_id,
-            'text'=> "DONE: ".print_r($result,1),
-            'parse_mode'=>'HTML',
-            'reply_to_message_id' => $message_id
-        ]);	
-    }
-    else{
-        KirimPerintah('sendMessage',[
-            'chat_id' => $chat_id,
-            'text'=> "result: ".print_r($data['allowed_groups'],1),
-            'parse_mode'=>'HTML',
-            'reply_to_message_id' => $message_id
-        ]);	
-    }
-}
+//     if(!empty($command_after)){
+//         $data['allowed_groups'][$command_after] = true;
+//         $result = executeQuery("update settings set value = '".serialize($data['allowed_groups'])."' where key='allowed_groups'", "DB_GJK");
+//         KirimPerintah('sendMessage',[
+//             'chat_id' => $chat_id,
+//             'text'=> "DONE: ".print_r($result,1),
+//             'parse_mode'=>'HTML',
+//             'reply_to_message_id' => $message_id
+//         ]);	
+//     }
+//     else{
+//         KirimPerintah('sendMessage',[
+//             'chat_id' => $chat_id,
+//             'text'=> "result: ".print_r($data['allowed_groups'],1),
+//             'parse_mode'=>'HTML',
+//             'reply_to_message_id' => $message_id
+//         ]);	
+//     }
+// }
 
 elseif(isDiawali($command,"user") and $chat_id == $id_developer){
     if(isDiawali($command,"user_")){

@@ -91,7 +91,7 @@ elseif($command == "stop"){
 elseif($command == "ping"){
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text'=>  "PONG! ($timelag s)",
+        'text'=>  "PONG! ($jeda s)",
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);

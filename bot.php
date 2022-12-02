@@ -28,6 +28,9 @@ $data_last_serve_time = loadData("last_serve_time",0);
 $last_serve_time = intval($data_last_serve_time);
 saveData("last_serve_time",time());
 $jeda = time() - intval($last_serve_time);
+if(rand(0,2) == 2){
+	$data['srvupdate']['lags'][] = $jeda;
+}
 include('galihjk/main.php');
 
 // $last_perintah_bot = loadData("last_perintah_bot",0);
