@@ -18,7 +18,7 @@ function getGameType($type, $prop = "all"){
 
 function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 	global $emoji_thinking;
-	global $data['playing_chatters'];
+	global $data;
 	
 	if(!empty(getUser($user_id)['playing'])){
 		if(getUser($user_id)['playing']['chat_id'] == $chat_id){
@@ -47,7 +47,7 @@ function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 
 function startPlayingGame($chat_id, $from_id, $game, $datagame){
 	global $config;
-	global $data['playing_chatters'];
+	global $data;
 
 	$data['playing_chatters'][$chat_id]['playing'] = $game;
 	$data['playing_chatters'][$chat_id][$game] = $datagame;
@@ -55,7 +55,7 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 }
 
 function stopPlayingGame($chat_id){
-	global $data['playing_chatters'];
+	global $data;
 
 	$data['playing_chatters'][$chat_id]['playing'] = "";
 	$data['playing_chatters'][$chat_id][$game] = [];
