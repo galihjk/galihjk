@@ -108,7 +108,7 @@ function setUserWinRate($user_id, $rank, $playercount){
 function unsetUserPlaying($user_id, $calculate = true){
 	$calculate_result = false;
 	$set_user = [
-		'playing'=>'',
+		'playing'=>[],
 	];
 	if($calculate){
 		if(!empty(getUser($user_id)['unclaimeds'])){
