@@ -52,7 +52,9 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 
 	$data['playing_chatters'][$chat_id]['playing'] = $game;
 	$data['playing_chatters'][$chat_id][$game] = $datagame;
-	setUserPlaying($from_id, $chat_id, $game);
+	if($from_id != "System"){
+		setUserPlaying($from_id, $chat_id, $game);		
+	}
 }
 
 function stopPlayingGame($chat_id){

@@ -56,7 +56,7 @@ elseif($subcommand == "play"){
             'starting_check',
             time()+5,
         ];
-        server_start(true);
+        // server_start(true);
     }
 }
 elseif($subcommand == "extend" and !empty($data['playing_chatters'][$chat_id]['mamin']['step'])

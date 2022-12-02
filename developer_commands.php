@@ -45,6 +45,40 @@ if(isDiawali($command,"user") and $chat_id == $id_developer){
     }
 }
 
+elseif($command == "setjadwal" and $chat_id == $id_developer){
+    KirimPerintah('editMessageText',[
+        'chat_id' => '-1001635551800',
+        'text'=> $command_after
+        ,
+        'parse_mode'=>'HTML',
+        'message_id' => '4313',
+    ]);
+}
+
+elseif($command == "forceplay" and $chat_id == $id_developer){
+    $result = KirimPerintah('sendAnimation',[
+        'chat_id' =>'-1001635551800',
+        'animation' => 'CgACAgUAAxkBAALHa2N-3z1MSV2MenFwfOhCwXTOLQUNAALfBgACxrD5V8vgk_f6z8n4KwQ',
+        'caption' => "Kuis Mayo Mino\n\nAyo Ikutan!!\nklik >>> /join\n\nPermainan dimulai oleh: System",
+        'parse_mode'=>'HTML',
+    ]);
+    $startmsgid = $result['result']['message_id'];
+    startPlayingGame('-1001635551800', "System", 'mamin', [
+        'step'=>'starting',
+        'starting_timeleft'=>90,
+        'startmsgid'=>$startmsgid,
+        'remind_join'=>0,
+        'player_change'=>true,
+        'players'=>[]
+    ]);
+    $data['change_step'][] = [
+        'mamin',
+        '-1001635551800',
+        'starting_check',
+        time()+5,
+    ];
+}
+
 elseif($command == "tesjob" and $chat_id == $id_developer){
     create_job("KirimPerintah('sendMessage',[
         'chat_id' => '$chat_id',

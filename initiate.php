@@ -30,7 +30,7 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
         'chat_id' => '@galihjkdev',
         'text'=> "STATUS @galihjkbot: OK\n"
             ."lag=$avg\n"
-            ."per ".date("Y-m-d H:i:s", strtotime('+7 hours'))."\n"
+            ."per ".date("Y-m-d H:i:s")."\n"
             ."<i>Server mungkin DOWN (mati/rusak) jika tidak ada update dalam 10 menit</i>\n"
         ,
         'parse_mode'=>'HTML',
@@ -39,6 +39,12 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
     $data['srvupdate'] = [
         'lags' => [],
     ];
+
+    //tes main MAMIN setiap jam 4 sampai 5 sore
+    // if(empty()){
+
+    // }
+
 }
 
 //initiate for games
