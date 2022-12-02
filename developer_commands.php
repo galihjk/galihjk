@@ -21,7 +21,8 @@
 //     }
 // }
 
-elseif(isDiawali($command,"user") and $chat_id == $id_developer){
+// else
+if(isDiawali($command,"user") and $chat_id == $id_developer){
     if(isDiawali($command,"user_")){
         KirimPerintah('sendMessage',[
             'chat_id' => $chat_id,
