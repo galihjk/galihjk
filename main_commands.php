@@ -273,6 +273,9 @@ else{
         }
     }
     elseif(in_array($command,["flee", "extend", "force_start"])  and !empty($data['playing_chatters'][$chat_id]['playing'])){
+        if($command == 'flee'){
+            setUser($user_id, [ 'playing'=>'' ]);
+        }
         $command = $data['playing_chatters'][$chat_id]['playing'] . "_$command";
     }
     
