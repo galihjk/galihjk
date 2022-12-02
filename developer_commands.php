@@ -181,9 +181,26 @@ elseif($command == "data" and $chat_id == $id_developer){
 
 elseif(isDiawali($command,"data__") and $chat_id == $id_developer){
     $explode = explode("__",$command);
+    $datakey = $explode[1];
+    $datashow = [];
+    $dataget = $data[$datakey];
+    if(!empty($explode[2])){
+        $datashow = $data[$datakey][$explode[2]];
+    }
+    else{
+        foreach($dataget as $key => $val){
+            if(is_array($val)){
+                $datashow[$key] = "/data__$datakey"."__$key";
+            }
+            else{
+                $datashow[$key] = $val;
+            }
+        }
+    }
+    
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
-        'text' => 'data: '.print_r($data[$explode[1]],1),
+        'text' => 'data: '.print_r($datashow,1),
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id
     ]);
@@ -239,17 +256,17 @@ elseif($command == "startsrv" and $chat_id == $id_developer){
     ]);
 }
 
-elseif($command == "lstprnth" and $chat_id == $id_developer){
-    KirimPerintah('sendMessage',[
-        'chat_id' => $chat_id,
-        'text' => "lstprnth: ".print_r([
-            'last_perintah_bot'=>loadData("last_perintah_bot",0),
-            'currenttime'=>time(),
-        ],1),
-        'parse_mode'=>'HTML',
-        'reply_to_message_id' => $message_id
-    ]);
-}
+// elseif($command == "lstprnth" and $chat_id == $id_developer){
+//     KirimPerintah('sendMessage',[
+//         'chat_id' => $chat_id,
+//         'text' => "lstprnth: ".print_r([
+//             'last_perintah_bot'=>loadData("last_perintah_bot",0),
+//             'currenttime'=>time(),
+//         ],1),
+//         'parse_mode'=>'HTML',
+//         'reply_to_message_id' => $message_id
+//     ]);
+// }
 
 elseif($command == "stopsrv" and $chat_id == $id_developer){
     server_stop();

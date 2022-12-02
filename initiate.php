@@ -20,6 +20,11 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
     }
     checkExpiredUnclaimeds($from_id);
     $data['active_users'] = [];
+
+    //sekalian update server status setiap 10 menit
+    $data['srvupdate'] = [
+        'lags' => [],
+    ];
 }
 
 //initiate for games
