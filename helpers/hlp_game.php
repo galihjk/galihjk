@@ -60,8 +60,9 @@ function startPlayingGame($chat_id, $from_id, $game, $datagame){
 function stopPlayingGame($chat_id){
 	global $data;
 
-	$data['playing_chatters'][$chat_id]['playing'] = "";
-	$data['playing_chatters'][$chat_id][$game] = [];
+	// $data['playing_chatters'][$chat_id]['playing'] = "";
+	// $data['playing_chatters'][$chat_id][$game] = [];
+	unset($data['playing_chatters'][$chat_id]);
 }
 
 function setUserPlaying($user_id, $chat_id, $game){

@@ -41,9 +41,29 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
     ];
 
     //tes main MAMIN setiap jam 4 sampai 5 sore
-    // if(empty()){
-
-    // }
+    if(date("H") == "16" and empty($playing_chatters['-1001635551800'])){
+        $result = KirimPerintah('sendAnimation',[
+            'chat_id' =>'-1001635551800',
+            'animation' => 'CgACAgUAAxkBAALHa2N-3z1MSV2MenFwfOhCwXTOLQUNAALfBgACxrD5V8vgk_f6z8n4KwQ',
+            'caption' => "Kuis Mayo Mino\n\nAyo Ikutan!!\nklik >>> /join\n\nPermainan dimulai oleh: System",
+            'parse_mode'=>'HTML',
+        ]);
+        $startmsgid = $result['result']['message_id'];
+        startPlayingGame('-1001635551800', "System", 'mamin', [
+            'step'=>'starting',
+            'starting_timeleft'=>90,
+            'startmsgid'=>$startmsgid,
+            'remind_join'=>0,
+            'player_change'=>true,
+            'players'=>[]
+        ]);
+        $data['change_step'][] = [
+            'mamin',
+            '-1001635551800',
+            'starting_check',
+            time()+5,
+        ];
+    }
 
 }
 
