@@ -73,16 +73,16 @@ elseif($command == "stop"){
             'parse_mode'=>'HTML',
             'reply_to_message_id' => $message_id
         ]);	
-        // if($data_playing_chatters[$chat_id]['playing'] == "ttss"){
+        // if($data['playing_chatters'][$chat_id]['playing'] == "ttss"){
         //     KirimPerintah('deleteMessage',[
         //         'chat_id' => $chat_id,
-        //         'message_id'=> $data_playing_chatters[$chat_id]['ttss']['board_msgid'],
+        //         'message_id'=> $data['playing_chatters'][$chat_id]['ttss']['board_msgid'],
         //     ]);
-        //     unset($data_playing_chatters[$chat_id]['ttss']);
+        //     unset($data['playing_chatters'][$chat_id]['ttss']);
         // }
-        // $data_playing_chatters[$chat_id]['playing'] = false;	
+        // $data['playing_chatters'][$chat_id]['playing'] = false;	
         // clear memory and stop playing
-        $data_playing_chatters[$chat_id] = [
+        $data['playing_chatters'][$chat_id] = [
             'playing' => false,
         ];
     }
@@ -243,12 +243,12 @@ elseif($command == "point"){
 //=============================================================
 
 //don't play other game!
-if(!empty($data_playing_chatters[$chat_id]['playing']) and substr($command,-5) == "_play"){
+if(!empty($data['playing_chatters'][$chat_id]['playing']) and substr($command,-5) == "_play"){
     if(substr($chat_id,0,1) == "-"){
-        $balasan = "Kamu sedang bermain ".strtoupper($data_playing_chatters[$chat_id]['playing']).". Kalau ingin berhenti, admin perlu jalankan command /stop (harus admin grup)";
+        $balasan = "Kamu sedang bermain ".strtoupper($data['playing_chatters'][$chat_id]['playing']).". Kalau ingin berhenti, admin perlu jalankan command /stop (harus admin grup)";
     }
     else{
-        $balasan = "Kamu sedang bermain ".strtoupper($data_playing_chatters[$chat_id]['playing']).". Kalau ingin berhenti, kamu perlu jalankan command /stop";
+        $balasan = "Kamu sedang bermain ".strtoupper($data['playing_chatters'][$chat_id]['playing']).". Kalau ingin berhenti, kamu perlu jalankan command /stop";
     }
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
@@ -260,7 +260,7 @@ if(!empty($data_playing_chatters[$chat_id]['playing']) and substr($command,-5) =
 else{
 
     if($command == "join"){
-        if(empty($data_playing_chatters[$chat_id]['playing'])){
+        if(empty($data['playing_chatters'][$chat_id]['playing'])){
             KirimPerintah('sendMessage',[
                 'chat_id' => $chat_id,
                 'text'=>  "Mau join apa? Kita gak lagi main apa-apa nih.. Yuk /play dulu!",
@@ -269,11 +269,11 @@ else{
             ]);
         }
         else{
-            $command = $data_playing_chatters[$chat_id]['playing'] . "_$command";
+            $command = $data['playing_chatters'][$chat_id]['playing'] . "_$command";
         }
     }
-    elseif(in_array($command,["flee", "extend", "force_start"])  and !empty($data_playing_chatters[$chat_id]['playing'])){
-        $command = $data_playing_chatters[$chat_id]['playing'] . "_$command";
+    elseif(in_array($command,["flee", "extend", "force_start"])  and !empty($data['playing_chatters'][$chat_id]['playing'])){
+        $command = $data['playing_chatters'][$chat_id]['playing'] . "_$command";
     }
     
     $gamefiles = scandir('galihjk/games/');

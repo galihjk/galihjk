@@ -18,11 +18,11 @@ function getGameType($type, $prop = "all"){
 
 function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 	global $emoji_thinking;
-	global $data_playing_chatters;
+	global $data['playing_chatters'];
 	
 	if(!empty(getUser($user_id)['playing'])){
 		if(getUser($user_id)['playing']['chat_id'] == $chat_id){
-			if(empty($data_playing_chatters[$chat_id][getUser($user_id)['playing']['game']]['players'][$user_id])){
+			if(empty($data['playing_chatters'][$chat_id][getUser($user_id)['playing']['game']]['players'][$user_id])){
 				return true;
 			}
 			KirimPerintah('sendMessage',[
@@ -47,18 +47,18 @@ function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 
 function startPlayingGame($chat_id, $from_id, $game, $datagame){
 	global $config;
-	global $data_playing_chatters;
+	global $data['playing_chatters'];
 
-	$data_playing_chatters[$chat_id]['playing'] = $game;
-	$data_playing_chatters[$chat_id][$game] = $datagame;
+	$data['playing_chatters'][$chat_id]['playing'] = $game;
+	$data['playing_chatters'][$chat_id][$game] = $datagame;
 	setUserPlaying($from_id, $chat_id, $game);
 }
 
 function stopPlayingGame($chat_id){
-	global $data_playing_chatters;
+	global $data['playing_chatters'];
 
-	$data_playing_chatters[$chat_id]['playing'] = "";
-	$data_playing_chatters[$chat_id][$game] = [];
+	$data['playing_chatters'][$chat_id]['playing'] = "";
+	$data['playing_chatters'][$chat_id][$game] = [];
 }
 
 function setUserPlaying($user_id, $chat_id, $game){

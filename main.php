@@ -15,8 +15,8 @@ foreach($scandir as $file){
 //====
 
 //game playing loops
-if(!empty($data_playing_chatters)){
-	foreach($data_playing_chatters as $chat_id=>$val_chatter){
+if(!empty($data['playing_chatters'])){
+	foreach($data['playing_chatters'] as $chat_id=>$val_chatter){
 		if(!empty($val_chatter['playing'])){
 			$ada_yang_lagi_main = true;
 			$game = $val_chatter['playing'];
@@ -53,22 +53,22 @@ if(!empty($data['delayedPerintah'])){
 if(!empty($data['change_step'])){
 	//change game step
 	// 0 'game', 1 $chat_id, 2 'step', 3 time()+xx
-	if(!empty($data_playing_chatters)){
+	if(!empty($data['playing_chatters'])){
 		foreach($data['change_step'] as $key=>$val){
-			if(empty($data_playing_chatters[$val[1]])){
+			if(empty($data['playing_chatters'][$val[1]])){
 				file_put_contents("ERROR change_step data_playing_chatters NOT LOADED.txt","ERROR change_step data_playing_chatters NOT LOADED.txt");
 			}
 			elseif(!isset($val[3]) or time() >= $val[3]){
-				if(!empty($data_playing_chatters[$val[1]]['playing']) and $data_playing_chatters[$val[1]]['playing'] == $val[0]){
-					$data_playing_chatters[$val[1]][$val[0]]['step'] = $val[2];
+				if(!empty($data['playing_chatters'][$val[1]]['playing']) and $data['playing_chatters'][$val[1]]['playing'] == $val[0]){
+					$data['playing_chatters'][$val[1]][$val[0]]['step'] = $val[2];
 				}
 				else{
-					file_put_contents("gjlog/error_change_step".date("YmdHis").".txt",print_r([$data_playing_chatters,$val],1));
+					file_put_contents("gjlog/error_change_step".date("YmdHis").".txt",print_r([$data['playing_chatters'],$val],1));
 				}
 				unset($data['change_step'][$key]);
 			}
 		}
-		// saveData("data_playing_chatters",$data_playing_chatters);
+		// saveData("data_playing_chatters",$data['playing_chatters']);
 	}
 	else{
 		file_put_contents("data_playing_chatters_kosong2.txt","au ah!2");

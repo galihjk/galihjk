@@ -16,7 +16,6 @@ $id_developer = $config['id_developer'];
 include('galihjk/initiate.php');
 
 $update_id = loadData("updid_$token",0);
-$data_playing_chatters = $data['playing_chatters'];
 
 $updates = DapatkanUpdate($update_id, $token);
 
@@ -37,7 +36,6 @@ include('galihjk/main.php');
 // 	server_stop();
 // }
 
-$data['playing_chatters'] = $data_playing_chatters;
 saveData("updid_$token",$update_id);
 saveData("data", $data);
 /*
@@ -45,14 +43,14 @@ saveData("data", $data);
 		
 			
 		if(!empty($update)) {
-			$data_playing_chatters = loadData("data_playing_chatters");
-			if(!empty($data_playing_chatters)){
+			$data['playing_chatters'] = loadData("data_playing_chatters");
+			if(!empty($data['playing_chatters'])){
 				include('galihjk/main_update.php');
-				if(empty($data_playing_chatters)){
+				if(empty($data['playing_chatters'])){
 					file_put_contents("ERROR data_playing_chatters NOT LOADED 2.txt","data_playing_chatters DATA NOT LOADED 2.txt");
 				}
 				else{
-					saveData("data_playing_chatters",$data_playing_chatters);
+					saveData("data_playing_chatters",$data['playing_chatters']);
 				}
 			}
 			else{
@@ -69,14 +67,14 @@ saveData("data", $data);
 				if(abs($last_serve_time-time()) > 1){
 					saveData("last_serve_time",time());
 					$jeda = time() - intval($last_serve_time);
-					$data_playing_chatters = loadData("data_playing_chatters");
-					if(!empty($data_playing_chatters)){
+					$data['playing_chatters'] = loadData("data_playing_chatters");
+					if(!empty($data['playing_chatters'])){
 						include('galihjk/main.php');
-						if(empty($data_playing_chatters)){
+						if(empty($data['playing_chatters'])){
 							file_put_contents("ERROR data_playing_chatters NOT LOADED 4.txt","data_playing_chatters DATA NOT LOADED 4.txt");
 						}
 						else{
-							saveData("data_playing_chatters",$data_playing_chatters);
+							saveData("data_playing_chatters",$data['playing_chatters']);
 						}
 					}
 					else{
@@ -85,14 +83,14 @@ saveData("data", $data);
 				}
 				$update = json_decode(file_get_contents("php://input"), TRUE);
 				if(!empty($update)) {
-					$data_playing_chatters = loadData("data_playing_chatters");
-					if(!empty($data_playing_chatters)){
+					$data['playing_chatters'] = loadData("data_playing_chatters");
+					if(!empty($data['playing_chatters'])){
 						include('galihjk/main_update.php');
-						if(empty($data_playing_chatters)){
+						if(empty($data['playing_chatters'])){
 							file_put_contents("ERROR data_playing_chatters NOT LOADED 2.txt","data_playing_chatters DATA NOT LOADED 2.txt");
 						}
 						else{
-							saveData("data_playing_chatters",$data_playing_chatters);
+							saveData("data_playing_chatters",$data['playing_chatters']);
 						}
 					}
 					else{

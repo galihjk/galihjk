@@ -8,8 +8,8 @@ $results = [];
 
 if(!empty(getUser($inline_from_id)['playing']['chat_id'])){
     $chat_id = getUser($inline_from_id)['playing']['chat_id'];
-    $checkfile = "galihjk/games/".$data_playing_chatters[$chat_id]['playing'].'_inline_query.php';
-    if(!empty($data_playing_chatters[$chat_id]['playing'])){
+    $checkfile = "galihjk/games/".$data['playing_chatters'][$chat_id]['playing'].'_inline_query.php';
+    if(!empty($data['playing_chatters'][$chat_id]['playing'])){
         if(file_exists($checkfile)) include ($checkfile);
     }
 }
