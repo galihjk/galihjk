@@ -36,6 +36,7 @@ function checkUserNotPlayingAnyGame($user_id, $chat_id, $message_id){
 				'chat_id' => $chat_id,
 				'text'=> "GAGAL!\nMaaf ".getUser($user_id)['first_name'].", Kamu saat ini sedang memainkan game lain (tidak bisa main lebih dari 1 game sekaligus).\n\n*<i>Mungkin kamu bisa coba command</i> <pre>/flee</pre> <i>dulu</i>..",
 				'reply_to_message_id'=> $message_id,
+				'parse_mode'=>'HTML'
 			]);
 		}
 		return false;

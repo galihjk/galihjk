@@ -119,9 +119,6 @@ function KirimPerintah($perintah,$data,$bot_token = "default"){
         print_r($debug);
     }
     elseif(!$debug['ok']){
-        if(isset($data['text'])){
-            echo "text = " . $data['text'] . "\n";
-        }
 		file_put_contents("last_error.txt", print_r([$perintah,$data,$bot_token],true)."\n\n".print_r($debug,true));
         print_r($debug);
     }
