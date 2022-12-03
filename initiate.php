@@ -41,7 +41,13 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
     ];
 
     //tes main MAMIN setiap jam 4 sampai 5 sore
-    if(date("H") == "16" and empty($playing_chatters['-1001635551800'])){
+    if(empty($data['playing_chatters']['-1001635551800'])
+        and(
+            date("H") == "16" or
+            date("H") == "06" or
+            date("H") == "13"
+        )
+    ){
         $result = KirimPerintah('sendAnimation',[
             'chat_id' =>'-1001635551800',
             'animation' => 'CgACAgUAAxkBAALHa2N-3z1MSV2MenFwfOhCwXTOLQUNAALfBgACxrD5V8vgk_f6z8n4KwQ',
