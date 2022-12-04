@@ -41,7 +41,7 @@ if(isDiawali($chat_id,"-") and empty($data['playing_chatters'][$chat_id])){
         foreach($admins['result'] as $item){
             $text .= "<a href='tg://user?id=".$item['user']['id']."'>.</a>";
         }
-        $text .= "\nSudah waktu nya saya pamit undur diri.. Saya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D";
+        $text .= "\nSudah waktu nya saya pamit undur diri.. Saya izin left yaa,, kalau mau main lagi, nanti tambahkan lagi aja saya ke grup ini, hehe.. Terima Kasiiih.. :D\n\n*<i>kamu bisa main kapan saja di @galihjkplay</i>";
         setChatData($chat_id, [
             'active'=>false,
         ], false);
