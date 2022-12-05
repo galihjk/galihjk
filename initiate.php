@@ -45,7 +45,8 @@ if(abs(time()-$data['last_active_user_time']) >= 10 * 60){
         and(
             date("H") == "16" or
             date("H") == "07" or
-            date("H") == "13"
+            date("H") == "13"or
+            date("H") == "20"
         )
     ){
         $result = KirimPerintah('sendAnimation',[
