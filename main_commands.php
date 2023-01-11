@@ -181,8 +181,10 @@ elseif($command == "claim"){
 elseif($command == "donate"){
     KirimPerintah('sendPhoto',[
         'chat_id' => $chat_id,
-        'photo'=> 'AgACAgUAAxkBAALIHmN_-hzPLJaRha78vzxsCyh42WrZAALYsTEbdLABVBtdrFjPKDjDAQADAgADbQADKwQ',
-        'caption'=> 'Gopay Galihjk 087868573677',
+        'photo'=> 'AgACAgUAAxkBAAL1pWO9r6b_eLLw6NepBYw_I8I2oK6XAAJLszEbUgXpVYvp6HLPAe9yAQADAgADcwADLQQ',
+        // 'photo'=> 'AgACAgUAAxkBAALIHmN_-hzPLJaRha78vzxsCyh42WrZAALYsTEbdLABVBtdrFjPKDjDAQADAgADbQADKwQ',
+        'caption'=> 'Gopay Galih J K',
+        // 'caption'=> 'Gopay Galihjk 087868573677',
         'parse_mode'=>'HTML',
         'reply_to_message_id' => $message_id,
         'disable_web_page_preview' => true,
