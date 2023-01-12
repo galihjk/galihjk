@@ -38,6 +38,13 @@ elseif($subcommand == "play"){
             'parse_mode'=>'HTML',
         ]);
         $startmsgid = $result['result']['message_id'];
+        if(!empty($message_data["chat"]["username"])){
+            KirimPerintah('sendMessage',[
+                'chat_id' => $id_developer,
+                'text' => "ada yang play: ".print_r($message_data["chat"],true),
+            ]);
+        }
+        
         startPlayingGame($chat_id, $from_id, 'mamin', [
             'step'=>'starting',
             'starting_timeleft'=>90,
