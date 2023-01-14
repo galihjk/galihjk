@@ -367,31 +367,32 @@ elseif($playdata['step'] == 'game_end'){
         $rank++;
         $skorsblmny = $v;
     }
+    $text .= "\n<a href='https://t.me/galihjkdev/10866'>Tolong kasih masukan di sini yaa untuk permainan ini :D</a>";
     KirimPerintah('sendMessage',[
         'chat_id' => $chat_id,
         'text'=> $text,
         'parse_mode'=>'HTML',
     ]);
-    $ada_poin_klaim = false;
-    $text = "Poin yang dapat diklaim:\n";
-    foreach ($points as $k=>$v){
-        if(!empty($v['calculate_result'])){
-            $ada_poin_klaim = true;
-            $text .= mentionUser($k) . " : ".$v['calculate_result']."\n";
-        }
-    }
-    if($ada_poin_klaim){
-        $text .= "\nKlik untuk ambil --> <a href='t.me/".$config['bot_username']."?start=cmd_claim'>[CLAIM]</a>\n<i>*kadaluarsa dalam 24 jam</i>";
-        $text .= "\n\n/mamin_play - main lagi";
-        $text .= "\n/play - main yang lain";
-        $data['delayedPerintah'][] = ['sendMessage',
-            [
-                'chat_id' => $chat_id,
-                'text'=> $text,
-                'parse_mode'=>'HTML',
-                'disable_web_page_preview' => true,
-            ], time()+1
-        ];        
-    }
+    // $ada_poin_klaim = false;
+    // $text = "Poin yang dapat diklaim:\n";
+    // foreach ($points as $k=>$v){
+    //     if(!empty($v['calculate_result'])){
+    //         $ada_poin_klaim = true;
+    //         $text .= mentionUser($k) . " : ".$v['calculate_result']."\n";
+    //     }
+    // }
+    // if($ada_poin_klaim){
+    //     $text .= "\nKlik untuk ambil --> <a href='t.me/".$config['bot_username']."?start=cmd_claim'>[CLAIM]</a>\n<i>*kadaluarsa dalam 24 jam</i>";
+    //     $text .= "\n\n/mamin_play - main lagi";
+    //     $text .= "\n/play - main yang lain";
+    //     $data['delayedPerintah'][] = ['sendMessage',
+    //         [
+    //             'chat_id' => $chat_id,
+    //             'text'=> $text,
+    //             'parse_mode'=>'HTML',
+    //             'disable_web_page_preview' => true,
+    //         ], time()+1
+    //     ];        
+    // }
     stopPlayingGame($chat_id);
 }
